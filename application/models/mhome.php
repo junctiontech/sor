@@ -1,4 +1,7 @@
 <?php 
+//junctiontech 
+// version 1 SOR
+
 //Model Class for competition start
 class Mhome extends CI_Model {
 	
