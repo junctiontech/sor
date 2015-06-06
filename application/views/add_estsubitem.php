@@ -1,0 +1,90 @@
+<!--header starts added by palak on 13 jan of create sub item page -->
+<div id="main-content">
+
+	<div class="page-title">
+
+<div>
+
+<h1><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> Estimation Subitems</h1>
+
+</div>
+
+</div>
+
+<div id="breadcrumbs">
+
+<ul class="breadcrumb">
+
+
+
+<li class="active"> <i class="fa fa-home"></i><?php echo($this->breadcrumb->output());?> </li>
+
+</ul>
+
+</div>
+
+<!--header end added by palak on 13 jan --> 
+  <div class="row-fluid">
+                    <div class="span12">
+                        <div class="box">
+                            <div class="box-title">
+                                <h3><i class="icon-reorder"></i> Add Estimation Subitems</h3>
+                            </div>
+                            <div class="box-content">
+                                <form action="index.php/home/add_estsubitem_submit/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$select?>/<?=$est_id?>" method="post"class="form-horizontal form-row-separated">
+                                      <div class="control-group">
+                                      <label class="control-label">Department</label>
+                                      <div class="controls">
+                                         <select onchange="if (this.selectedIndex) show_chapter(this.value,0);" class="span6 chosen" data-placeholder="Choose a Category" tabindex="1">
+                                            <option value="" > </option>
+											 <?php foreach($dep as $d){ ?>
+                                            <option value="<?=$d->dep_id?>"><?=$d->dep_name?></option>
+                                             <?php } ?>
+                                         </select>
+                                      </div>
+                                   </div>
+								      <div class="control-group" >
+                                      <label class="control-label">Chapter</label>
+                                      <div class="controls" id="show_chap">
+									 
+                                         <select  class="span6 chosen" onchange="if (this.selectedIndex) show_item(this.value,0);" data-placeholder="Choose a Category" tabindex="1">
+										
+                                            <option  value=""> </option>
+                                            <?php foreach($chap as $c){ ?>
+                 <option value="<?=$c->chap_id?>" <?=($this->uri->segment(4)==$c->chap_id)?'selected':''?>><?=$c->chap_name?></option>
+                 
+				 <?php } ?>
+                                            
+                                         </select>
+                                      </div>
+                                   </div>
+								      <div class="control-group">
+                                      <label class="control-label">Item</label>
+                                      <div class="controls" id="show_item">
+                                         <select class="span6 chosen" onchange="if (this.selectedIndex) show_sitem(this.value,0);" data-placeholder="Choose a Category" tabindex="1">
+                                            <option value=""> </option>
+                 
+                                            
+                                         </select>
+                                      </div>
+                                   </div>
+								      <div class="control-group">
+                                      <label class="control-label">SubItem</label>
+                                      <div class="controls" id="show_subitem">
+                                         <select class="span6 chosen" data-placeholder="Choose a Category" tabindex="1">
+                                            <option value=""> </option>
+                                            
+                                            
+                                         </select>
+                                      </div>
+                                   </div>
+                                    <div class="form-actions">
+                                       <button type="submit"  class="btn btn-primary"><i class="fa fa-check"></i> Add</button>
+                                       <button type="button" onClick="window.history.back();" class="btn btn-default"><i class="fa fa-times"></i> Cancel</button>
+                                    </div>
+                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			

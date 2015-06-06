@@ -1,0 +1,180 @@
+@charset "utf-8";
+/* CSS Document */
+
+a.title_heading
+{
+	color: #fff;text-decoration:none
+}
+
+a.title_list
+{
+	color:#039;text-decoration:none
+}
+div.dataTables_paginate{   margin-top: -22px;}
+table.table{
+  background-color: #fff;
+}
+.center
+{
+	text-align:center;
+	
+	}
+.p-t-20
+	{
+	padding-top:20px;	
+		}
+.text-c{
+	text-transform:capitalize;
+	}
+.sidebar{
+background-color: #34495e!important;
+}		
+	.nav-list>li.active>a{
+
+background-color: #2c3e50!important;
+}
+.tile-grey{
+background-color: #34495e;
+
+}
+.tile-title:hover {
+background-color: #252a32;
+}
+.tile-title {
+position: relative;
+display: block;
+background: #303641;
+margin-bottom: 10px;
+-webkit-border-radius: 5px;
+-webkit-background-clip: padding-box;
+-moz-border-radius: 5px;
+-moz-background-clip: padding;
+border-radius: 5px;
+background-clip: padding-box;
+-moz-transition: all 300ms ease-in-out;
+-o-transition: all 300ms ease-in-out;
+-webkit-transition: all 300ms ease-in-out;
+transition: all 300ms ease-in-out;
+}
+.tile-title .icon {
+text-align: center;
+padding: 20px;
+}
+.tile-title .icon i, .tile-title h3, .tile-title p {
+color: #ffffff;
+}
+.tile-title .icon i {
+font-size: 60px;
+line-height: 1;
+margin: 0;
+padding: 0;
+vertical-align: middle;
+}
+.glyphicon:empty {
+width: 1em;
+}
+.glyphicon {
+position: relative;
+top: 1px;
+display: inline-block;
+font-family: 'Glyphicons Halflings';
+font-style: normal;
+font-weight: normal;
+line-height: 1;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+.tile-title .icon i:before {
+margin: 0;
+padding: 0;
+line-height: 1;
+}
+.glyphicon-leaf:before {
+content: "\e103";
+}
+.tile-title .title {
+background: #252a32;
+text-align: center;
+}
+.tile-title .title h3 {
+padding-top: 20px;
+font-size: 16px;
+font-weight: bold;
+}
+
+.tile-title .icon i, .tile-title h3, .tile-title p {
+color: #ffffff;
+}
+.tile-title .title p {
+padding-bottom: 20px;
+font-size: 11px;
+color: rgba(255, 255, 255, 0.85);
+text-transform: uppercase;
+}
+.title h3 a 
+{
+color: #fff!important;
+text-decoration: none;
+text-transform: uppercase;
+}
+.table thead>tr>th{
+padding-left: 13px!important;
+}
+.input-small {
+width: 90px;
+}
+.sf{
+font-size: 13px;
+}
+.input-mini {
+width: 60px;
+}
+.input-mini-xs{
+width: 45px;
+}
+.input-medium {
+width: 110px;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.subcal tbody>tr>td:nth-child(7) {
+    display: none;
+    }
+.box>.box-title{
+  background-color: #2c3e50!important;
+}
+.text-white{
+color:#fff!important;
+
+}
+/* search result form margin css added by palak on 12 may*/
+.btn-toolbar .btn-group {
+  margin-right: 20px!important;
+}
+.login-wrapper > footer {
+    background: #fff;
+    padding: 12px 20px 3px;
+    width: 340px;
+    margin: 30px auto 0 auto;
+}
+.login-wrapper > footer p {
+    text-align: center;
+    color: #222;
+}
