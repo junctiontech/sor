@@ -6,7 +6,7 @@
 class Mhome extends CI_Model {
 	
 	 /**
-	 # Programmer : Garima
+	 # This is the change from Anki's PC
 	 # Mhome Model
 	 
 	 */
