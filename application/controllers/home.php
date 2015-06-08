@@ -604,48 +604,54 @@ if($this->is_logged_in()){
 				}
 				function edit_estimation($est_id=false,$v=false)
 				{
-					if($this->is_logged_in()){
-			redirect('login');
-		}
-			elseif($this->check_authority('edit_estimation'))
-			{
-				redirect('home/estimation_list');
-			}
-		else{
-				$value = array('');
-				$sub="";
-				$dep_id="";
-				$chap_id="";
-				$item_id="";
-				$this->data['value']="";
-				$filter=array('est_id'=>$est_id);
-				$value=$this->data['value']=$this->mhome->get_list($filter,'ssr_t_estimate_sitem');
-				
-				for($i=0;$i<=count($value); $i++){
-				$filter=array('est_id'=>$est_id);
-				$value=$this->data['value']=$this->mhome->get_list($filter,'ssr_t_estimate_sitem');
-				
-				$sub.="".$value[$i]->subitem_id."".",";
-				$dep_id=$value[0]->dep_id;
-				$chap_id=$value[0]->chap_id;
-				$item_id=$value[0]->item_id;
-
+						if($this->is_logged_in()){
+							redirect('login');
+						}
+				elseif($this->check_authority('edit_estimation'))
+				{
+						redirect('home/estimation_list');
 				}
-				$sub=rtrim($sub,",");
-				if($v==1){
-				redirect("home/estimation_view/".$dep_id."/".$chap_id."/".$item_id."/".$sub."/".$est_id."/");
-				}else{
-					redirect("home/estimation/".$dep_id."/".$chap_id."/".$item_id."/".$sub."/".$est_id."/");
-				}
-				}
+			else{
+					$value = array('');
+					$sub="";
+					$dep_id="";
+					$chap_id="";
+					$item_id="";
+					$this->data['value']="";
+					$filter=array('est_id'=>$est_id);
+					$value=$this->data['value']=$this->mhome->get_list($filter,'ssr_t_estimate_sitem');
+					
+					for($i=0;$i<=count($value); $i++){
+					$filter=array('est_id'=>$est_id);
+					$value=$this->data['value']=$this->mhome->get_list($filter,'ssr_t_estimate_sitem');
+					
+					$sub.="".$value[$i]->subitem_id."".",";
+					$dep_id=$value[0]->dep_id;
+					$chap_id=$value[0]->chap_id;
+					$item_id=$value[0]->item_id;
+	
+					}
+					$sub=rtrim($sub,",");
+					if($v==1){
+					redirect("home/estimation_view/".$dep_id."/".$chap_id."/".$item_id."/".$sub."/".$est_id."/");
+					}else{
+						redirect("home/estimation/".$dep_id."/".$chap_id."/".$item_id."/".$sub."/".$est_id."/");
+					}
+					}
 				}
 				function delete_estimate($est_id=false){
 					if($this->is_logged_in()){
-			redirect('login');
-		}else{
-					$this->mhome->delete_estimate($est_id);
-					redirect("home/estimation_list");
-				}
+							redirect('login');
+						}
+					elseif($this->check_authority('delete_estimate'))
+						{
+							redirect('home/estimation_list');
+						}
+				
+					else{
+								$this->mhome->delete_estimate($est_id);
+								redirect("home/estimation_list");
+						}
 				}
 				function final_estimate($est_id=false){
 					if($this->is_logged_in()){
