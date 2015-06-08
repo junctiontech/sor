@@ -29,7 +29,7 @@ class Mhome extends CI_Model {
 	/*Get table details start*/
     function get_list($filter=false,$table=false)
     {
-		//print_r($filter);die;
+		
 				
 		$query = $this->db->get_where($table, $filter);
 		//echo $this->db->last_query();die;
