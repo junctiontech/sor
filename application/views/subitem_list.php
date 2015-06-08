@@ -19,6 +19,13 @@
 		</div>
 	 </div>
 	 </br>
+	 <?php  if($this->session->flashdata('category_error')) { ?>
+								<div class="row-fluid">
+									<div class="alert alert-danger">
+										<strong><?=$this->session->flashdata('message')?></strong> 
+									</div>
+									</div>
+<?php }?>
 	 <?php  if($this->session->flashdata('cat_error')) {  ?>
 									<div class="form-group">
 										<div class="alert alert-danger">
