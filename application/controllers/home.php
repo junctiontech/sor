@@ -1201,7 +1201,7 @@ public function item($dep_id=false,$chap_id=false)
 		 
 	    $this->data['chap'] = $this->mhome->get_chapist('ssr_t_chapter');
 	    $this->data['item_cls_list']=$this->mhome->get_item_cls_list($class_ids);
-		//print_r($this->data);die;
+		
 		
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
