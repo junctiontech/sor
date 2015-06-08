@@ -2478,9 +2478,12 @@ public function delete_subitem($dep_id=false,$chap_id=false,$item_id=false,$subi
 public function delete_material($mat_code=false,$labour_code=false,$overhead_code=false,$unit_code=false,$carriage_id=false,$pla_code=false,$id=false,$id1=false){
 	if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}else{		
 	               if($mat_code){
-					  
+		               	if($this->check_authority('delete_material')==true)
+		               	{
+		               		redirect('home/material');
+		               	}
 						$filter = array('mat_code'=>$mat_code);
 						$this->mhome->delete_material($filter,'ssr_t_material');
 						$this->session->set_flashdata('message_type', 'success');        
@@ -2488,7 +2491,10 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/material');		
 						}
 						elseif($labour_code){
-							//print_r(labr);die;
+							 if($this->check_authority('delete_material')==true)
+								{
+								redirect('home/labour');
+								}
 							$filter = array('labour_code'=>$labour_code);
 						$this->mhome->delete_material($filter,'ssr_t_labor');
 						$this->session->set_flashdata('message_type', 'success');        
@@ -2496,7 +2502,10 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/labour');	
 						}
 						elseif($overhead_code){
-							//print_r(over);die;
+								if($this->check_authority('delete_material')==true)
+									{
+									redirect('home/overhead');
+									}
 							$filter = array('overhead_code'=>$overhead_code);
 						$this->mhome->delete_material($filter,'ssr_t_overhead');
 						$this->session->set_flashdata('message_type', 'success');        
@@ -2504,7 +2513,10 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/overhead');	
 						}
 						elseif($unit_code){
-							//print_r(over);die;
+							if($this->check_authority('delete_material')==true)
+										{
+										redirect('home/unit');
+										}
 							$filter = array('unit_code'=>$unit_code);
 						$this->mhome->delete_material($filter,'ssr_t_uom');
 						$this->session->set_flashdata('message_type', 'success');        
@@ -2512,7 +2524,10 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/unit');	
 						}
 						elseif($carriage_id){
-							//print_r(over);die;
+							if($this->check_authority('delete_material')==true)
+							{
+								redirect('home/carriage');
+							}
 							$filter = array('carriage_id'=>$carriage_id);
 						$this->mhome->delete_material($filter,'ssr_t_carriage');
 						$this->session->set_flashdata('message_type', 'success');        
@@ -2520,7 +2535,10 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/carriage');	
 						}
 						elseif($pla_code){
-							//print_r(over);die;
+						if($this->check_authority('delete_material')==true)
+							{
+								redirect('home/plant');
+							}
 							$filter = array('pla_code'=>$pla_code);
 						$this->mhome->delete_material($filter,'ssr_t_plant');
 						$this->session->set_flashdata('message_type', 'success');        
@@ -2528,7 +2546,10 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/plant');	
 						}
 						elseif($id){
-							//print_r(over);die;
+								if($this->check_authority('delete_material')==true)
+									{
+										redirect('home/item_class');
+									}
 							$filter = array('id'=>$id);
 						$this->mhome->delete_material($filter,'ssr_t_class');
 						$this->session->set_flashdata('message_type', 'success');        
@@ -2536,7 +2557,10 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/item_class');	
 						}
 						elseif($id1){
-							//print_r("refrence");die;
+							if($this->check_authority('delete_material')==true)
+							{
+								redirect('home/refrence');
+							}
 							$filter = array('id'=>$id1);
 						$this->mhome->delete_material($filter,'ssr_t_reference');
 						$this->session->set_flashdata('message_type', 'success');        
