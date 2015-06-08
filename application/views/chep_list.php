@@ -59,7 +59,7 @@
 					<h3><a href="<?=base_url()?>index.php/home/item/<?=$cl->dep_id?>/<?=$cl->chap_id?>"><?=$cl->chap_name?></a></h3>
 					<p ><a class="pull-right" style=" margin-right: 9px; color: #fff;"href="<?=base_url()?>index.php/home/add_chapter/<?=$cl->dep_id?>/<?=$cl->chap_id?>"><i class="fa fa-edit"></i> Edit </a>
 					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
-					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>"><i class="fa fa-download"></i> Generate PDF</a></p>
+					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> Generate PDF</a></p>
 					</div>
 				</div>
 			</a>

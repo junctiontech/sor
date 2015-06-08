@@ -197,7 +197,7 @@
  
  
  function deleteRow(tableID,row, row_count)
-{   var tableID="sample_editable_1";
+{   var tableID="table1";
 	try{
 		var table=document.getElementById(tableID);
 		

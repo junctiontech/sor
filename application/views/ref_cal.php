@@ -561,7 +561,7 @@ for(i=0;i<rowCount+1;i++){
 	  }
 		var final_total=document.getElementById('total_'+row_id).value
 			
-		  document.getElementById('final_total').value=Math.round(final_total);
+		  document.getElementById('final_total').value=final_total;
 		}
 }
 		
