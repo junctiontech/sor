@@ -607,10 +607,11 @@ if($this->is_logged_in()){
 						if($this->is_logged_in()){
 							redirect('login');
 						}
-				elseif($this->check_authority('edit_estimation'))
-				{
-						redirect('home/estimation_list');
-				}
+				elseif($v=='')
+						{
+								$this->check_authority('edit_estimation');
+								redirect('home/estimation_list');
+						}
 			else{
 					$value = array('');
 					$sub="";
