@@ -2073,11 +2073,7 @@ function get_subitem_list($dep_id=false,$chap_id=false,$item_id=false){
 	       if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('get_subitem_list')==true)
-			{
-			//echo"elseif";die;
-				redirect('home/item/'.$dep_id.'/'.$chap_id);
-			}
+		
 		else{
 			$this->check_authority('get_subitem_list');
 		       $this->data['dep_id'] = $dep_id;
@@ -2465,7 +2461,12 @@ public function delete_item($dep_id=false,$chap_id=false,$item_id=false){
 	
 	if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('delete_item'))
+		{
+			redirect('home/item/'.$dep_id.'/'.$chap_id);
+		}
+		else{
 		$this->mhome->delete_item($item_id);
 	
 	                   $this->session->set_flashdata('message_type', 'success');        
