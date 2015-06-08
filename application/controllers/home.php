@@ -1157,7 +1157,7 @@ public function item($dep_id=false,$chap_id=false)
 		}
 		elseif($this->check_authority('manage_subitem'))
 		{
-			redirect('home/item/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+			redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);
 		}
 		else{
 	   if($subitem_id){
@@ -1733,7 +1733,7 @@ public function manage_unit($unit_code=false)
 		}
 		elseif($this->check_authority('create_sub_item'))
 		{
-			redirect('home/item/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+			redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);
 		}
 		else{
 		       $this->data['dep_id'] = $dep_id;
@@ -2492,7 +2492,7 @@ public function delete_subitem($dep_id=false,$chap_id=false,$item_id=false,$subi
 		}
 		elseif($this->check_authority('delete_subitem'))
 		{
-			redirect('home/item/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+			redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);
 		}
 		else{
 	
