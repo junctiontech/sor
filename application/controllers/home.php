@@ -606,7 +606,12 @@ if($this->is_logged_in()){
 				{
 					if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+			elseif($this->check_authority('edit_estimation'))
+			{
+				redirect('home/estimation_list');
+			}
+		else{
 				$value = array('');
 				$sub="";
 				$dep_id="";
