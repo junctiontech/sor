@@ -1154,7 +1154,12 @@ public function item($dep_id=false,$chap_id=false)
 	 {
 		 if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('manage_subitem'))
+		{
+			redirect('home/item/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+		}
+		else{
 	   if($subitem_id){
 			$filter = array('subitem_id'=>$subitem_id);
 		
@@ -1725,7 +1730,12 @@ public function manage_unit($unit_code=false)
 	{  
 	if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('create_sub_item'))
+		{
+			redirect('home/item/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+		}
+		else{
 		       $this->data['dep_id'] = $dep_id;
 		       $this->data['chap_id'] = $chap_id;
 		       $this->data['item_id'] = $item_id;
@@ -2479,7 +2489,12 @@ public function delete_subitem($dep_id=false,$chap_id=false,$item_id=false,$subi
 	
 	if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('delete_subitem'))
+		{
+			redirect('home/item/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+		}
+		else{
 	
 						$this->mhome->delete_subitem($subitem_id);
 	
