@@ -2621,17 +2621,13 @@ public function index1(){
 		echo json_encode ($query);
 	}
 }
-  // public function search_ajax()
-//{
-	//echo"hihhhhhh";die;
-	//$dep_id = $this->input->post('value');
-	//print_r($dep_id);die;
-	// $chap_list = $thais->data['chap_list'] = $this->utilities->search_ajax($dep_id);
-	//print_r($chap_list);die;
-	//$this->load->view('subitem_cal',$this->data);
-	//$this->load->view('subitem_cal');
-	//$this->parser->parse('subitem_cal',$thais->data);
-//}
+
+public function msg($dep_id=false)
+	{
+	$this->session->set_flashdata('category_error_block', 'success message');        
+	$this->session->set_flashdata('message', $this->config->item("add_department").' You Are Not Authorised Person For Genrate PDF');
+		redirect('home/chapter/'.$dep_id);
+	}
 }
 /* Ended */
 
