@@ -96,6 +96,7 @@
     					<th class="subitem">Rate</th>
     					<th class="subitem">Amount</th>
     					<th class="subitem">Total</th>
+    					<th>Ovehead</th>
     					</tr>
     					</thead>
     				
@@ -192,7 +193,12 @@
     									>
     									
     								</td>
-    								
+    								<td><input type="text" readonly class="input-mini" 
+    									placeholder="Ovehead" id="" 
+    									name="Ovehead" 
+    									value=""
+    									>
+    								</td>
     								
     								
     								
@@ -223,6 +229,7 @@
     							<td><input type="text"  class="input-mini-xs" id="rate_1" name="rate[]"  onchange="adding_total(this.id,'dataTable')" value=""></td>
     							<td><input type="text" readonly class="input-mini-xs" id="amount_1" name="amount[]" value="" onblur="get_total(this.id)"></td>
     							<td><input type="text" readonly class="input-mini" placeholder="Total" id="total_1" name="total_amount[]" value=""></td>
+    					  		<td><input type="text" readonly class="input-mini" placeholder="Ovehead" id="" 	name="Ovehead" value=""></td>
     					  </tr>
     	                   </tbody>
     			<?php }?>
