@@ -480,7 +480,12 @@ function login($info=false)
 				{
 					if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('estimation_val'))
+		{
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+		}
+		else{
 				$this->data['dep_id'] = $dep_id;
 				$this->data['chap_id'] = $chap_id;
 				$this->data['item_id'] = $item_id;
@@ -558,7 +563,12 @@ function login($info=false)
 				{
 					if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('add_estsubitem'))
+		{
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
+		}
+		else{
 				$this->data['dep_id'] = $dep_id;
 				$this->data['chap_id'] = $chap_id;
 				$this->data['item_id'] = $item_id;
@@ -2621,17 +2631,13 @@ public function index1(){
 		echo json_encode ($query);
 	}
 }
-  // public function search_ajax()
-//{
-	//echo"hihhhhhh";die;
-	//$dep_id = $this->input->post('value');
-	//print_r($dep_id);die;
-	// $chap_list = $thais->data['chap_list'] = $this->utilities->search_ajax($dep_id);
-	//print_r($chap_list);die;
-	//$this->load->view('subitem_cal',$this->data);
-	//$this->load->view('subitem_cal');
-	//$this->parser->parse('subitem_cal',$thais->data);
-//}
+
+public function msg($dep_id=false)
+	{
+	$this->session->set_flashdata('category_error_block', 'success message');        
+	$this->session->set_flashdata('message', $this->config->item("add_department").' You Are Not Authorised Person For Genrate PDF');
+		redirect('home/chapter/'.$dep_id);
+	}
 }
 /* Ended */
 

@@ -1,3 +1,4 @@
+<?php $user_session_data = $this->session->userdata('user_data'); ?>
 <div id="main-content">
 <div class="page-title">
 <div>
@@ -58,8 +59,21 @@
 					<div class="title">
 					<h3><a href="<?=base_url()?>index.php/home/item/<?=$cl->dep_id?>/<?=$cl->chap_id?>"><?=$cl->chap_name?></a></h3>
 					<p ><a class="pull-right" style=" margin-right: 9px; color: #fff;"href="<?=base_url()?>index.php/home/add_chapter/<?=$cl->dep_id?>/<?=$cl->chap_id?>"><i class="fa fa-edit"></i> Edit </a>
+					<?php foreach($list_permision as $var){
+					if($user_session_data['role_id']==$var->role_id && $var->function_id=='pdf_file' && $var->auth_read==0 && $var->auth_execute==0)
+					{
+					?>
+					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
+					href="<?=base_url()?>index.php/home/msg/<?=$cl->dep_id?>"><i class="fa fa-download"></i>Generate PDF</a>
+					<?php
+					}
+					if($var->function_id=='pdf_file' && $var->auth_read==1 && $var->auth_execute==1)
+					{
+					?>
 					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
 					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> Generate PDF</a></p>
+					<?php } }?>
+					
 					</div>
 				</div>
 			</a>
