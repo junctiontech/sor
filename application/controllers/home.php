@@ -483,7 +483,7 @@ function login($info=false)
 		}
 		elseif($this->check_authority('estimation_val'))
 		{
-			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$subitem_id);
 		}
 		else{
 				$this->data['dep_id'] = $dep_id;
