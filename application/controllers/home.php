@@ -422,7 +422,7 @@ function login($info=false)
 		}
 		elseif($this->check_authority('add_est_submit'))
 		{
-			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$subitem_id);
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
 		}
 		else{
 				if($this->input->post('est_id')){
@@ -756,7 +756,7 @@ if($this->is_logged_in()){
 		}
 		elseif($this->check_authority('del_sitem_est'))
 		{
-			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$subitem_id);
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
 		}
 		else{
 					
