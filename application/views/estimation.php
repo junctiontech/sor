@@ -38,7 +38,7 @@
 			 <?php  if($this->session->flashdata('category_error')) {  ?>
 									<div class="form-group">
 										<div class="alert alert-danger">
-										<a href="javascript:;" class="goto-register"><strong><?=$this->session->flashdata('message')?></strong></a>
+										<a href="javascript:;" class="alert alert-danger"><strong><?=$this->session->flashdata('message')?></strong></a>
 	
 										</div>
 										</div>
