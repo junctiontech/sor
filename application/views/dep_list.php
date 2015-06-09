@@ -1,3 +1,4 @@
+<!--  Department list -->
 <div id="main-content">
 <div class="page-title">
 <div>
