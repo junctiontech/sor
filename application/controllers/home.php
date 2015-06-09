@@ -566,8 +566,7 @@ function login($info=false)
 		}
 		elseif($this->check_authority('add_estsubitem'))
 		{
-			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id);
-			echo"sdss";die;
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
 		}
 		else{
 				$this->data['dep_id'] = $dep_id;
