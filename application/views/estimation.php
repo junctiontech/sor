@@ -165,7 +165,7 @@
 
 				</table>
 				</div>
-				<br>
+				
 				<input type="submit" name="save" formaction="index.php/home/add_est_submit/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$select?>" class="btn btn-primary pull-right"  value="Save Changes">
   		
 	</div>
