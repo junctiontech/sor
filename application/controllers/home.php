@@ -419,7 +419,12 @@ function login($info=false)
 				{	
 				if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('add_est_submit'))
+		{
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$select);
+		}
+		else{
 				if($this->input->post('est_id')){
 					$data=array('est_description' => $this->input->post('est_description'),
 					'est_total' => $this->input->post('final_total'),
@@ -748,7 +753,12 @@ if($this->is_logged_in()){
 				function del_sitem_est($dep_id=false,$chap_id=false,$item_id=false,$select=false,$est_id=false){
 					if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('del_sitem_est'))
+		{
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$select);
+		}
+		else{
 					
 					$sub_select=$_POST['select'];
 					for($i=0;$i<=count($sub_select);$i++){
