@@ -4,9 +4,7 @@
   			<h1><i class="fa fa-keyboard-o"></i>Estimation Values</h1>
   		</div>
   	</div>
-
-
-  	<div id="breadcrumbs">
+<div id="breadcrumbs">
   		<ul class="breadcrumb">
   			<li class="active"> <i class="fa fa-home"></i><?php echo($this->breadcrumb->output());?> </li>
 

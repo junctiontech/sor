@@ -413,7 +413,7 @@ function login($info=false)
 				$this->parser->parse('estimation',$this->data);
 				$this->parser->parse('include/footer',$this->data);
 				}
-		//}		
+			
 			}
 				function add_est_submit($dep_id=false,$chap_id=false,$item_id=false,$select=false,$est_id=false)
 				{	
