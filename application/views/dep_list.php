@@ -1,12 +1,12 @@
+<!--  Department list -->
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-dashboard"></i> Dashboard</h1>
+<h1><i class="fa fa-dashboard"></i> Departments</h1>
 </div>
 </div>
 <div id="breadcrumbs">
 <ul class="breadcrumb">
-
 
 <li class="active"> <i class="fa fa-home"></i><?php echo($this->breadcrumb->output());?> </li>
 </ul>
@@ -15,8 +15,7 @@
 <?php  if($this->session->flashdata('category_error')) { ?>
 								<div class="row-fluid">
 									<div class="alert alert-danger">
-									
-								
+																
 									<strong><?=$this->session->flashdata('message')?></strong> 
 									
 								
