@@ -480,7 +480,12 @@ function login($info=false)
 				{
 					if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('estimation_val'))
+		{
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+		}
+		else{
 				$this->data['dep_id'] = $dep_id;
 				$this->data['chap_id'] = $chap_id;
 				$this->data['item_id'] = $item_id;
@@ -558,7 +563,12 @@ function login($info=false)
 				{
 					if($this->is_logged_in()){
 			redirect('login');
-		}else{
+		}
+		elseif($this->check_authority('add_estsubitem'))
+		{
+			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id);
+		}
+		else{
 				$this->data['dep_id'] = $dep_id;
 				$this->data['chap_id'] = $chap_id;
 				$this->data['item_id'] = $item_id;

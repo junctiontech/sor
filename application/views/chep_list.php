@@ -71,10 +71,9 @@
 					{
 					?>
 					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
-					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>"><i class="fa fa-download"></i> Generate PDF</a>
-					<?php } }?>
-					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
 					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> Generate PDF</a></p>
+					<?php } }?>
+					
 					</div>
 				</div>
 			</a>
