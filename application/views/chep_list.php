@@ -72,7 +72,10 @@
 					?>
 					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
 					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> Generate PDF</a></p>
-					<?php } }?>
+					<?php 
+					} 
+					}
+					?>
 					
 					</div>
 				</div>
