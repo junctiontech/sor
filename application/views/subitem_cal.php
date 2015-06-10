@@ -174,7 +174,7 @@
     								</td>
     								
     								
-    								<td><input  type="text" class="input-mini-xs"  id="rate_<?=$key+1?>" 
+    								<td><input  type="text" readonly class="input-mini-xs"  id="rate_<?=$key+1?>" 
     									name="rate[]" onchange="adding_total(this.id,'editTable')"
     									value="<?php //=(!empty($sub->rate))?$sub->rate:"";?>">
     								</td>
@@ -193,10 +193,10 @@
     									>
     									
     								</td>
-    								<td><input type="text" readonly class="input-mini" 
-    									placeholder="Ovehead" id="" 
-    									name="Ovehead" 
-    									value=""
+    								<td><input type="text" onchange="overhead_cal(this.value,this.id,'editTable')" class="input-mini" 
+    									placeholder="Ovehead" id="overhead_<?=$key+1?>" 
+    									name="Ovehead[]" 
+    									value="<?=(!empty($sub->over_head))?$sub->over_head:"";?>"
     									>
     								</td>
     								
@@ -221,15 +221,15 @@
     							<td><span id="code_1" ></span></td>
     							<td><textarea   class="input-medium" rows="1" id="item_desc_1" name="item_desc[]"onchange="get_text_type(this.id,'dataTable');"></textarea></td>
     							
-    							<td><input type="text" readonly class="input-mini-xs" id="unit_1" name="unit_name[]" value=""></td>
-    							<td><input type="text" readonly class="input-mini-xs" id="units_1" name="unit[]" value="">
+    							<td><input type="text" readonly class="input-mini-xs" id="unit_1" name="unit_code[]" value=""></td>
+    							<td><input type="text" readonly class="input-mini-xs" id="units_1" name="unit_code[]" value="">
     							</td>
     							
     							<td><input  type="text" data-rule-required="true" class="input-mini-xs form-control required" id="quantity_1" name="quantity[]" onchange="calculate_amount(this.id);adding_total(this.id,'dataTable')"  value=""  ></td>
-    							<td><input type="text"  class="input-mini-xs" id="rate_1" name="rate[]"  onchange="adding_total(this.id,'dataTable')" value=""></td>
+    							<td><input type="text" readonly class="input-mini-xs" id="rate_1" name="rate[]"  onchange="adding_total(this.id,'dataTable')" value=""></td>
     							<td><input type="text" readonly class="input-mini-xs" id="amount_1" name="amount[]" value="" onblur="get_total(this.id)"></td>
     							<td><input type="text" readonly class="input-mini" placeholder="Total" id="total_1" name="total_amount[]" value=""></td>
-    					  		<td><input type="text" readonly class="input-mini" placeholder="Ovehead" id="" 	name="Ovehead" value=""></td>
+    					  		<td><input type="text"  class="input-mini" onchange="overhead_cal(this.value,this.id,'dataTable')" placeholder="Ovehead" id="overhead_1" 	name="Ovehead[]" value=""></td>
     					  </tr>
     	                   </tbody>
     			<?php }?>
@@ -291,7 +291,10 @@
     				var row = i;
     			   calculate_amount_onload(row);
     			}
-    			  adding_total(row,'editTable');
+    			adding_total(row,'editTable');
+    			overhead_cal_single_onload(row);
+					 overhead_cal_onload(document.getElementById("overhead_"+row).value,document.getElementById("overhead_"+row).id,'editTable',rowCount);
+					
       }
       , 2000 );
     });
@@ -483,7 +486,7 @@
     }
     			
     function adding_total(row,tableID)
-    { 				
+    { 			
     			var table=document.getElementById(tableID);
     			
     			var rowCount=table.rows.length;
@@ -518,13 +521,21 @@
     			var total=0;
     			document.getElementById('total_'+row_id).value=total;
     	}else{ 
+    		var chk=document.getElementById("overhead_"+row_id).value;
+    		if(chk){
     			var total = document.getElementById('total_' + (row_id-1)).value;
-    			var rate = document.getElementById('rate_'+row_id).value;
-    			var tot1 = total*rate;
-    			var tot2 = tot1/100;
-    			var tot3 = tot2+(+total);
-    			document.getElementById("amount_"+ row_id).value=tot2; 
-    			document.getElementById("total_"+ row_id).value=tot3; 
+    			var amt = document.getElementById('amount_'+row_id).value;
+    			var tot3 = parseFloat(amt)+parseFloat(total);
+    			document.getElementById("total_"+ row_id).value=tot3;
+        		}else{
+        			var total = document.getElementById('total_' + (row_id-1)).value;
+        			 var rate = document.getElementById('rate_'+row_id).value;
+        			var tot1 = total*rate;
+        			var tot2 = tot1/100;
+        			var tot3 = tot2+(+total);
+        				document.getElementById("amount_"+ row_id).value=tot2; 
+        				document.getElementById("total_"+ row_id).value=tot3; 
+        		}
     			}
     			}
     	else{  

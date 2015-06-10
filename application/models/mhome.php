@@ -378,7 +378,7 @@ function get_record(){
 	}
 	function manage_subitem_cal($info=false,$finaltotal=false,$subitem_id=false,$item_id=false){
 		//print_r($finaltotal=false);die;
-		$this->db->query("INSERT ignore INTO ssr_t_calculation (dep_id,chap_id,item_id,subitem_id,class_id,serial,item_type,item_desc,code,unit_code,amount,total_amount,quantity,rate) VALUES ".$info."");
+		$this->db->query("INSERT ignore INTO ssr_t_calculation (dep_id,chap_id,item_id,subitem_id,class_id,serial,item_type,item_desc,code,unit_code,amount,total_amount,quantity,rate,over_head) VALUES ".$info."");
 		//echo $this->db->last_query();die;
 		if($finaltotal){
 		$this->db->query("UPDATE  ssr_t_subitem  SET rate = ".$finaltotal." WHERE subitem_id= '".$subitem_id."'");
@@ -395,7 +395,7 @@ function update_subitem_cal($info=false,$finaltotal=false,$dep_id=false,$chap_id
 
 	  $this->db->query("DELETE FROM `ssr_t_calculation` WHERE `dep_id`='".$dep_id."' and `chap_id`='".$chap_id."' and `item_id`='".$item_id."' and `subitem_id`='".$subitem_id."' ");	
 	 
-	$this->db->query("INSERT ignore INTO ssr_t_calculation (dep_id,chap_id,item_id,subitem_id,class_id,serial,item_type,item_desc,code,unit_code,amount,total_amount,quantity,rate) VALUES ".$info."");
+	$this->db->query("INSERT ignore INTO ssr_t_calculation (dep_id,chap_id,item_id,subitem_id,class_id,serial,item_type,item_desc,code,unit_code,amount,total_amount,quantity,rate,over_head) VALUES ".$info."");
 
 	if($finaltotal){
 	$this->db->query("UPDATE  ssr_t_subitem  SET rate = ".$finaltotal." WHERE subitem_id= '".$subitem_id."'");
