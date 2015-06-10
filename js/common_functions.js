@@ -202,7 +202,7 @@ function get_type_value(row,tableid)
 			}else if(type_val=='overhead'){
 			$('#rate_'+row_id).val(v.overhead_percent);
 			$('#item_desc_'+row_id).val(v.overhead_desc); 
-			adding_total(row,tableid);
+			overhead_cal_single(row_id,tableid);
 			 }else if(type_val=='labour'){
 			$('#rate_'+row_id).val(v.labour_rate);
 			$('#unit_'+row_id).val(v.unit_code);
@@ -634,3 +634,95 @@ function total_estamount_onload(tableID)
 				document.getElementById('final_total').value=grand_total;
 }
 /*estimate coding end.................................................................................*/
+/*overhead calculation start...........................................................................*/
+function overhead_cal(value,id,tableid)
+{				
+				var get_data = id.split('_');		
+				var id_type =  get_data[0];
+				var row_id = get_data[1];
+				
+				var temp = new Array();
+				temp = value.split(",");
+				var lnth= temp.length;
+				 
+				var sum=0;
+	for(i=0;i<=lnth-1;i++)
+	{
+				var val=temp[i];
+				var sum =parseFloat(sum)+parseFloat(document.getElementById('amount_'+ val).value);
+	}
+				
+				var rate = document.getElementById('rate_'+ row_id).value;
+				var tot1 = sum*rate;
+				var tot2 = tot1/100;
+				document.getElementById("amount_"+ row_id).value=tot2; 
+				adding_total(id,tableid);
+				
+}
+
+function overhead_cal_onload(value,id,tableid,rowCount)
+{			
+	for(i=1;i<=rowCount;i++){
+		var row = i;
+		var chk=document.getElementById("overhead_"+row).value;
+		if(chk){	
+				var e = document.getElementById("type_"+row);
+				var type_val = e.options[e.selectedIndex].value;
+				
+				 if(type_val=='overhead'){
+					
+					var id1= document.getElementById("overhead_"+row).value
+					var temp = new Array();
+					temp = id1.split(",");
+					var lnth= temp.length;
+				 
+					var sum=0;
+	for(j=0;j<=lnth-1;j++)
+	{      
+				var val=temp[j];
+				var sum =parseFloat(sum)+parseFloat(document.getElementById('amount_'+ val).value);
+	}
+				var rate = document.getElementById('rate_'+ row).value;
+				var tot1 = sum*rate;
+				var tot2 = tot1/100;
+				document.getElementById("amount_"+ row).value=tot2; 
+				
+				 }}}	
+	adding_total(id,tableid);
+
+}
+function overhead_cal_single(row_id,tableid)
+{				
+	if(row_id==1){
+		var total=0;
+		document.getElementById('total_'+row_id).value=total;
+	}else{ 
+		var total = document.getElementById('total_' + (row_id-1)).value;
+		 var rate = document.getElementById('rate_'+row_id).value;
+		var tot1 = total*rate;
+		var tot2 = tot1/100;
+		var tot3 = tot2+(+total);
+			document.getElementById("amount_"+ row_id).value=tot2; 
+			document.getElementById("total_"+ row_id).value=tot3; 
+		}
+	var table=document.getElementById(tableid);
+	var rowCount=table.rows.length;
+	adding_total(rowCount,tableid);
+}
+function overhead_cal_single_onload(row_id)
+{				
+	if(row_id==1){
+		var total=0;
+		document.getElementById('total_'+row_id).value=total;
+	}else{ 
+		var total = document.getElementById('total_' + (row_id-1)).value;
+		 var rate = document.getElementById('rate_'+row_id).value;
+		var tot1 = total*rate;
+		var tot2 = tot1/100;
+		var tot3 = tot2+(+total);
+			document.getElementById("amount_"+ row_id).value=tot2; 
+			document.getElementById("total_"+ row_id).value=tot3; 
+		}
+	adding_total(row_id,'editTable');
+}
+/*overhead calculation end...........................................................................*/
