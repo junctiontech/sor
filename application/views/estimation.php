@@ -4,9 +4,7 @@
   			<h1><i class="fa fa-keyboard-o"></i>Estimation Values</h1>
   		</div>
   	</div>
-
-
-  	<div id="breadcrumbs">
+<div id="breadcrumbs">
   		<ul class="breadcrumb">
   			<li class="active"> <i class="fa fa-home"></i><?php echo($this->breadcrumb->output());?> </li>
 
@@ -38,7 +36,7 @@
 			 <?php  if($this->session->flashdata('category_error')) {  ?>
 									<div class="form-group">
 										<div class="alert alert-danger">
-										<a href="javascript:;" class="goto-register"><strong><?=$this->session->flashdata('message')?></strong></a>
+										<a href="javascript:;" class="alert alert-danger"><strong><?=$this->session->flashdata('message')?></strong></a>
 	
 										</div>
 										</div>
