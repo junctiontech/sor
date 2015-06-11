@@ -44,7 +44,7 @@
                                 <h3><i class="icon-reorder"></i> User Management</h3>
                             </div>
 							 <div class="box-content">
-                                <form method="POST" action="<?=base_url();?>index.php/authority/user_add" class="form-horizontal">
+                                <form method="POST" action="<?=base_url();?>index.php/login/user_add" class="form-horizontal">
 								   <div class="control-group">
                                         <label class="control-label">Email</label>
                                         <div class="controls" for="usermailid">

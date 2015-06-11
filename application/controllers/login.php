@@ -190,7 +190,7 @@ class Login extends CI_Controller {
 		else
 		{
 				Authority::checkAuthority('role_management');
-		$list_perm=	$this->data['list_perm']=$this->authority_model->list_permsn();
+		$list_permsn =$this->data['list_permsn']=$this->authority_model->list_permsn();
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
 		$this->load->view('role_management',$this->data);
