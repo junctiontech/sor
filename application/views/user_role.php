@@ -12,13 +12,6 @@
 		</ul>
 	</div>
 	
-	<?php  if($this->session->flashdata('category_success')) { ?>
-								<div class="row-fluid">
-									<div class="alert alert-success">
-										<strong><?=$this->session->flashdata('message')?></strong> 
-									</div>
-								</div>
-	<?php }?>
 	<?php  if($this->session->flashdata('message')) { ?>
 								<div class="row-fluid">
 									<div class="alert alert-success">
@@ -100,13 +93,13 @@
                                     <tbody>
 									<?php foreach($verify_list as $list){ ?>
 										<tr>
-											<form method="POST" action="<?=base_url();?>index.php/authority/user_role/<?=$list->user_id?>" >
+											<form method="POST" action="<?=base_url();?>index.php/login/role_assign/<?=$list->user_id?>" >
 													<td><?=$list->user_id;?></td>
 													<td><?=$list->usermailid;?></td>
 													<td>
 														<div class="control-group">
 														  <div class="controls">
-															<select required class="span6 chosen" data-placeholder="Choose a Role" name="name" tabindex="1" required>
+															<select required class="span6 chosen" data-placeholder="Choose a Role" name="role" tabindex="1" required>
 																<option value=""> </option>
 															<?php  foreach($role_list as $lists){ ?>
 																<option value="<?=$lists->role_id?>"<?=(!empty($list->role_id) && $list->role_id==$lists->role_id)?'selected':'' ?> ><?=$lists->role_id; ?></option>
@@ -118,7 +111,7 @@
 													<td>
 													   <div class="btn-group">
 															<button class="btn btn-small show-tooltip" type="submit"  title="edit" ><i class="fa fa-check"></i>   Assign</button>
-															<a class="btn btn-small btn-danger show-tooltip" title="Delete" onClick="return confirm('Are you sure to delete this user? This will delete all the related records on this user as well.')" href="<?=base_url()?>index.php/authority/delete_user/<?=$list->user_id?>"><i class="fa fa-times"></i> Delete</a>
+															<a class="btn btn-small btn-danger show-tooltip" title="Delete" onClick="return confirm('Are you sure to delete this user? This will delete all the related records on this user as well.')" href="<?=base_url()?>index.php/login/delete_user/<?=$list->user_id?>"><i class="fa fa-times"></i> Delete</a>
 															<button class="btn btn-small btn-primary show-tooltip" type="submit" title="Block/Unblock"   ><i class="fa fa-ban"></i> Block</button>
 														</div>
 													</td>

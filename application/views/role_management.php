@@ -12,6 +12,13 @@
 
 	</ul>
 	</div>
+	<?php  if($this->session->flashdata('message')) { ?>
+								<div class="row-fluid">
+									<div class="alert alert-success">
+										<strong><?=$this->session->flashdata('message')?></strong> 
+									</div>
+								</div>
+	<?php } ?>
   <div class="row-fluid">
                     <div class="span12">
                         <div class="box">

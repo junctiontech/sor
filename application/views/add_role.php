@@ -21,7 +21,7 @@
                                
                             </div>
                             <div class="box-content">
-							<!--<form action="<?php //echo base_url(); ?>index.php/authority/insert_role" method="POST">-->
+						<form action="<?php echo base_url(); ?>index.php/login/insert_role" method="POST">
 								   <div class="control-group">
                                        <!-- <label class="control-label">User Name</label>-->
                                         <div class="controls">
@@ -73,7 +73,7 @@
                                       <button type="submit" class="btn btn-primary">Submit</button>
                                       <button type="button" class="btn">Cancel</button>
                                    </div>
-							<!--</form>-->
+							</form>
                                
                             </div>
                         </div>

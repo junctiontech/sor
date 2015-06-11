@@ -54,7 +54,7 @@
 									<div class="control-group">
 										<label class="control-label">Role</label>
                                       <div class="controls">
-                                        <select class="span6 chosen" data-placeholder="Choose a Category" tabindex="1" data-rule-required="true">
+                                        <select class="span6 chosen" name="role" data-placeholder="Choose a Category" tabindex="1" data-rule-required="true">
 												<option value=""> </option>
 												<?php  foreach($role_list as $lists){ ?>
 													<option value="<?=$lists->role_id?>" ><?=$lists->role_id; ?></option>

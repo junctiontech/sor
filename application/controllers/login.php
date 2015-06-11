@@ -73,7 +73,7 @@ class Login extends CI_Controller {
 	    if($q)
 			{
 				$this->session->set_flashdata('category_error', 'Error message');  
-				$this->session->set_flashdata('message',$this->config->item("user").'email id already exist'); 
+				$this->session->set_flashdata('message',$this->config->item("user").'Email id already exist'); 
 				$this->session->$a;
 				  redirect('login');
 			}
@@ -126,9 +126,9 @@ class Login extends CI_Controller {
 		}		
 	}
 	//********** function start for user role and role management****
-	function user_role($info=false)
+	
+	function user_role()
 	{	
-		$name= $this->input->post('name');
 		if($this->is_logged_in())
 		{
 			redirect('login');
@@ -136,11 +136,6 @@ class Login extends CI_Controller {
 		else
 		{
 				Authority::checkAuthority('user_role');
-			if($name!=='')
-			{
-			$data=array('role_id'=>$name);
-			}
-		$role_assign=$this->data['role_assign']=$this->authority_model->role_assign($data,$info);
 		$role_list=$this->data['role_list']=$this->authority_model->role_list();
 		$verify_list=$this->data['verify_list']=$this->authority_model->verify_list();
 		$this->parser->parse('include/header',$this->data);
@@ -150,17 +145,31 @@ class Login extends CI_Controller {
 		}
 	}
 	
-	// function for delete user from user_role view
-	function delete_user($info=false)
+	//function for assign role 
+	function role_assign($info=false)
 	{
-		//print_r($info);die;
-		if($info){
+		$name= $this->input->post('role');
+		if($name!=='')
+		{
+			$data=array('role_id'=>$name);
+		}
+		$role_assign=$this->data['role_assign']=$this->authority_model->role_assign($data,$info);
+		$this->session->set_flashdata('message_type', 'success');
+		$this->session->set_flashdata('message', $this->config->item("user").' Role Assign Successfully');
+		redirect('login/user_role');
+	}
+	
+	// function for delete user from user_role view
+	function delete_user($user=false)
+	{
+		//print_r($user);die;
+		if($user){
 					  
-						$filter = array('user_id'=>$info);
+						$filter = array('user_id'=>$user);
 						$this->authority_model->delete_user($filter,'ssr_t_users');
 						$this->session->set_flashdata('message_type', 'success');        
-                        $this->session->set_flashdata('message', $this->config->item("user").' DELETE successfully');
-						redirect('authority/user_role');		
+                        $this->session->set_flashdata('message', $this->config->item("user").' Delete Successfully');
+						redirect('login/user_role');		
 						}
 	}	
 	//function for delete user from user_role view
@@ -176,7 +185,7 @@ class Login extends CI_Controller {
 			$data=array('status'=>'reject');
 		}
 		$verify=$this->data['verify']=$this->authority_model->verify($data,$filter,'ssr_t_users');
-		redirect('authority/user_role');
+		redirect('login/user_role');
 	}
 
 	
@@ -197,7 +206,7 @@ class Login extends CI_Controller {
 		$this->parser->parse('include/footer',$this->data);
 		}
 	}
-//for role permissions
+//
 	function role_permission($info=false)
 	{	
 		//print_r($info);die;
@@ -208,15 +217,17 @@ class Login extends CI_Controller {
 		else
 		{
 			$permissions=$this->data['permissions']=$this->authority_model->permissions($info);
-			//print_r($permissions);die;
-			//$list_function_prem=	$this->data['list_function_prem']=$this->authority_model->list_function_prem();
 			$this->parser->parse('include/header',$this->data);
 			$this->parser->parse('include/leftmenu',$this->data);
 			$this->load->view('role_permission',$this->data);
 			$this->parser->parse('include/footer',$this->data);
 		}
 	}
-	//for manage users(add-edit)
+	
+	
+	//function for role permissions
+	 
+	
 	function manage_users($info=false)
 	{
 		if($this->is_logged_in())
@@ -242,19 +253,20 @@ class Login extends CI_Controller {
 			else
 				{
 					$email = $this->input->post('usermailid');
-					$qry =   $this->authority_model->user_add('ssr_t_users',$email);
+					$role= $this->input->post('role');
+					$qry =   $this->authority_model->user_add('ssr_t_users',$email,$role);
 					if($qry)
 					   {
 							$this->session->set_flashdata('category_error', 'Error message');  
 							$this->session->set_flashdata('message',$this->config->item("user").'email id already exist'); 
-							   redirect('authority/manage_users');
+							   redirect('login/manage_users');
 						  
 					   }
 					else
 					   {
 							$this->session->set_flashdata('category_success', 'success message	');        
 							$this->session->set_flashdata('message', $this->config->item("user").' Data Inserted successfully');
-								redirect('authority/user_role');
+								redirect('login/user_role');
 					   }
 				}
 		}
@@ -279,7 +291,7 @@ class Login extends CI_Controller {
   function insert_role()
 	{		
 		$data = $this->input->post();
-		print_r($data);die;
+		//print_r($data);die;
 		$value = "";
 	  if($this->input->post('edit_costing')==1)
 	   {	
@@ -287,9 +299,12 @@ class Login extends CI_Controller {
 			{
 				$value .= "('".$data['function'][$i]."','".$data['read'][$i]."','".$data['execute'][$i]."')".",";
 			}
+			//print_r($value);die;
 			if($this->authority_model->insert_role(rtrim($value,",")))
 			{
-				redirect("authority/role_management");
+				$this->session->set_flashdata('category_success', 'success message	');
+				$this->session->set_flashdata('message', $this->config->item("user").' Role Inserted successfully');
+				redirect("login/role_management");
 				
 			}
 			else

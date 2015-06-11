@@ -86,7 +86,7 @@ class Authority_model extends CI_Model
 	
 	
 //function for add user in role view
-		function user_add($table,$email)
+		function user_add($table,$email,$role)
 		{	
 			$this->db->where('usermailid',$email);
 			$query = $this->db->get('ssr_t_users');
@@ -98,7 +98,7 @@ class Authority_model extends CI_Model
 				$data=array
 						   (
 						  'usermailid'=>  $this->input->post('usermailid'),
-						  'role_id'=>	$this->input->post('role_id'),
+						  'role_id'=>	$role,
 						  'password'=>  $this->input->post('password')
 						   );
 				$this->db->insert("ssr_t_users",$data);
@@ -121,6 +121,7 @@ class Authority_model extends CI_Model
 //Start function for insert role for add_role view	
 	function insert_role($info)
 	{
+		//print_r($info);die;
 		$this->db->query("INSERT ignore INTO ssr_t_role_permission (function_id,auth_read,auth_execute) VALUES ".$info."");
 		return true;
 	}
