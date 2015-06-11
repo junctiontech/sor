@@ -1,4 +1,4 @@
-    <div id="main-content" >
+<div id="main-content" >
     	<div class="page-title">
     	<div>
     	<h1><i class="fa fa-keyboard-o"></i> Subitem Calculation</h1>
@@ -292,7 +292,7 @@
     			   calculate_amount_onload(row);
     			}
     			adding_total(row,'editTable');
-    			overhead_cal_single_onload(row);
+    			//overhead_cal_single_onload(row);
 					 overhead_cal_onload(document.getElementById("overhead_"+row).value,document.getElementById("overhead_"+row).id,'editTable',rowCount);
 					
       }
@@ -384,6 +384,7 @@
     			var z = 1;
     	for(i=0;i<rowCount;i++){
     			table.rows[i].cells[1].childNodes[0].value = i+1;
+    			
     			var get_data = table.rows[i].cells[0].childNodes[0].id.split('_') ;
     			var textbox_name =  get_data[0];
     			table.rows[i].cells[0].childNodes[0].id = textbox_name+"_"+z;
@@ -427,6 +428,12 @@
     			var get_data10 = table.rows[i].cells[10].childNodes[0].id.split('_') ;
     			var textbox_name10 =  get_data10[0];
     			table.rows[i].cells[10].childNodes[0].id = textbox_name10+"_"+z;
+
+    			var get_data11 = table.rows[i].cells[11].childNodes[0].id.split('_') ;
+				var textbox_name11 =  get_data11[0];
+				table.rows[i].cells[11].childNodes[0].id = textbox_name11+"_"+z;
+				table.rows[i].cells[11].childNodes[0].value ='' ;
+    			
     			z++;
     	}
     	}
@@ -639,6 +646,11 @@
     								var get_data10 = table.rows[i].cells[10].childNodes[0].id.split('_') ;
     								var textbox_name10 =  get_data10[0];
     								table.rows[i].cells[10].childNodes[0].id = textbox_name10+"_"+z;
+
+    								var get_data11 = table.rows[i].cells[11].childNodes[0].id.split('_') ;
+    								var textbox_name11 =  get_data11[0];
+    								table.rows[i].cells[11].childNodes[0].id = textbox_name11+"_"+z;
+    								table.rows[i].cells[11].childNodes[0].value ='' ;
     								
     								z++;
     	}

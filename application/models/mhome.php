@@ -567,7 +567,7 @@ function update_subitem_cal($info=false,$finaltotal=false,$dep_id=false,$chap_id
 	}
 	function manage_rel_cal($info=false,$finaltotal=false,$ref_id=false){
 		//print_r($finaltotal=false);die;
-		$this->db->query("INSERT ignore INTO ssr_t_rel_calculation (dep_id,chap_id,item_id,ref_id,serial,item_type,item_desc,code,unit_code,amount,total_amount,quantity,rate) VALUES ".$info."");
+		$this->db->query("INSERT ignore INTO ssr_t_rel_calculation (dep_id,chap_id,item_id,ref_id,serial,item_type,item_desc,code,unit_code,amount,total_amount,quantity,rate,over_head) VALUES ".$info."");
 		//echo $this->db->last_query();die;
 		if($finaltotal){
 		$this->db->query("UPDATE  ssr_t_reference  SET cost_total = ".$finaltotal." WHERE id= '".$ref_id."'");
@@ -589,7 +589,7 @@ function update_rel_cal($info=false,$finaltotal=false,$dep_id=false,$chap_id=fal
 		
 		 $this->db->query("DELETE FROM `ssr_t_rel_calculation` WHERE `dep_id`='".$dep_id."' and `chap_id`='".$chap_id."' and `item_id`='".$item_id."' and `ref_id`='".$ref_id."' ");	 
 		 
-		$this->db->query("INSERT ignore INTO ssr_t_rel_calculation (dep_id,chap_id,item_id,ref_id,serial,item_type,item_desc,code,unit_code,amount,total_amount,quantity,rate) VALUES ".$info."");
+		$this->db->query("INSERT ignore INTO ssr_t_rel_calculation (dep_id,chap_id,item_id,ref_id,serial,item_type,item_desc,code,unit_code,amount,total_amount,quantity,rate,over_head) VALUES ".$info."");
 		//echo $this->db->last_query();die;
 		if($finaltotal){
 		$this->db->query("UPDATE  ssr_t_reference  SET cost_total = ".$finaltotal." WHERE id= '".$ref_id."'");
