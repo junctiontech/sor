@@ -7,13 +7,12 @@ class Csv extends CI_Controller {
 		
 		$this->data[]="";
 		$this->data['url'] = base_url();
-		
-		
+		$this->load->model('authority_model');
 		$this->load->library('parser');
 		$this->data['base_url']=base_url();
-		$this->load->model('authority_model');
         $this->load->model('csv_model');
         $this->load->library('csvimport');
+        $this->load->library('authority');
         //$debug_mode=n;
     }
   function is_logged_in()
@@ -34,35 +33,12 @@ class Csv extends CI_Controller {
 		 
 	 }
 	 
-	 // Start function for check permissions for particular role_id
-	function check_authority($function)
-	{	
-		$user_session_data = $this->session->userdata('user_data');	
-		$role=$user_session_data['role_id'];
-		$list_permision=$this->data['list_permision']=$this->authority_model->list_permision($role);
-		foreach($list_permision as $var)
-		{	
-		  if($user_session_data['role_id']==$var->role_id && $var->function_id==$function && $var->auth_read==1 && $var->auth_execute==0)
-			{  
-			$this->session->set_flashdata('category_error', 'success message');        
-			$this->session->set_flashdata('message', $this->config->item("add_department").' You are not authorised person for edit');
-					return true;
-			}
-			if($user_session_data['role_id']==$var->role_id && $var->function_id==$function && $var->auth_read==0 && $var->auth_execute==0)
-			{		
-				$this->session->set_flashdata('category_error_block', 'success message');        
-				$this->session->set_flashdata('message', $this->config->item("add_department").' You Are Not Authorised Person Please Contact Administrator');
-						redirect('home');
-			}
-		}
-	}
-	// Start function for check permissions for particular role_id
-	 
+	
     function index($listname=false) {
 		if($this->is_logged_in()){
 			redirect('login');
 		}else{
-		$this->check_authority('index');
+		Authority::checkAuthority('index');
 		 $this->data['list_name']=$this->uri->segment(3);
 		//print_r($listname);die;
 		if($listname=='material'){
@@ -96,7 +72,7 @@ class Csv extends CI_Controller {
     if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('importcsv')==true)
+		elseif(Authority::checkAuthority('importcsv')==true)
 			{
 					redirect('csv/index');
 			}

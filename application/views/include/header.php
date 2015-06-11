@@ -68,7 +68,7 @@ echo date("h:i:s");
  ?>
 </li>
 <li>
-<a href="<?=base_url();?>index.php/home/acc_setting">
+<a href="<?=base_url();?>index.php/login/acc_setting">
 <i class="fa fa-cog"></i>
 Account Settings
 </a>
@@ -82,7 +82,7 @@ Edit Profile
 
 <li class="divider"></li>
 <li>
-<a href="<?php echo base_url(); ?>index.php/home/logout">
+<a href="<?php echo base_url(); ?>index.php/login/logout">
 <i class="fa fa-off"></i>
 Logout
 </a>

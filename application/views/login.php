@@ -6,7 +6,7 @@
 	<!-- BEGIN Main Content -->
 	<div class="login-wrapper">
 			<!-- BEGIN Login Form -->
-					<form id="form-login" method="POST"  action="<?=base_url();?>index.php/home/login">
+					<form id="form-login" method="POST"  action="<?=base_url();?>index.php/login/login_user">
 					<h2 style="text-transform: uppercase;text-align: center;color: #fff;"><b><i class="fa fa-home"></i> SOR </b></h2>
 					</br>
 					<h5 style="text-transform: uppercase;text-align: center;color: #fff;"><b>Login to your account </b></h5>
@@ -61,8 +61,8 @@
 			<!-- END Login Form -->
 
 
-				<!-- BEGIN Register Form -->
-				<form id="form-register" action="<?=base_url();?>index.php/home/sign_up" method="post" class="hide">
+				<!-- BEGIN Register Form --> 
+				<form id="form-register" action="<?=base_url();?>index.php/login/sign_up" method="post" class="hide">
 					<h3 style="text-transform: uppercase;text-align: center;color: #fff;">Sign up</h3>
 					  <span style="color: #fff; font-weight:800; text-transform: capitalize;" class="msg_box_reg-email " ></span>
 					
@@ -93,7 +93,7 @@
 					</div>
 					<hr/>
 					<p class="clearfix">
-						<a href="javascript:;" class="goto-login pull-left text-white" >← Back to login form</a>
+						<a href="javascript:;" class="goto-login pull-left text-white" >â†� Back to login form</a>
 					</p>
 				</form>
 				<!-- END Register Form -->
@@ -118,7 +118,7 @@
 					</div>
 					<hr/>
 					<p class="clearfix">
-						<a href="javascript:;" class="goto-login pull-left text-white">← Back to login form</a>
+						<a href="javascript:;" class="goto-login pull-left text-white">â†� Back to login form</a>
 					</p>
 				</form>
 				<!-- END Forgot Password Form -->
@@ -135,7 +135,7 @@
 			function forgot(){
 			    goToForm('forgot');
         }
-		function goToForm(form)
+		function goToForm(form) 
 			   {
 					$('.login-wrapper > form:visible').fadeOut(500, function(){
 						$('#form-' + form).fadeIn(500);

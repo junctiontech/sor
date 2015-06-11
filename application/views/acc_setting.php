@@ -87,7 +87,7 @@
 										</form>
                                     </div>
                                     <div class="tab-pane" id="tab-1-2">
-                                        <form action="<?=base_url();?>index.php/Home/change_pass" class="form-horizontal" id="validation-form" method="post">
+                                        <form action="<?=base_url();?>index.php/login/change_pass" class="form-horizontal" id="validation-form" method="post">
                                   <div class="control-group">
                                         <label class="control-label" for="password">Password:</label>
                                         <div class="controls">

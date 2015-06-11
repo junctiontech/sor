@@ -14,6 +14,7 @@ class Home extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->data['base_url']=base_url();
+		$this->load->library('authority');
 	 }
 	 function is_logged_in()
 	 {
@@ -57,94 +58,7 @@ class Home extends CI_Controller {
 	}
 	
 	}
-function login($info=false)
-	{
-		
-		  // echo"gfjsdfgbsdk";die;       //$this->parser->parse('include/footer',$this->data);
-											$data=array(
-											'usermailid'=>$this->input->post('usermailid'),
-											'password'=>$this->input->post('password')
-											);
-											//print_r($data);die;
-											$row=$this->mhome->login_check('ssr_t_users',$data);
-											if($row){
-											//print_r($row);die;
-											$user_data = array(
-											'usermailid' => $row->usermailid,
-											'user_id' => $row->user_id,
-											'role_id' => $row->role_id
-											);
-											$this->session->set_userdata('user_data',$user_data);	
-											$user_session_data = $this->session->userdata('user_data');
-											
-											redirect('home');
-										   }
-										   else{
-											   
-											 redirect('login');
-											 // echo"invalid user or password";
-											   }
-											//   	$this->parser->parse(//'include/header',$this->data);
-	//$this->parser->parse('include/header',$this->data);
-	//	$this->parser->parse('login',$this->data);
-	//	$this->parser->parse('include/footer',$this->data);
-	}
-	
-	// Start function for check permissions for particular role_id
-	function check_authority($function)
-	{	
-		$user_session_data = $this->session->userdata('user_data');	
-		$role=$user_session_data['role_id'];
-		$list_permision=$this->data['list_permision']=$this->authority_model->list_permision($role);
-		foreach($list_permision as $var)
-		{	
-		  if($user_session_data['role_id']==$var->role_id && $var->function_id==$function && $var->auth_read==1 && $var->auth_execute==0)
-			{  
-			$this->session->set_flashdata('category_error', 'success message');        
-			$this->session->set_flashdata('message', $this->config->item("add_department").' You are not authorised person for edit');
-					return true;
-			}
-			if($user_session_data['role_id']==$var->role_id && $var->function_id==$function && $var->auth_read==0 && $var->auth_execute==0)
-			{		
-				$this->session->set_flashdata('category_error_block', 'success message');        
-				$this->session->set_flashdata('message', $this->config->item("add_department").' You Are Not Authorised Person Please Contact Administrator');
-						redirect('home');
-			}
-		}
-	}
-	// Start function for check permissions for particular role_id
-	
-	function logout($info=false)
-	{
-		//$this->parser->parse('include/footer',$this->data);
-										$this->data['user_data']=$this->session->userdata('user_data');
-										$userdata=$this->session->userdata('user_data');
-										$unset_userdata=$this->session->unset_userdata($userdata);
-										$this->session->sess_destroy();
-								//$this->load
-										//print_r($unset_userdata);die;
-											  redirect('login');
-	}
-	function sign_up(){
-		 
-		$a = $this->input->post('usermailid');
-     $q =   $this->mhome->insert_sign('ssr_t_users',$a);
-	// print_r($q);die;
-	 if($q)
-       {
-        $this->session->set_flashdata('category_error', 'error message');  
-		$this->session->set_flashdata('message',$this->config->item("user").' email id already exist'); 
-          redirect('login');
-		  
-       }
-       else
-       {
-        $this->session->set_flashdata('category_success', 'success message');        
-                           $this->session->set_flashdata('message', $this->config->item("user").'Signup successfully Please Login With Your Account');
-	 redirect('login');
-       }
-	}
-	
+
 	function user()
    {
 	   if($this->is_logged_in()){
@@ -164,45 +78,13 @@ function login($info=false)
    }
    }
 	
-	function change_pass($info=false)
-	{ 
-	if($this->is_logged_in()){
-			redirect('login');
-		}else{
-			$data = array(
-			'password' => $this->input->post('password')
-			);
-			$filter=array(
-	        'user_id' => $user_data['user_id']
-			);
-			$this->mhome->change($filter,$data,'ssr_t_users');
-			 $this->session->set_flashdata('message_type', 'success');        
-                           $this->session->set_flashdata('message', $this->config->item("user").'Password updated successfully');
-			redirect('home');
-	}
-	}
-	function acc_setting($info=false)
-	{ 
-	if($this->is_logged_in()){
-			redirect('login');
-		}else{
-		$user_data=$user_session_data = $this->session->userdata('user_data');
-		
-		$this->data['user_data']=$this->session->userdata('user_data');
-		$userdata=$this->session->userdata('user_data');
-		$this->parser->parse('include/header',$this->data);
-		$this->parser->parse('include/leftmenu',$this->data);
-		$this->load->view('acc_setting',$this->data);
-		$this->parser->parse('include/footer',$this->data);
-	}
-	}
 	
 		
     function add_department($dep_id=false){
 		if($this->is_logged_in()){
 			redirect('login');
 		}
-			elseif($this->check_authority('add_department')==true)
+			elseif(Authority::checkAuthority('add_department')==true)
 			{
 			//echo"elseif";die;
 					redirect('home');
@@ -420,7 +302,7 @@ function login($info=false)
 				if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('add_est_submit'))
+		elseif(Authority::checkAuthority('add_est_submit'))
 		{
 			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
 		}
@@ -486,7 +368,7 @@ function login($info=false)
 					if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('estimation_val'))
+		elseif(Authority::checkAuthority('estimation_val'))
 		{
 			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$subitem_id);
 		}
@@ -569,7 +451,7 @@ function login($info=false)
 					if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('add_estsubitem'))
+		elseif(Authority::checkAuthority('add_estsubitem'))
 		{
 			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
 		}
@@ -604,7 +486,7 @@ if($this->is_logged_in()){
 					if($this->is_logged_in()){
 			redirect('login');
 		}else{
-				$this->check_authority('estimation_list');
+				Authority::checkAuthority('estimation_list');
 				$this->data['dep_id'] = $dep_id;
 				$this->data['chap_id'] = $chap_id;
 				$this->data['item_id'] = $item_id;
@@ -624,7 +506,7 @@ if($this->is_logged_in()){
 						}
 				elseif($v=='')
 						{
-								$this->check_authority('edit_estimation');
+								Authority::checkAuthority('edit_estimation');
 								redirect('home/estimation_list');
 						}
 			else{
@@ -659,7 +541,7 @@ if($this->is_logged_in()){
 					if($this->is_logged_in()){
 							redirect('login');
 						}
-					elseif($this->check_authority('delete_estimate'))
+					elseif(Authority::checkAuthority('delete_estimate'))
 						{
 							redirect('home/estimation_list');
 						}
@@ -681,7 +563,7 @@ if($this->is_logged_in()){
 					if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('estimate_pdf'))
+		elseif(Authority::checkAuthority('estimate_pdf'))
 				{
 						redirect('home/estimation_list');	
 				}
@@ -754,7 +636,7 @@ if($this->is_logged_in()){
 					if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('del_sitem_est'))
+		elseif(Authority::checkAuthority('del_sitem_est'))
 		{
 			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
 		}
@@ -817,7 +699,7 @@ if($this->is_logged_in()){
 if($this->is_logged_in()){
 			redirect('login');
 		}else{
-			$this->check_authority('chapter');
+			Authority::checkAuthority('chapter');
 	$filter = array('dep_id'=>$dep_id);
 	    	
 		$this->data['chap_list'] = $this->mhome->get_list($filter,'ssr_t_chapter');
@@ -843,7 +725,7 @@ if($this->is_logged_in()){
 		 if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('add_chapter')==true)
+		elseif(Authority::checkAuthority('add_chapter')==true)
 			{
 			//echo"elseif";die;
 					redirect('home/chapter/'.$dep_id);
@@ -971,7 +853,7 @@ public function item($dep_id=false,$chap_id=false)
 	if($this->is_logged_in()){
 			redirect('login');
 		}else{
-		$this->check_authority('item');
+		Authority::checkAuthority('item');
 	$filter = array('dep_id'=>$dep_id,'chap_id'=>$chap_id);
 		$this->data['item_list'] = $this->mhome->get_item_list($filter,'ssr_t_item');	
 		//print_r($this->data['item_list']);die;
@@ -1001,7 +883,7 @@ public function item($dep_id=false,$chap_id=false)
 		 if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('create_item'))
+		elseif(Authority::checkAuthority('create_item'))
 				{
 					redirect('home/item/'.$dep_id.'/'.$chap_id);	
 				}
@@ -1175,7 +1057,7 @@ public function item($dep_id=false,$chap_id=false)
 		 if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('manage_subitem'))
+		elseif(Authority::checkAuthority('manage_subitem'))
 		{
 			redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);
 		}
@@ -1286,7 +1168,7 @@ public function item($dep_id=false,$chap_id=false)
 	if($this->is_logged_in()){
 			redirect('login');
 		}else{
-	$this->check_authority('material');
+	Authority::checkAuthority('material');
 	$this->data['mat_list'] = $this->mhome->get_material_list();	
 		 $this->data['unit_list'] = $this->mhome->get_unitlist();
 		//print_r($this->data['mat_list']);die;
@@ -1309,7 +1191,7 @@ public function item($dep_id=false,$chap_id=false)
 	 if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('manage_material')==true)
+		elseif(Authority::checkAuthority('manage_material')==true)
 			{
 					redirect('home/material');
 			}
@@ -1408,7 +1290,7 @@ public function item($dep_id=false,$chap_id=false)
 if($this->is_logged_in()){
 			redirect('login');
 		}else{
-			$this->check_authority('labour');
+			Authority::checkAuthority('labour');
 	$this->data['labour_list'] = $this->mhome->get_labour_list();	
 	
 		 $this->data['unitlist'] = $this->mhome->get_unitlist();
@@ -1435,7 +1317,7 @@ if($this->is_logged_in()){
 		 if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('manage_labour')==true)
+		elseif(Authority::checkAuthority('manage_labour')==true)
 			{
 					redirect('home/labour');
 			}
@@ -1528,7 +1410,7 @@ if($this->is_logged_in()){
 		if($this->is_logged_in()){
 			redirect('login');
 		}else{
-			$this->check_authority('overhead');
+			Authority::checkAuthority('overhead');
 		 $this->data['overhead_list'] = $this->mhome->get_overhead_list();	
 		
 		//print_r($this->data['overhead_list']);die;
@@ -1552,7 +1434,7 @@ public function manage_overhead($overhead_code=false)
 		 if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('manage_overhead')==true)
+		elseif(Authority::checkAuthority('manage_overhead')==true)
 			{
 					redirect('home/overhead');
 			}
@@ -1640,7 +1522,7 @@ public function manage_overhead($overhead_code=false)
 		}
 		
 		else{
-			$this->check_authority('unit');
+			Authority::checkAuthority('unit');
 		 $this->data['unit_list'] = $this->mhome->get_unit_list();	
 		
 		//print_r($this->data['overhead_list']);die;
@@ -1665,7 +1547,7 @@ public function manage_unit($unit_code=false)
 	   if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('manage_unit')==true)
+		elseif(Authority::checkAuthority('manage_unit')==true)
 			{
 					redirect('home/unit');
 			}
@@ -1751,7 +1633,7 @@ public function manage_unit($unit_code=false)
 	if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('create_sub_item'))
+		elseif(Authority::checkAuthority('create_sub_item'))
 		{
 			redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);
 		}
@@ -1858,7 +1740,7 @@ public function carriage()
 if($this->is_logged_in()){
 			redirect('login');
 		}else{
-		$this->check_authority('carriage');
+		Authority::checkAuthority('carriage');
 	$this->data['carriage_list'] = $this->mhome->get_carriage_list();	
 		 $this->data['unitlist'] = $this->mhome->get_unitlist();
 		
@@ -1883,7 +1765,7 @@ if($this->is_logged_in()){
 			redirect('login');
 		}
 		
-		elseif($this->check_authority('manage_carriage')==true)
+		elseif(Authority::checkAuthority('manage_carriage')==true)
 			{
 			//echo"elseif";die;
 					redirect('home/carriage');
@@ -1982,7 +1864,7 @@ if($this->is_logged_in()){
 	if($this->is_logged_in()){
 			redirect('login');
 		}else{
-	$this->check_authority('plant');
+	Authority::checkAuthority('plant');
 	$this->data['plan_list'] = $this->mhome->get_plan_list();	
 		 $this->data['unitlist'] = $this->mhome->get_unitlist();
 		
@@ -2008,7 +1890,7 @@ if($this->is_logged_in()){
 		 if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('manage_plant')==true)
+		elseif(Authority::checkAuthority('manage_plant')==true)
 			{
 			//echo"elseif";die;
 					redirect('home/plant');
@@ -2105,7 +1987,7 @@ function get_subitem_list($dep_id=false,$chap_id=false,$item_id=false){
 		}
 		
 		else{
-			$this->check_authority('get_subitem_list');
+			Authority::checkAuthority('get_subitem_list');
 		       $this->data['dep_id'] = $dep_id;
 		       $this->data['chap_id'] = $chap_id;
 		       $this->data['item_id'] = $item_id;
@@ -2149,7 +2031,7 @@ function get_subitem_list($dep_id=false,$chap_id=false,$item_id=false){
 if($this->is_logged_in()){
 			redirect('login');
 		}else{	
-		$this->check_authority('item_class');
+		Authority::checkAuthority('item_class');
 		 $this->data['class_list'] = $this->mhome->get_class_list();	
 		
 		//print_r($this->data['overhead_list']);die;
@@ -2174,7 +2056,7 @@ public function manage_item_class($id=false)
 	   if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('manage_item_class')==true)
+		elseif(Authority::checkAuthority('manage_item_class')==true)
 			{
 					redirect('home/item_class');
 			}
@@ -2262,7 +2144,7 @@ public function manage_item_class($id=false)
 	 if($this->is_logged_in()){
 			redirect('login');
 		}else{
-  $this->check_authority('refrence');
+  Authority::checkAuthority('refrence');
 		//print_r($this->data);die;
 		//Breadcrumb section start
 		
@@ -2294,7 +2176,7 @@ public function manage_item_class($id=false)
 		 if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('manage_refrence')==true)
+		elseif(Authority::checkAuthority('manage_refrence')==true)
 			{
 					redirect('home/refrence');
 			}
@@ -2394,7 +2276,7 @@ public function manage_item_class($id=false)
 if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('create_ref_cal')==true)
+		elseif(Authority::checkAuthority('create_ref_cal')==true)
 			{
 			//echo"elseif";die;
 					redirect('home/refrence');
@@ -2492,7 +2374,7 @@ public function delete_item($dep_id=false,$chap_id=false,$item_id=false){
 	if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('delete_item'))
+		elseif(Authority::checkAuthority('delete_item'))
 		{
 			redirect('home/item/'.$dep_id.'/'.$chap_id);
 		}
@@ -2510,7 +2392,7 @@ public function delete_subitem($dep_id=false,$chap_id=false,$item_id=false,$subi
 	if($this->is_logged_in()){
 			redirect('login');
 		}
-		elseif($this->check_authority('delete_subitem'))
+		elseif(Authority::checkAuthority('delete_subitem'))
 		{
 			redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);
 		}
@@ -2528,7 +2410,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 			redirect('login');
 		}else{		
 	               if($mat_code){
-		               	if($this->check_authority('delete_material')==true)
+		               	if(Authority::checkAuthority('delete_material')==true)
 		               	{
 		               		redirect('home/material');
 		               	}
@@ -2539,7 +2421,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/material');		
 						}
 						elseif($labour_code){
-							 if($this->check_authority('delete_material')==true)
+							 if(Authority::checkAuthority('delete_material')==true)
 								{
 								redirect('home/labour');
 								}
@@ -2550,7 +2432,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/labour');	
 						}
 						elseif($overhead_code){
-								if($this->check_authority('delete_material')==true)
+								if(Authority::checkAuthority('delete_material')==true)
 									{
 									redirect('home/overhead');
 									}
@@ -2561,7 +2443,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/overhead');	
 						}
 						elseif($unit_code){
-							if($this->check_authority('delete_material')==true)
+							if(Authority::checkAuthority('delete_material')==true)
 										{
 										redirect('home/unit');
 										}
@@ -2572,7 +2454,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/unit');	
 						}
 						elseif($carriage_id){
-							if($this->check_authority('delete_material')==true)
+							if(Authority::checkAuthority('delete_material')==true)
 							{
 								redirect('home/carriage');
 							}
@@ -2583,7 +2465,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/carriage');	
 						}
 						elseif($pla_code){
-						if($this->check_authority('delete_material')==true)
+						if(Authority::checkAuthority('delete_material')==true)
 							{
 								redirect('home/plant');
 							}
@@ -2594,7 +2476,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/plant');	
 						}
 						elseif($id){
-								if($this->check_authority('delete_material')==true)
+								if(Authority::checkAuthority('delete_material')==true)
 									{
 										redirect('home/item_class');
 									}
@@ -2605,7 +2487,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 						redirect('home/item_class');	
 						}
 						elseif($id1){
-							if($this->check_authority('delete_material')==true)
+							if(Authority::checkAuthority('delete_material')==true)
 							{
 								redirect('home/refrence');
 							}
