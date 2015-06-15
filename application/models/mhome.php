@@ -6,7 +6,7 @@
 class Mhome extends CI_Model {
 	
 	 /**
-	 # This is the change from Anki's PC
+	 # This is the change from Ankit's PC
 	 # Mhome Model
 	 
 	 */
@@ -539,7 +539,7 @@ function update_subitem_cal($info=false,$finaltotal=false,$dep_id=false,$chap_id
 		function get_cls_list(){
 		$query=$this->db->query("SELECT * from `ssr_t_class` ");
 		
-	//echo $this->db->last_query();die;
+	//echo $this->db->last_query();die; 
 		return $query->Result();
 	
 	
