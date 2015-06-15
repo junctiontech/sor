@@ -29,7 +29,7 @@
                             <div class="box-content">
 							<div class="btn-toolbar pull-right">
                                     <div class="btn-group">
-                                        <a class="btn btn-primary show-tooltip" title="" href="<?php echo base_url(); ?>index.php/login/add_role" data-original-title="Add ">Add</a>
+                                        <a class="btn btn-primary show-tooltip" title="" href="<?php echo base_url(); ?>index.php/role/add_role" data-original-title="Add ">Add</a>
                                     </div>
                                  </div>
 								 <br>
@@ -48,7 +48,7 @@
                                             <td><?=$role->role_id;?></td>
 											<td>
                                                <div class="btn-group">
-														<a class="btn btn-small btn-primary show-tooltip" title="Permissions" href="<?php echo base_url(); ?>index.php/login/role_permission/<?=$role->role_id;?>"><i class="fa fa-foursquare"></i> Permissions</a>
+														<a class="btn btn-small btn-primary show-tooltip" title="Permissions" href="<?php echo base_url(); ?>index.php/role/role_permission/<?=$role->role_id;?>"><i class="fa fa-foursquare"></i> Permissions</a>
 												</div>
                                                
                                             </td>

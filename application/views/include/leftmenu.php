@@ -65,8 +65,8 @@
 
 </li>
 <li><a href="<?=base_url()?>index.php/home/estimation_list"> <i class="fa fa-align-justify"></i><span>Estimations</span></a></li>
-<li><a href="<?=base_url()?>index.php/login/user_role"> <i class="fa fa-user"></i><span>User Management</span></a></li>
-<li><a href="<?=base_url()?>index.php/login/role_management"> <i class="fa fa-users"></i><span>Role Management</span></a></li><!--
+<li><a href="<?=base_url()?>index.php/role/user_role"> <i class="fa fa-user"></i><span>User Management</span></a></li>
+<li><a href="<?=base_url()?>index.php/role/role_management"> <i class="fa fa-users"></i><span>Role Management</span></a></li><!--
 <li class="">
 <a href="http://192.168.1.110:8080//PDFGeneration">
 <i class="fa fa-file"></i>

@@ -1,6 +1,9 @@
 <?php 
+
+		/*  class for read permissions for user authority  */
 class Authority  
 {
+	/* function for read permissions for particular user */
 	public static function checkAuthority($function)
 	{
 		$obj =& get_instance();
@@ -22,6 +25,20 @@ class Authority
 						redirect('home');
 			}
 		}	
+	}
+				/* function for check session if null so redirect into login page  */
+	public static function is_logged_in()
+	{
+		$object =& get_instance();
+		$user_data=$user_session_data = $object->session->userdata('user_data');
+		if($user_session_data=='')
+		{
+			 $object->session->set_flashdata('message_type', 'error');
+			 $object->session->set_flashdata('message',$object->config->item("user").'First Login with Your account');
+				redirect('login');
+				return true;
+		}									
+	
 	}
 }
 /*END OF FILE*/

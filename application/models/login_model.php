@@ -1,12 +1,8 @@
 <?php
+/* Model for login and sign up   */
+
 class Login_model extends CI_Model 
 {
-	 /**
-	 # Programmer : Ankit
-	 # Login_model Model
-	 
-	 **/
-	 
 	//variable initialize
     var $title   = '';
     var $content = '';
@@ -20,8 +16,11 @@ class Login_model extends CI_Model
 		//Load database connection
 		$this->load->database();
     }
+    
+    /* function for login check email id ragisterd or not   */
  function login_check($table=false,$data=false)
    {
+	      
 		  $query = $this->db->get_where($table,$data);
 		  if($query->num_rows()>0)
 		  {
@@ -32,6 +31,9 @@ class Login_model extends CI_Model
 				return false;
 		  }
    }
+   
+   
+   	/* function for insert user data and if not already exist */
  function insert_sign()
    {
 			$a= $this->input->post('usermailid');
@@ -53,6 +55,8 @@ class Login_model extends CI_Model
 					$this->db->insert("ssr_t_users",$data);
 				}
     }
+    
+    /*  function for insert change password  */
 	function change($filter=false,$data=false,$table=false)
 	{
 			$this->db->where($filter);

@@ -31,19 +31,17 @@ $user_session_data = $this->session->userdata('user_data');
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/bootstrap-fileupload/bootstrap-fileupload.css" />
 
 </head>
-
-
 <body>
-<?php if($this->uri->segment(1)!='' && $this->uri->segment(1)!='login'){ ?>
+<?php  if($this->uri->segment(1)!='' && $this->uri->segment(1)!='login'){ ?>
 <div id="navbar" class="navbar">
 <button type="button" class="navbar-toggle navbar-btn collapsed" data-toggle="collapse" data-target="#sidebar">
 <span class="fa fa-bars"></span>
 </button>
 <a class="navbar-brand" href="javascript:;">
 <small>
-	<strong>
-<i class="fa fa-home"></i>
-SOR
+<strong>
+	<i class="fa fa-home"></i>
+	SOR
 </strong>
 </small>
 </a>
@@ -68,7 +66,7 @@ echo date("h:i:s");
  ?>
 </li>
 <li>
-<a href="<?=base_url();?>index.php/login/acc_setting">
+<a href="<?=base_url();?>index.php/role/acc_setting">
 <i class="fa fa-cog"></i>
 Account Settings
 </a>
@@ -82,7 +80,7 @@ Edit Profile
 
 <li class="divider"></li>
 <li>
-<a href="<?php echo base_url(); ?>index.php/login/logout">
+<a href="<?php echo base_url(); ?>index.php/role/logout">
 <i class="fa fa-off"></i>
 Logout
 </a>

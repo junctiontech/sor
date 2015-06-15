@@ -48,9 +48,9 @@
 												<td><?php echo $list->user_role ?></td>
 												<td>
 													<div class="btn-group">
-															<a class="btn btn-small show-tooltip" title="Accept" href="<?=base_url();?>index.php/login/verify/<?=$list->user_id?>/<?=$info=1?>"><i class="fa fa-check"></i></a>
+															<a class="btn btn-small show-tooltip" title="Accept" href="<?=base_url();?>index.php/role/verify/<?=$list->user_id?>/<?=$info=1?>"><i class="fa fa-check"></i></a>
 													
-															<a class="btn btn-small btn-danger show-tooltip" title="Reject" href="<?=base_url();?>index.php/login/verify/<?=$list->user_id;?>/<?=$info=2?>"><i class="fa fa-times"></i></a>
+															<a class="btn btn-small btn-danger show-tooltip" title="Reject" href="<?=base_url();?>index.php/role/verify/<?=$list->user_id;?>/<?=$info=2?>"><i class="fa fa-times"></i></a>
 													</div>
 												</td>
 											</tr>
@@ -76,7 +76,7 @@
                             <div class="box-content">
 							<div class="btn-toolbar pull-right">
                                     <div class="btn-group">
-                                        <a class="btn btn-primary show-tooltip" title="" href="<?php echo base_url(); ?>index.php/login/manage_users" data-original-title="Add "><i class="fa fa-plus"></i> Add User</a>
+                                        <a class="btn btn-primary show-tooltip" title="" href="<?php echo base_url(); ?>index.php/role/manage_users" data-original-title="Add "><i class="fa fa-plus"></i> Add User</a>
                                     </div>
                             </div>
 								 <br>
@@ -93,7 +93,7 @@
                                     <tbody>
 									<?php foreach($verify_list as $list){ ?>
 										<tr>
-											<form method="POST" action="<?=base_url();?>index.php/login/role_assign/<?=$list->user_id?>" >
+											<form method="POST" action="<?=base_url();?>index.php/role/role_assign/<?=$list->user_id?>" >
 													<td><?=$list->user_id;?></td>
 													<td><?=$list->usermailid;?></td>
 													<td>
@@ -111,9 +111,9 @@
 													<td>
 													   <div class="btn-group">
 															<button class="btn btn-small show-tooltip" type="submit"  title="edit" ><i class="fa fa-check"></i>   Assign</button>
-															<a class="btn btn-small btn-danger show-tooltip" title="Delete" onClick="return confirm('Are you sure to delete this user? This will delete all the related records on this user as well.')" href="<?=base_url()?>index.php/login/delete_user/<?=$list->user_id?>"><i class="fa fa-times"></i> Delete</a>
-															<button class="btn btn-small btn-primary show-tooltip" type="submit" title="Block/Unblock"   ><i class="fa fa-ban"></i> Block</button>
-														</div>
+															<a class="btn btn-small btn-danger show-tooltip" title="Delete" onClick="return confirm('Are you sure to delete this user? This will delete all the related records on this user as well.')" href="<?=base_url()?>index.php/role/delete_user/<?=$list->user_id?>"><i class="fa fa-times"></i> Delete</a>
+															<a class="btn btn-small btn-primary show-tooltip"  title="Block/Unblock" href="<?=base_url()?>index.php/role/blocked_user/<?=$list->user_id?>"><i class="fa fa-ban"></i> Block</a>
+													   </div>
 													</td>
 											</form>
 										</tr>
