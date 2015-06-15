@@ -1,5 +1,3 @@
-
-
 <div id="main-content">
 <div class="page-title">
 <div>
@@ -85,6 +83,7 @@
 				<th class="subitem">Rate</th>
 				<th class="subitem">Amount</th>
 				<th class="subitem">Total</th>
+				<th>Ovehead</th>
 				</tr>
 				</thead>
 			
@@ -181,8 +180,13 @@
 								name="total_amount[]" 
 								value="<?php //=(!empty($sub->total_amount))?$sub->total_amount:"";?>"
 								>
-								
 							</td>
+							<td><input type="text" onchange="overhead_cal(this.value,this.id,'editTable')" class="input-mini" 
+    									placeholder="Ovehead" id="overhead_<?=$key+1?>" 
+    									name="Ovehead[]" 
+    									value="<?=(!empty($sub->over_head))?$sub->over_head:"";?>"
+    									>
+    								</td>
 							
 							
 							
@@ -218,6 +222,7 @@
 						<td><input type="text"  class="input-mini-xs" id="rate_1" name="rate[]"  onchange="adding_total(this.id,'dataTable')" value=""></td>
 						<td><input type="text" readonly class="input-mini-xs" id="amount_1" name="amount[]" value="" onblur="get_total(this.id)"></td>
 						<td><input type="text" readonly class="input-mini" placeholder="Total" id="total_1" name="total_amount[]" value=""></td>
+						<td><input type="text"  class="input-mini" onchange="overhead_cal(this.value,this.id,'dataTable')" placeholder="Ovehead" id="overhead_1" 	name="Ovehead[]" value=""></td>
 				  </tr>
                    </tbody>
                    
@@ -225,12 +230,30 @@
 			<?php }?>
 		  
 </table>
-</div>					
+</div>	
+<div class="row ">
+    					<div class="col-md-4 col-md-offset-8" style="text-align: right;">
+    					
+    						<?php if(!empty($ref_costing)){?>
+    				<input type="button" value="Add Row" class="btn btn-info " onclick="edit_addRow('editTable',
+    			  <?=$row_table?>)">
+    			  
+    			  
+    	          <input type="button" value="Delete Row"class="btn btn-info "  onclick="edit_deleteRow('editTable')">
+    	          <?php } else {?>
+    				  	<input type="button" value="Add Row" class="btn btn-info "  onclick="addRow('dataTable')">
+    	          <input type="button" value="Delete Row" class="btn btn-info " onclick="deleteRow('dataTable')">
+    	          <?php }?>
+    				
+    					 </div>
+    			  </div>				
 			  <input type="hidden" readonly name="final_total" id="final_total" value="" />
-                  <!--<p><a class="btn span2" href="javascript:;" onclick="javascript:append_menus();">Add Subitem Line</a></p>	-->	
-					
-					
-		  <input type="submit" name="save" class="btn btn-primary pull-right"  value="Save Changes">
+                 	      <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-4">
+              <button type="button" class="btn" onClick="window.history.back();">Cancel</button>
+           
+                     
+    			<input type="submit" name="save" class="btn btn-primary " value="Save Changes">
+          </div>
  </form>
 	
 	
@@ -259,7 +282,7 @@ $(window).load(function() {
 			var rowCount=table.rows.length;
 			for(i=1;i<=rowCount;i++){
 				var row = i;
-			//calculate_amount_onload(row);
+			
 			
 			}
 		//document.getElementById("rate_1").onchange(calculate_amount_onload(1));
@@ -270,6 +293,7 @@ $(window).load(function() {
 			
 			}
 			adding_total(row,'editTable');
+			 overhead_cal_onload(document.getElementById("overhead_"+row).value,document.getElementById("overhead_"+row).id,'editTable',rowCount);
   }
   
  , 2000 );
@@ -412,6 +436,11 @@ function deleteRow(tableID,row, row_count)
 							var get_data10 = table.rows[i].cells[10].childNodes[0].id.split('_') ;
 								var textbox_name10 =  get_data10[0];
 								table.rows[i].cells[10].childNodes[0].id = textbox_name10+"_"+z;
+
+								var get_data11 = table.rows[i].cells[11].childNodes[0].id.split('_') ;
+								var textbox_name11 =  get_data11[0];
+								table.rows[i].cells[11].childNodes[0].id = textbox_name11+"_"+z;
+								table.rows[i].cells[11].childNodes[0].value ='' ;
 							
 							z++;
 							
@@ -519,18 +548,26 @@ for(i=0;i<rowCount+1;i++){
 		else if(type_val=='overhead'){
 			
 			if(row_id==1){
-		var total=0;
-		document.getElementById('total_'+row_id).value=total;
-	}else{ 
-		var total = document.getElementById('total_' + (row_id-1)).value;
-		 var rate = document.getElementById('rate_'+row_id).value;
-		var tot1 = total*rate;
-		var tot2 = tot1/100;
-		var tot3 = tot2+(+total);
-			document.getElementById("amount_"+ row_id).value=tot2; 
-			document.getElementById("total_"+ row_id).value=tot3; 
-		}
-		}else{  
+    			var total=0;
+    			document.getElementById('total_'+row_id).value=total;
+    	}else{ 
+    		var chk=document.getElementById("overhead_"+row_id).value;
+    		if(chk){
+    			var total = document.getElementById('total_' + (row_id-1)).value;
+    			var amt = document.getElementById('amount_'+row_id).value;
+    			var tot3 = parseFloat(amt)+parseFloat(total);
+    			document.getElementById("total_"+ row_id).value=tot3;
+        		}else{
+        			var total = document.getElementById('total_' + (row_id-1)).value;
+        			 var rate = document.getElementById('rate_'+row_id).value;
+        			var tot1 = total*rate;
+        			var tot2 = tot1/100;
+        			var tot3 = tot2+(+total);
+        				document.getElementById("amount_"+ row_id).value=tot2; 
+        				document.getElementById("total_"+ row_id).value=tot3; 
+        		}
+    			}
+    			}else{  
 		if(row_id==1){
 		
 		var total=document.getElementById('amount_'+row_id).value;
@@ -647,7 +684,12 @@ function edit_deleteRow(tableID,row, row_count)
 							var get_data10 = table.rows[i].cells[10].childNodes[0].id.split('_') ;
 								var textbox_name10 =  get_data10[0];
 								table.rows[i].cells[10].childNodes[0].id = textbox_name10+"_"+z;
-							
+
+								var get_data11 = table.rows[i].cells[11].childNodes[0].id.split('_') ;
+								var textbox_name11 =  get_data11[0];
+								table.rows[i].cells[11].childNodes[0].id = textbox_name11+"_"+z;
+								table.rows[i].cells[11].childNodes[0].value ='' ;
+								
 							z++;
 						}
                      

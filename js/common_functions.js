@@ -202,7 +202,7 @@ function get_type_value(row,tableid)
 			}else if(type_val=='overhead'){
 			$('#rate_'+row_id).val(v.overhead_percent);
 			$('#item_desc_'+row_id).val(v.overhead_desc); 
-			overhead_cal_single(row_id,tableid);
+			adding_total(row,tableid);
 			 }else if(type_val=='labour'){
 			$('#rate_'+row_id).val(v.labour_rate);
 			$('#unit_'+row_id).val(v.unit_code);

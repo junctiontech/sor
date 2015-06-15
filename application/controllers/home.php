@@ -2326,7 +2326,7 @@ if($this->is_logged_in()){
 				
 				
 				
-				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['ref_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."')".",";
+				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['ref_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."','".$data['Ovehead'][$i]."')".",";
 			}
 			if($this->mhome->update_rel_cal(rtrim($value,","),$data['final_total'],$data['dep_id'],$data['chap_id'],$data['item_id'],$data['ref_id'])){
 				
@@ -2342,7 +2342,7 @@ if($this->is_logged_in()){
 				
 				
 				
-				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['ref_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."')".",";
+				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['ref_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."','".$data['Ovehead'][$i]."')".",";
 			}
 			
 			
