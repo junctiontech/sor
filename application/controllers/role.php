@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /* controller for role management and user management */
+/* junction software pvt ltd  */
 class Role extends CI_Controller {
 
 	function __construct() {
