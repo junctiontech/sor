@@ -65,13 +65,17 @@
 					?>
 					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
 					href="<?=base_url()?>index.php/home/msg/<?=$cl->dep_id?>"><i class="fa fa-download"></i>Generate PDF</a>
+					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
+					href="<?=base_url()?>index.php/home/msg/<?=$cl->dep_id?>"><i class="fa fa-download"></i>Generate Subitem PDF</a>
 					<?php
 					}
 					if($var->function_id=='pdf_file' && $var->auth_read==1 && $var->auth_execute==1)
 					{
 					?>
 					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
-					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> Generate PDF</a></p>
+					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> Generate PDF</a>
+					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
+					href="<?=base_url()?>PDFGeneration/subpdf.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> Generate Subitem PDF</a></p>
 					<?php 
 					} 
 					}
