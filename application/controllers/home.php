@@ -1260,6 +1260,9 @@ public function item($dep_id=false,$chap_id=false)
 										
 							$this->mhome->update_material($info,array('mat_code'=>$this->input->post('id')));
 								
+							$filter=array('code'=>$this->input->post('mat_name'));
+							$this->update_rate($filter);
+							
 							$this->session->set_flashdata('message_type', 'success');        
 							$this->session->set_flashdata('message', $this->config->item("material").' updated successfully');
 							redirect("home/material");
@@ -1285,6 +1288,229 @@ public function item($dep_id=false,$chap_id=false)
      }
  }
 	 }
+	 
+	 
+	 function update_rate($filter=FALSE){
+	 	if($this->is_logged_in()){
+	 		redirect('login');
+	 	}else{
+	 		/*rate update coding stared.............................................................*/
+	 		$sub_detail=$this->data['$sub_detail']=$this->mhome->get_cal_details($filter,'ssr_t_calculation');
+	 	 	
+	 		for($j=0;$j<=count($sub_detail)-1; $j++){
+	 			$subitem_id =array('subitem_id'=>$sub_detail[$j]->subitem_id);
+	 				
+	 			$sub_detail_cal=$this->mhome->get_cal_details($subitem_id,'ssr_t_calculation');
+	 				
+	 			$total=0;
+	 			$overamount=array('');
+	 			for($i=0;$i<=count($sub_detail_cal)-1; $i++){
+	 					
+	 				if($sub_detail_cal[$i]->item_type=='material'){
+	 
+	 					$filter=array('mat_name'=>$sub_detail_cal[$i]->code);
+	 					$material=$this->mhome->get_cal_details($filter,'ssr_t_material');
+	 					$overamount[$i]=$amount= $material[0]->rate  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 
+	 					$info=array('item_desc'=>$material[0]->mat_desc,
+	 							'unit_code'=> $material[0]->unit_code,
+	 							'rate'=>$material[0]->rate ,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->mhome->update_rate($info,$filter);
+	 
+	 				}
+	 				elseif($sub_detail_cal[$i]->item_type=='labour'){
+	 
+	 					$filter=array('labour_name'=>$sub_detail_cal[$i]->code);
+	 
+	 					$labour=$this->mhome->get_cal_details($filter,'ssr_t_labor');
+	 
+	 					$overamount[$i]=$amount= $labour[0]->labour_rate  * $sub_detail_cal[$i]->quantity;
+	 
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 
+	 					$info=array('item_desc'=>$labour[0]->labour_description,
+	 							'unit_code'=> $labour[0]->unit_code ,
+	 							'rate'=>$labour[0]->labour_rate ,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->mhome->update_rate($info,$filter);
+	 
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='refrence'){
+	 
+	 					$filter=array('name'=>$sub_detail_cal[$i]->code);
+	 					$refrence=$this->mhome->get_cal_details($filter,'ssr_t_reference');
+	 					$overamount[$i]=$amount= $refrence[0]->cost_total  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 					$info=array('item_desc'=>$refrence[0]->description,
+	 							'unit_code'=> $refrence[0]->unit_code,
+	 							'rate'=>$refrence[0]->cost_total,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->mhome->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='overhead'){
+	 
+	 					$filter=array('overhead_name'=>$sub_detail_cal[$i]->code);
+	 					$overhead=$this->mhome->get_cal_details($filter,' ssr_t_overhead');
+	 					$sub_detail_cal[$i]->quantity  ;
+	 
+	 					if($i==0){
+	 						$amount1= $overhead[0]->overhead_percent  * $total  ;
+	 						$overamount[$i]=$amount=$amount1/100;
+	 						$total=$amount;
+	 							
+	 
+	 					}else{
+	 						if(!$sub_detail_cal[$i]->over_head==''){
+	 							$sum=0;
+	 							$val=$sub_detail_cal[$i]->over_head;
+	 							$coma_sap_val=explode(",", $val);
+	 							for($v=0;$v<=count($coma_sap_val)-1;$v++){
+	 								$sum=$sum+$overamount[$coma_sap_val[$v]-1];
+	 							}
+	 								
+	 							$amount1= $overhead[0]->overhead_percent  * $sum  ;
+	 							$overamount[$i]=$amount=$amount1/100;
+	 							$total=$amount+$total;
+	 
+	 						}else{
+	 	 					$amount1= $overhead[0]->overhead_percent  * $total  ;
+	 	 					$overamount[$i]=$amount=$amount1/100;
+	 	 					$total=$amount+$total;
+	 	 						
+	 						}
+	 					}
+	 					$info=array('item_desc'=>$overhead[0]->overhead_desc,
+	 							'rate'=>$overhead[0]->overhead_percent,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->mhome->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='carriage'){
+	 
+	 					$filter=array('carriage_code'=>$sub_detail_cal[$i]->code);
+	 					$carriage=$this->mhome->get_cal_details($filter,'ssr_t_carriage');
+	 					$overamount[$i]=$amount= $carriage[0]->carriage_rate  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 
+	 					}
+	 					$info=array('item_desc'=>$carriage[0]->carriage_description,
+	 							'unit_code'=> $carriage[0]->unit_code,
+	 							'rate'=>$carriage[0]->carriage_rate,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->mhome->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='plant'){
+	 
+	 					$filter=array('pla_code'=>$sub_detail_cal[$i]->code);
+	 					$plant=$this->mhome->get_cal_details($filter,'ssr_t_plant');
+	 					$overamount[$i]=$amount= $plant[0]->rate  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 					$info=array('item_desc'=>$plant[0]->pla_desc,
+	 							'unit_code'=> $plant[0]->unit_code,
+	 							'rate'=>$plant[0]->rate,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->mhome->update_rate($info,$filter);
+	 
+	 						
+	 				}elseif($sub_detail_cal[$i]->item_type=='subitem'){
+	 
+	 					$filter=array('subitem_name'=>$sub_detail_cal[$i]->code);
+	 					$subitem=$this->mhome->get_cal_details($filter,'ssr_t_subitem');
+	 					$overamount[$i]=$amount= $subitem[0]->rate  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 					$info=array('item_desc'=>$subitem[0]->subitem_desc,
+	 							'unit_code'=> $subitem[0]->unit_code,
+	 							'rate'=>$subitem[0]->rate,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->mhome->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='convert'){
+	 
+	 					$overamount[$i]=$amount= $total / $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$amount;
+	 							
+	 					}
+	 					$info=array('amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->mhome->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='text'){
+	 
+	 					if($i==0){
+	 						$overamount[$i]=$amount= 0 ;
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$overamount[$i]=$amount= 0 ;
+	 						$total=$total;
+	 							
+	 					}
+	 				}
+	 			}
+	 
+	 			$finaltotal=round($total, 0, PHP_ROUND_HALF_UP);
+	 			$this->mhome->update_subitem_rate($finaltotal,$sub_detail_cal[0]->item_id,$sub_detail_cal[0]->subitem_id);
+	 
+	 			/*rate update coding end.............................................................*/
+	 		}}
+	 }
+	 
+	 
  public function labour()
 	{   
 if($this->is_logged_in()){
@@ -1378,6 +1604,10 @@ if($this->is_logged_in()){
 										
 							$this->mhome->update_labour($info,array('labour_code'=>$this->input->post('id')));
 								
+							$filter=array('code'=>$this->input->post('labour_name'));
+							$this->update_rate($filter);
+							
+							
 							$this->session->set_flashdata('message_type', 'success');        
 							$this->session->set_flashdata('message', $this->config->item("labour").' updated successfully');
 							redirect("home/labour");
@@ -1492,6 +1722,9 @@ public function manage_overhead($overhead_code=false)
 										
 							$this->mhome->update_overhead($info,array('overhead_code'=>$this->input->post('id')));
 								
+							$filter=array('code'=>$this->input->post('overhead_name'));
+							$this->update_rate($filter);
+							
 							$this->session->set_flashdata('message_type', 'success');        
 							$this->session->set_flashdata('message', $this->config->item("overhead").' updated successfully');
 							redirect("home/overhead");
@@ -1605,6 +1838,9 @@ public function manage_unit($unit_code=false)
 										
 							$this->mhome->update_unit($info,array('unit_code'=>$this->input->post('id')));
 								
+							$filter=array('unit_code'=>$this->input->post('unit_code'));
+							$this->update_rate($filter);
+							
 							$this->session->set_flashdata('message_type', 'success');        
 							$this->session->set_flashdata('message', 'Unit updated successfully');
 							redirect("home/unit");
@@ -1833,7 +2069,10 @@ if($this->is_logged_in()){
 										
 										
 							$this->mhome->update_carriage($info,array('carriage_id'=>$this->input->post('carriage_id')));
-								
+
+							$filter=array('code'=>$this->input->post('carriage_code'));
+							$this->update_rate($filter);
+							
 							$this->session->set_flashdata('message_type', 'success');        
 							$this->session->set_flashdata('message', $this->config->item("carriage").' updated successfully');
 							redirect("home/carriage");
@@ -1954,6 +2193,9 @@ if($this->is_logged_in()){
 										
 							$this->mhome->update_plant($info,array('pla_code'=>$this->input->post('id')));
 								
+							$filter=array('code'=>$this->input->post('pla_code'));
+							$this->update_rate($filter);
+							
 							$this->session->set_flashdata('message_type', 'success');        
 							$this->session->set_flashdata('message', $this->config->item("Plan").' updated successfully');
 							redirect("home/plant");
@@ -2329,6 +2571,9 @@ if($this->is_logged_in()){
 				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['ref_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."','".$data['Ovehead'][$i]."')".",";
 			}
 			if($this->mhome->update_rel_cal(rtrim($value,","),$data['final_total'],$data['dep_id'],$data['chap_id'],$data['item_id'],$data['ref_id'])){
+				
+				$filter=array('code'=>$ref_detail[0]->name);
+				$this->update_rate($filter);
 				
 				redirect("home/refrence/");
 				
