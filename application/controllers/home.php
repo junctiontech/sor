@@ -500,15 +500,11 @@ if($this->is_logged_in()){
 				}
 				}
 				function edit_estimation($est_id=false,$v=false)
-				{
+				{		
 						if($this->is_logged_in()){
 							redirect('login');
 						}
-				elseif($v=='')
-						{
-								Authority::checkAuthority('edit_estimation');
-								redirect('home/estimation_list');
-						}
+				
 			else{
 					$value = array('');
 					$sub="";
@@ -1199,7 +1195,7 @@ public function item($dep_id=false,$chap_id=false)
 		 	
 		// print_r($this->data['class_list']);die;
 		if($mat_code){
-			$filter = array('mat_code'=>$mat_code);
+			$filter = array('mat_name'=>$mat_code);
 		
 		   $material_info = $this->mhome->get_list($filter,'ssr_t_material');
 		   $this->data['material_info'] = $this->mhome->get_list($filter,'ssr_t_material');
@@ -1211,7 +1207,7 @@ public function item($dep_id=false,$chap_id=false)
 								 'rate'=>$material_info[0]->rate,
 		                          'created_by' => 1,
 									'created_on' => date("Y-m-d"));
-			$this->data['mat_code']=$mat_code;
+			$this->data['mat_name']=$mat_code;
 								  
 		
 		}else{
@@ -1258,7 +1254,7 @@ public function item($dep_id=false,$chap_id=false)
 										'updated_on' => date("Y-m-d"));
 										
 										
-							$this->mhome->update_material($info,array('mat_code'=>$this->input->post('id')));
+							$this->mhome->update_material($info,array('mat_name'=>$this->input->post('id')));
 								
 							$filter=array('code'=>$this->input->post('mat_name'));
 							$this->update_rate($filter);
@@ -1550,7 +1546,7 @@ if($this->is_logged_in()){
 		else{
 	    $this->data['unit_list'] = $this->mhome->get_unitlist(); 
 		if($labour_code){
-			$filter = array('labour_code'=>$labour_code);
+			$filter = array('labour_name'=>$labour_code);
 		
 		   $labour_info = $this->mhome->get_list($filter,'ssr_t_labor');
 		   $this->data = array('labour_name'=>$labour_info[0]->labour_name,
@@ -1559,7 +1555,7 @@ if($this->is_logged_in()){
 								 'labour_rate'=>$labour_info[0]->labour_rate,
 		                          'created_by' => 1,
 									'created_on' => date("Y-m-d"));
-			$this->data['labour_code']=$labour_code;
+			$this->data['labour_name']=$labour_code;
 								  
 		
 		}
@@ -1602,7 +1598,7 @@ if($this->is_logged_in()){
 										'updated_on' => date("Y-m-d"));
 										
 										
-							$this->mhome->update_labour($info,array('labour_code'=>$this->input->post('id')));
+							$this->mhome->update_labour($info,array('labour_name'=>$this->input->post('id')));
 								
 							$filter=array('code'=>$this->input->post('labour_name'));
 							$this->update_rate($filter);
@@ -1671,7 +1667,7 @@ public function manage_overhead($overhead_code=false)
 		else{
 	   
 		if($overhead_code){
-			$filter = array('overhead_code'=>$overhead_code);
+			$filter = array('overhead_name'=>$overhead_code);
 		
 		   $overhead_info = $this->mhome->get_list($filter,'ssr_t_overhead');
 		   $this->data = array('overhead_name'=>$overhead_info[0]->overhead_name,
@@ -1679,7 +1675,7 @@ public function manage_overhead($overhead_code=false)
 								 'overhead_percent'=>$overhead_info[0]->overhead_percent,
 								  'created_by' => 1,
 									'created_on' => date("Y-m-d"));
-			$this->data['overhead_code']=$overhead_code;
+			$this->data['overhead_name']=$overhead_code;
 								  
 		
 		}
@@ -1720,7 +1716,7 @@ public function manage_overhead($overhead_code=false)
 										'updated_on' => date("Y-m-d"));
 										
 										
-							$this->mhome->update_overhead($info,array('overhead_code'=>$this->input->post('id')));
+							$this->mhome->update_overhead($info,array('overhead_name'=>$this->input->post('id')));
 								
 							$filter=array('code'=>$this->input->post('overhead_name'));
 							$this->update_rate($filter);
@@ -2009,9 +2005,10 @@ if($this->is_logged_in()){
 		else{
 	    
 		if($carriage_id){
-			$filter = array('carriage_id'=>$carriage_id);
-		
+			$filter = array('carriage_code'=>$carriage_id);
+	
 		   $carriage_info = $this->mhome->get_list($filter,'ssr_t_carriage');
+		
 		   $this->data = array('carriage_code'=>$carriage_info[0]->carriage_code,
 		                         'carriage_description'=>$carriage_info[0]->carriage_description,
 		                         'carriage_category'=>$carriage_info[0]->carriage_category,
@@ -2020,7 +2017,7 @@ if($this->is_logged_in()){
 								 'carriage_rate'=>$carriage_info[0]->carriage_rate,
 		                          'created_by' => 1,
 									'created_on' => date("Y-m-d"));
-			$this->data['carriage_id']=$carriage_id;
+			$this->data['carriage_code']=$carriage_id;
 								  
 		}
 	//Breadcrumb section start
@@ -2068,7 +2065,7 @@ if($this->is_logged_in()){
 										'updated_on' => date("Y-m-d"));
 										
 										
-							$this->mhome->update_carriage($info,array('carriage_id'=>$this->input->post('carriage_id')));
+							$this->mhome->update_carriage($info,array('carriage_code'=>$this->input->post('carriage_id')));
 
 							$filter=array('code'=>$this->input->post('carriage_code'));
 							$this->update_rate($filter);
@@ -2659,10 +2656,10 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 		               	{
 		               		redirect('home/material');
 		               	}
-						$filter = array('mat_code'=>$mat_code);
+						$filter = array('mat_name'=>$mat_code);
 						$this->mhome->delete_material($filter,'ssr_t_material');
 						$this->session->set_flashdata('message_type', 'success');        
-                        $this->session->set_flashdata('message', $this->config->item("item").' DELETE successfully');
+                        $this->session->set_flashdata('message', $this->config->item("Material").' Deleted Successfully');
 						redirect('home/material');		
 						}
 						elseif($labour_code){
@@ -2670,7 +2667,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 								{
 								redirect('home/labour');
 								}
-							$filter = array('labour_code'=>$labour_code);
+							$filter = array('labour_name'=>$labour_code);
 						$this->mhome->delete_material($filter,'ssr_t_labor');
 						$this->session->set_flashdata('message_type', 'success');        
                         $this->session->set_flashdata('message', $this->config->item("item").' DELETE successfully');
@@ -2681,7 +2678,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 									{
 									redirect('home/overhead');
 									}
-							$filter = array('overhead_code'=>$overhead_code);
+							$filter = array('overhead_name'=>$overhead_code);
 						$this->mhome->delete_material($filter,'ssr_t_overhead');
 						$this->session->set_flashdata('message_type', 'success');        
                         $this->session->set_flashdata('message', $this->config->item("item").' DELETE successfully');
@@ -2703,7 +2700,7 @@ public function delete_material($mat_code=false,$labour_code=false,$overhead_cod
 							{
 								redirect('home/carriage');
 							}
-							$filter = array('carriage_id'=>$carriage_id);
+							$filter = array('carriage_code'=>$carriage_id);
 						$this->mhome->delete_material($filter,'ssr_t_carriage');
 						$this->session->set_flashdata('message_type', 'success');        
                         $this->session->set_flashdata('message', $this->config->item("item").' DELETE successfully');
@@ -2749,7 +2746,7 @@ public function create_carriage_cal($carriage_id=false){
 			redirect('login');
 		}else{
 	
-	$filter = array('carriage_id'=>$carriage_id);
+	$filter = array('carriage_code'=>$carriage_id);
 $this->data['carriage_costing'] = $this->mhome->get_list($filter,'ssr_t_carriage_cal');
   $this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);

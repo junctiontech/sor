@@ -74,7 +74,7 @@
 			  <td><?=($unit_name)?$unit_name[0]->unit_code:''?></td>
 			  
 			  <td><?=$li->labour_rate?></td>
-			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/manage_labour/<?=$li->labour_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Labour? This will delete all the related records on this Labour as well.')" href="<?=base_url()?>index.php/home/delete_material/0/<?=$li->labour_code?>"><i class="fa fa-edit"></i> DELETE</a></td>
+			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/manage_labour/<?=$li->labour_name?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Labour? This will delete all the related records on this Labour as well.')" href="<?=base_url()?>index.php/home/delete_material/0/<?=$li->labour_name?>"><i class="fa fa-edit"></i> DELETE</a></td>
 		</tr>
 
 		        <?php }?>

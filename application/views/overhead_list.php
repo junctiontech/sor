@@ -63,7 +63,7 @@
 						  <td><?=$ovl->overhead_name?></td>
 						  <td><?=$ovl->overhead_desc?></td>
 						  <td><?=$ovl->overhead_percent?></td>
-						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/manage_overhead/<?=$ovl->overhead_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Overhead? This will delete all the related records on this Overhead as well.')" href="<?=base_url()?>index.php/home/delete_material/0/0/<?=$ovl->overhead_code?>"><i class="fa fa-edit"></i> DELETE</a>
+						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/manage_overhead/<?=$ovl->overhead_name?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Overhead? This will delete all the related records on this Overhead as well.')" href="<?=base_url()?>index.php/home/delete_material/0/0/<?=$ovl->overhead_name?>"><i class="fa fa-edit"></i> DELETE</a>
 						  </td>
 					 </tr>
 
