@@ -14,7 +14,7 @@
 <div class="row">
 	    <div class="col-md-4 col-md-offset-8 ">
 		  
-			   <input type="button" value="ESTIMATION" onClick="document.getElementById('form-id').submit(); hello()" class="btn btn-primary "> 
+			   <input type="button" value="ESTIMATION" onClick="document.getElementById('form-id').submit();" class="btn btn-primary "> 
 			<a href="<?=base_url()?>index.php/home/manage_subitem/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>"><button class="btn btn-primary "  ><i class="fa fa-plus"></i> SUBITEM</button></a>
 		</div>
 	 </div>
@@ -26,15 +26,16 @@
 									</div>
 									</div>
 <?php }?>
-	 <?php  if($this->session->flashdata('cat_error')) {  ?>
+
+ <?php  if($this->session->flashdata('sat_error')) {  ?>
 									<div class="form-group">
 										<div class="alert alert-danger">
 										<a href="javascript:;" class="goto-register"><strong><?=$this->session->flashdata('message')?></strong></a>
 	
 										</div>
 										</div>
-								<?php }?> 
-	 <form action="<?=base_url()?>index.php/home/estimation/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>" method="post" id="form-id">
+								<?php }?>  
+	 <form action="<?=base_url()?>index.php/estimation_controller/estimation/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>" method="post" id="form-id">
 
 <?php if(count($subitem_list) && is_array($subitem_list)){?>
 <div class="table-big">
@@ -95,12 +96,12 @@
 				  <?php } ?>
 	</div>	
 <script>
-	function hello()
-	{
-		alert('Please select atleast one item');
+	//function hello()
+	//{
+	//	alert('Please select atleast one item');
 		
-		<?php //redirect("home/get_subitem_list/".$dep_id."/".$chap_id."/".$item_id.""); ?>
-	}
+	//	<?php //redirect("home/get_subitem_list/".$dep_id."/".$chap_id."/".$item_id.""); ?>
+	//}
 	
 </script>
 <? //redirect('subitem_list','refresh');?>
