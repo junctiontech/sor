@@ -20,7 +20,7 @@
       	<h3><i class="fa fa-plus"></i> <?=(isset($carriage_code))?"Edit":"Add"?> Carriage</h3>
        </div>
       <div class="box-content">
-      <form action="<?=base_url()?>index.php/home/add_carriage" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
+      <form action="<?=base_url()?>index.php/masters/add_carriage" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
            <?php if(!isset($carriage_code)){?>
 		<div class="row">
 	    <div class="col-md-2 col-md-offset-10">
@@ -46,11 +46,11 @@
 			</tr>
 			</thead>
 			<tbody id="dataTable">
-				<?php if(isset($carriage_code)){?>
+				<?php if(isset($carriage_id)){?>
 					
 					
 			<tr>
-				 <input type="hidden" name="carriage_id" id="carriage_id" value="<?=isset($carriage_code)?$carriage_code:''?>"/>
+				 <input type="hidden" name="carriage_id" id="carriage_id" value="<?=isset($carriage_id)?$carriage_id:''?>"/>
 			<td>
 				   <input type="text" name="carriage_code" id="carriage_code" value="<?=isset($carriage_code)?$carriage_code:''?>" class="form-control" data-rule-required="true">
 					
