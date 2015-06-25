@@ -43,7 +43,7 @@
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/home/manage_material"><i class="fa fa-plus"></i> MATERIAL</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_material"><i class="fa fa-plus"></i> MATERIAL</a>
 				</div> 
 			 </div>  
 			 </br>      
@@ -79,7 +79,7 @@
 			 // print_r($unit_name[0]->unit_name);die;?>
 			  <td><?=($class_name)?$class_name[0]->class_name:''?></td>
 			  <td><?=$li->rate?></td>
-			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/manage_material/<?=$li->mat_name?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Material? This will delete all the related records on this Material as well.')" href="<?=base_url()?>index.php/home/delete_material/<?=$li->mat_name?>"><i class="fa fa-edit"></i> DELETE</a></td>
+			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_material/<?=$li->mat_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Material? This will delete all the related records on this Material as well.')" href="<?=base_url()?>index.php/masters/delete_material/<?=$li->mat_code?>"><i class="fa fa-edit"></i> DELETE</a></td>
 		</tr>
 
 		        <?php }?>
