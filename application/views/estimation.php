@@ -25,6 +25,20 @@
 						</div> 
 					 </div>  
 					 </br> 
+					  <?php  if($this->session->flashdata('qqq_success')) { ?>
+								<div class="row-fluid">
+									<div class="alert alert-success">
+										<strong><?=$this->session->flashdata('message')?></strong> 
+									</div>
+								</div>
+<?php }?>
+					 <?php  if($this->session->flashdata('ct_success')) { ?>
+								<div class="row-fluid">
+									<div class="alert alert-success">
+										<strong><?=$this->session->flashdata('message')?></strong> 
+									</div>
+								</div>
+<?php }?>
 					 <?php  if($this->session->flashdata('category_success')) {  ?>
 									<div class="form-group">
 										<div class="alert alert-success">
