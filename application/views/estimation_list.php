@@ -63,13 +63,13 @@
 						</td>
 						<td>
 						<?php if($est->est_status!='final'){ ?>
-						<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/edit_estimation/<?=$est->est_id?>"><i class="fa fa-edit"></i> Edit </a>
-						<a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Estimate? This will delete all the related records on this Estimate as well.')" href="<?=base_url()?>index.php/home/delete_estimate/<?=$est->est_id?>"><i class="fa fa-trash-o"></i> Delete</a>
-						<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/final_estimate/<?=$est->est_id?>"><i class="fa fa-lock"></i> Finalize</a>
+						<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/estimation_controller/edit_estimation/<?=$est->est_id?>"><i class="fa fa-edit"></i> Edit </a>
+						<a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Estimate? This will delete all the related records on this Estimate as well.')" href="<?=base_url()?>index.php/estimation_controller/delete_estimate/<?=$est->est_id?>"><i class="fa fa-trash-o"></i> Delete</a>
+						<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/estimation_controller/final_estimate/<?=$est->est_id?>"><i class="fa fa-lock"></i> Finalize</a>
 						<?php } ?>
 						
-						<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/edit_estimation/<?=$est->est_id?>/<?=$V=1;?>"><i class="fa fa-edit"></i> View </a>
-						<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/estimate_pdf/<?=$est->est_id?>"><i class="fa fa-edit"></i> Generate PDF </a></td>
+						<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/estimation_controller/edit_estimation/<?=$est->est_id?>/<?=$V=1;?>"><i class="fa fa-edit"></i> View </a>
+						<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/estimation_controller/estimate_pdf/<?=$est->est_id?>"><i class="fa fa-edit"></i> Generate PDF </a></td>
 					</tr>
 				<?php } ?>
 				</tbody>
