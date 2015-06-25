@@ -20,7 +20,7 @@
       <div class="box-content">
 		 <div class="row">
 						<div class="col-md-4 col-md-offset-8">
-							<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/add_estsubitem/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$select?>/<?=$est_id?>"><i class="fa fa-plus"></i> Add Subitems</a>
+							<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/estimation_controller/add_estsubitem/<?=$select?>/<?=$est_id?>"><i class="fa fa-plus"></i> Add Subitems</a>
 							<a class="btn btn-primary btn-sm" onClick="document.getElementById('form-del').submit();" ><i class="fa fa-trash-o"></i> Delete Subitems</a>
 						</div> 
 					 </div>  
@@ -41,25 +41,24 @@
 										</div>
 										</div>
 								<?php }?> 
+								
 		<div class="row">
-		<form action="<?=base_url()?>index.php/home/del_sitem_est/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$select?>/<?=$est_id?>" method="post" name="myForm" id="form-del" >
+		<form action="<?=base_url()?>index.php/estimation_controller/del_sitem_est/<?=$select?>/<?=$est_id?>" method="post" name="myForm" id="form-del" >
 			<div class="col-md-12">
 					<div class="form-group"  style="padding-bottom: 30px;">
 						  <label class="col-sm-3 col-lg-2 control-label">Estimate Description</label>
 						  <div class="col-sm-9 col-lg-10 controls">
 						<input type="text" required name="est_description" class="form-control"
-			<?php  if(!empty($est_id)==1){ $filter = array('est_id'=>$est_id);
+			<?php if(!empty($est_id)==1){
+				   $filter = array('est_id'=>$est_id);
 					$est_description= $this->utilities->get_est('ssr_t_estimate',$filter);
-			
+					// print_r($est_description); die;
 					?>
-			value="<?=($est_description)?$est_description[0]->est_description:''?>"> <?php }  ?>
-						
+			value="<?=($est_description)?$est_description[0]->est_description:''?>"> <?php  } ?>
 						  </div>
 					  </div>
 			<div class="table-big">
-			
 			<table class="table table-hover fill-head table-advance" id="table1">
-
 					<thead>
 
 						
@@ -123,14 +122,12 @@
 					  <td><?=($unit_name)?$unit_name[0]->unit_code:''?></td>
 					  
 					<?php if(!empty($est_sub)==1){	$filter = array('est_id'=>$est_sub[0]->est_id,
-					'subitem_id'=>$subil->subitem_id,
-					'dep_id'=>$dep_id,
-					'chap_id'=>$chap_id,
-					'item_id'=>$item_id);
+					'subitem_id'=>$subil->subitem_id
+					);
 					 $subitem_est_quantity= $this->utilities->get_est('ssr_t_estimate_sitem',$filter); ?>
 					<input type="hidden" name="est_id" id="est_id_<?=$key+1?>"  
 					
-					value="<?=($subitem_est_quantity)?$subitem_est_quantity[0]->est_id:''?>" /> <?php } ?>
+					value="<?=($est_description)?$est_description[0]->est_id:''?>" /> <?php } ?>
 						<td><input readonly type="text" class="input-mini-xs" id="quantity_<?=$key+1?>" name="quantity[]"
 <?php if(!empty($est_sub)==1){ 
 					?>
@@ -144,7 +141,7 @@
 							
 									
 					<td>
-							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/home/estimation_val/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> Enter value</a>
+							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/estimation_controller/estimation_val/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> Enter value</a>
 													
 							</td>
 						
@@ -164,7 +161,7 @@
 				</table>
 				</div>
 				
-				<input type="submit" name="save" formaction="index.php/home/add_est_submit/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$select?>" class="btn btn-primary pull-right"  value="Save Changes">
+				<input type="submit" name="save" formaction="index.php/estimation_controller/add_est_submit/<?=$select?>" class="btn btn-primary pull-right"  value="Save Changes">
   		
 	</div>
 		</form>
