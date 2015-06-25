@@ -38,7 +38,7 @@
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/home/manage_plant"><i class="fa fa-plus"></i> PLANT</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_plant"><i class="fa fa-plus"></i> PLANT</a>
 				</div> 
 			 </div>  
 			 </br>   
@@ -68,7 +68,7 @@
 			  <td><?=($unit_name)?$unit_name[0]->unit_code:''?></td>
 			  
 			  <td><?=$li->rate?></td>
-			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/manage_plant/<?=$li->pla_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Plant? This will delete all the related records on this Plant as well.')" href="<?=base_url()?>index.php/home/delete_material/0/0/0/0/0/<?=$li->pla_code?>"><i class="fa fa-edit"></i> DELETE</a></td>
+			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_plant/<?=$li->pla_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Plant? This will delete all the related records on this Plant as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/<?=$li->pla_code?>"><i class="fa fa-edit"></i> DELETE</a></td>
 		</tr>
 
 		        <?php }?>
