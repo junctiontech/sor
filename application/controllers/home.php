@@ -2,7 +2,6 @@
 
 class Home extends CI_Controller {
 	
-   
 	 function __construct() {
 		parent::__construct();
 		$this->data[]="";
@@ -18,54 +17,22 @@ class Home extends CI_Controller {
 		$this->data['base_url']=base_url();
 		$this->load->library('authority');
 	 }
-	 function is_logged_in()
-	 {
-		 $user_data=$user_session_data = $this->session->userdata('user_data');
-	 if($user_session_data==''){
-	
-		 $this->session->set_flashdata('message_type', 'error');
-         $this->session->set_flashdata('message',$this->config->item("user").'First Login With Your Account.');
- 		redirect('login');
-		
-	}									
-	else{
-		
-		
-	}
-		 
-		 
-	 }
-	 
 	public function index()
 	{ 
-	if($this->is_logged_in()){
-		redirect('login');
-		
-	}
-	else{
-	//	$user_data['user_id'];
+	Authority::is_logged_in ();
 		 $filter = array('dep_id !=' => '');
 		$this->data['dep_list'] = $this->masters_model->get_list($filter,'ssr_t_department');	
-		//print_r($this->data['dep_list']);die;
-		//Breadcrumb section start
 			$this->breadcrumb->clear();
 		    $this->breadcrumb->add_crumb('Home', base_url().'index.php/home');
-		//Breadcrumb section end
-		
 	   $this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
 		$this->load->view('dep_list',$this->data);
 		$this->parser->parse('include/footer',$this->data);
-		
 	}
-	
-	}
-
+/* function for the record of the users */
 	function user()
    {
-	   if($this->is_logged_in()){
-			redirect('login');
-		}else{
+	  Authority::is_logged_in ();
        $user=$this->input->post('usermailid');
        $query=$this->mhome->get_record('ssr_t_users',array('usermailid'=>$user));
        if($query)
@@ -75,20 +42,13 @@ class Home extends CI_Controller {
        }
        else
        {
-        
-       }
    }
    }
-	
-	
-		
+ /*  function for new add department */    
     function add_department($dep_id=false){
-		if($this->is_logged_in()){
-			redirect('login');
-		}
-			elseif(Authority::checkAuthority('add_department')==true)
+		Authority::is_logged_in ();
+			if(Authority::checkAuthority('add_department')==true)
 			{
-			//echo"elseif";die;
 					redirect('home');
 			}
 		else
@@ -118,10 +78,9 @@ class Home extends CI_Controller {
 		
 	}
 	}
+/* function for update the depatment and we create new department */	
   function manage_department(){
-			if($this->is_logged_in()){
-			redirect('login');
-		}else{
+			Authority::is_logged_in ();
 					if($this->input->post('submit')){
 					if($this->input->post('id')){
 						//echo"edit";die;
@@ -132,14 +91,9 @@ class Home extends CI_Controller {
 					                 'updated_by' => 1,
 										'updated_on' => date("Y-m-d"));
 			               $this->mhome->manage_department($info,array('dep_id'=>$this->input->post('id')));
-				
 			               $this->session->set_flashdata('message_type', 'success');        
                            $this->session->set_flashdata('message', $this->config->item("department").' updated successfully');
-						
-						
-						
 					}else{	
-			        // echo"add";die;
 					$info = array('dep_name' => $this->input->post('dep_name'),
 					               'dep_desc' => $this->input->post('dep_desc'),
 					                'dep_heading' => $this->input->post('dep_heading'),
@@ -149,8 +103,6 @@ class Home extends CI_Controller {
 					  $c_id=$this->mhome->manage_department($info);
 																
 							}
-					
-				
 					if($this->input->post('id')){
 						$this->session->set_flashdata('message_type', 'success');        
                            $this->session->set_flashdata('message', $this->config->item("department").' updated successfully');
@@ -159,26 +111,20 @@ class Home extends CI_Controller {
 						$this->session->set_flashdata('message_type', 'success');        
                         $this->session->set_flashdata('message', $this->config->item("department").' Added successfully');
 								redirect('home');	
-					
 					}
 				}
-					
- }
+ 
   }
+ /* function used for search the code for calculation in subitem calculation  */ 
 			public function auto_search()
 			{
-				if($this->is_logged_in()){
-			redirect('login');
-		}else{
+				Authority::is_logged_in ();
 				$search = $this->input->post('search');
 				$search_data=$this->data['search_data']=$this->mhome->search_auto($search);
 			}
-			}
+			
 			public function search_result($id=false){
-				if($this->is_logged_in()){
-			redirect('login');
-		}else{
-				//Breadcrumb section start
+				Authority::is_logged_in ();				//Breadcrumb section start
 				   $this->breadcrumb->clear();
 				   $this->breadcrumb->add_crumb('Home', base_url());
 				   $this->breadcrumb->add_crumb('Search Result', '');
@@ -187,12 +133,9 @@ class Home extends CI_Controller {
 				$this->parser->parse('include/leftmenu',$this->data);
 				$this->parser->parse('search_result',$this->data);
 			}
-			}
-			// create function for search
+// create function for search
 			public function search_keyword(){
-				if($this->is_logged_in()){
-			redirect('login');
-		}else{
+				Authority::is_logged_in ();
 				//Filter In Sub Items Start 
 				
 				if($this->input->post('item_id') && $this->input->post('search') && $this->input->post('chap_id'))
@@ -252,56 +195,14 @@ class Home extends CI_Controller {
 				   $this->parser->parse('include/footer',$this->data);
 					
 			}
-			}
-			
-					public function form_validation($id=false){
-						if($this->is_logged_in()){
-			redirect('login');
-		}else{
-
-				$this->parser->parse('include/header',$this->data);
-				$this->parser->parse('include/leftmenu',$this->data);
-				$this->parser->parse('form_validation',$this->data);
-				$this->parser->parse('include/footer',$this->data);
-
-
-		}
-				} 
-				public function search($id=false){
-if($this->is_logged_in()){
-			redirect('login');
-		}else{
-				$this->parser->parse('include/header',$this->data);
-				$this->parser->parse('include/leftmenu',$this->data);
-				$this->parser->parse('search',$this->data);
-				$this->parser->parse('include/footer',$this->data);
-} 
-				}
-				
-					public function abstract_est($id=false){
-						if($this->is_logged_in()){
-			redirect('login');
-		}else{
-
-				$this->parser->parse('include/header',$this->data);
-				$this->parser->parse('include/leftmenu',$this->data);
-				$this->parser->parse('abstract_est',$this->data);
-				$this->parser->parse('include/footer',$this->data);
-				}
-					}
-				
+/* function for chapter list of all the chapters */				
    public function chapter($dep_id)
 	{ 
-if($this->is_logged_in()){
-			redirect('login');
-		}else{
+Authority::is_logged_in ();
 			Authority::checkAuthority('chapter');
 	$filter = array('dep_id'=>$dep_id);
-	    	
 		$this->data['chap_list'] = $this->masters_model->get_list($filter,'ssr_t_chapter');
-		
 	    $this->data['dep_detail'] = $this->masters_model->get_list($filter,'ssr_t_department');			
-		//print_r($this->data['chap_list']);die;
 		//Breadcrumb section start
 			$this->breadcrumb->clear();
 		    $this->breadcrumb->add_crumb('Home', base_url().'index.php/home');
@@ -309,29 +210,20 @@ if($this->is_logged_in()){
 		    $this->breadcrumb->add_crumb('Chapter', '');
 		//Breadcrumb section end
 		$this->data['dep_id']=$dep_id;
-		//Templets load section
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
 		$this->load->view('chep_list',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 	} 
-	}
+/* function for add new chapter button */	
 	public function add_chapter($dep_id=false,$chap_id=false)
 	 {
-		 if($this->is_logged_in()){
-			redirect('login');
-		}
-		elseif(Authority::checkAuthority('add_chapter')==true)
+		 Authority::is_logged_in ();
+		if(Authority::checkAuthority('add_chapter')==true)
 			{
-			//echo"elseif";die;
 					redirect('home/chapter/'.$dep_id);
 			}
 		else{
-	//print_r($dep_id);die;
-		
-		//$this->data['dep_id']=$dep_id;
-	  
-			//print_r($this->data['dep_detail'][0]->dep_name);die;
 		if($chap_id){
 			$filter = array('chap_id'=>$chap_id);
 		
@@ -343,38 +235,26 @@ if($this->is_logged_in()){
 		                          'created_by' => 1,
 									'created_on' => date("Y-m-d"));
 			$this->data['chap_id']=$chap_id;
-								  
-		
 		}
 		 $filter1 = array('dep_id'=>$dep_id);
-	    	
-	
 	    $this->data['deprt_detail'] = $this->masters_model->get_list($filter1,'ssr_t_department');			
-		
 		//Breadcrumb section start
 			$this->breadcrumb->clear();
 		    $this->breadcrumb->add_crumb('Home', base_url());
-		    
 		    $this->breadcrumb->add_crumb($this->data['deprt_detail'][0]->dep_name,base_url().'index.php/home');
 		    $this->breadcrumb->add_crumb('Chapter','');
-		   
 		//Breadcrumb section end
-		//print_r($this->data);die;
-		
-		$this->data['dep'] = $this->mhome->get_deplist('ssr_t_department');	
+		$this->data['dep'] = $this->estimation_model->get_deplist('ssr_t_department');	
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
 		$this->parser->parse('add_chapter',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 	 }
 	 }
+/* function for update and create new chapter */	 
 	 function manage_chapter(){
-		 if($this->is_logged_in()){
-			redirect('login');
-		}else{
-			//print_r($_POST);die;
+		 Authority::is_logged_in ();
 					if($this->input->post('submit')){
-					//echo"jjj";die;
 						if($this->input->post('id')){
 			          $info = array('dep_id' => $this->input->post('dep_id'),
 			                          'chap_name' => $this->input->post('chap_name'),
@@ -385,15 +265,10 @@ if($this->is_logged_in()){
 										'created_on' => date("Y-m-d"),
 										'updated_by' => 1,
 										'updated_on' => date("Y-m-d"));
-										
-										
 							$this->mhome->manage_chapter($info,array('chap_id'=>$this->input->post('id')));
-								
 							$this->session->set_flashdata('message_type', 'success');        
 							$this->session->set_flashdata('message', $this->config->item("chapter").' updated successfully');
-					
 	                 }else{
-						 //echo"bb";die;
 					       $info = array('dep_id' => $this->input->post('dep_id'),
 					                     'chap_name' => $this->input->post('chap_name'),
 										'chap_desc' => $this->input->post('chap_desc'),
@@ -403,10 +278,7 @@ if($this->is_logged_in()){
 										'created_on' => date("Y-m-d"),
 										'updated_by' => 1,
 										'updated_on' => date("Y-m-d"));
-								//print_r($info);die;		
-												
 					        $c_id=$this->mhome->manage_chapter($info);
-																
 						  }   
 					
 					if($this->input->post('id')){
@@ -420,66 +292,51 @@ if($this->is_logged_in()){
 					}
 				}
 	}
-	 }
+/*  funnction for get departmnet list for chapter*/	 
 	public function manage_chapter_list($id=false){
-		if($this->is_logged_in()){
-			redirect('login');
-		}else{
-	 $this->data['dep'] = $this->mhome->get_deplist('ssr_t_department');		
+		Authority::is_logged_in ();
+	 $this->data['dep'] = $this->estimation_model->get_deplist('ssr_t_department');		
 			
 			
-		//Breadcrumb section start
 			$this->breadcrumb->clear();
 		    $this->breadcrumb->add_crumb('Home', base_url());
 		    $this->breadcrumb->add_crumb('Departments', base_url());
 		    $this->breadcrumb->add_crumb('Chapter','');
-		   
-		//Breadcrumb section end
-			
 			$this->parser->parse('include/header',$this->data);
 			$this->parser->parse('include/leftmenu',$this->data);
 			$this->parser->parse('manage_chapter',$this->data);
 			$this->parser->parse('include/footer',$this->data);		
 		}
 			
-	}
+/* function for item */	
 public function item($dep_id=false,$chap_id=false)
 	{   
 	
-	if($this->is_logged_in()){
-			redirect('login');
-		}else{
+	Authority::is_logged_in ();
 		Authority::checkAuthority('item');
 	$filter = array('dep_id'=>$dep_id,'chap_id'=>$chap_id);
 		$this->data['item_list'] = $this->mhome->get_item_list($filter,'ssr_t_item');	
-		//print_r($this->data['item_list']);die;
 		$filter = array('dep_id'=>$dep_id);
 	    $this->data['dep_detail'] = $this->masters_model->get_list($filter,'ssr_t_department');
 		$filter = array('chap_id'=>$chap_id);
 	    $this->data['chap_detail'] = $this->masters_model->get_list($filter,'ssr_t_chapter');
-		
-		//Breadcrumb section start
 			$this->breadcrumb->clear();
 		    $this->breadcrumb->add_crumb('Home', base_url());
 		    $this->breadcrumb->add_crumb($this->data['dep_detail'][0]->dep_name, base_url().'index.php/home');
 		    $this->breadcrumb->add_crumb($this->data['chap_detail'][0]->chap_name, base_url().'index.php/home/chapter/'.$this->data['dep_detail'][0]->dep_id);
 		    $this->breadcrumb->add_crumb('Items', '');
-		//Breadcrumb section end
 		$this->data['dep_id']=$dep_id;
 	    $this->data['chap_id']=$chap_id;
-		//Templets load section
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
 		$this->load->view('item_list',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 	}	
-	}	
+/* function for new item */	
  public function create_item($dep_id=false,$chap_id=false,$item_id=false)
 	 {
-		 if($this->is_logged_in()){
-			redirect('login');
-		}
-		elseif(Authority::checkAuthority('create_item'))
+		Authority::is_logged_in ();
+		if(Authority::checkAuthority('create_item'))
 				{
 					redirect('home/item/'.$dep_id.'/'.$chap_id);	
 				}
@@ -505,49 +362,34 @@ public function item($dep_id=false,$chap_id=false)
 		                         'created_by' => 1,
 									'created_on' => date("Y-m-d"));
 			$this->data['item_id']=$item_id;
-								  
-		
 		}
 			
 		$this->data['dep_id']=$dep_id;
 	    $this->data['chap_id']=$chap_id;
 	    $this->data['item_class_id']=$chap_id;
-		//Breadcrumb section start
 			$this->breadcrumb->clear();
 		    $this->breadcrumb->add_crumb('Home', base_url());
 		     $this->breadcrumb->add_crumb('Department', base_url().'index.php/home');
 		    $this->breadcrumb->add_crumb('Chapter','');
 		    $this->breadcrumb->add_crumb('Items','');
-		   
-		//Breadcrumb section end
-		//print_r($this->data);die;
-		$this->data['dep'] = $this->mhome->get_deplist('ssr_t_department');	
+		$this->data['dep'] = $this->estimation_model->get_deplist('ssr_t_department');	
 		$this->data['chap'] = $this->mhome->get_chapist('ssr_t_chapter');
 		$this->data['unit_list'] = $this->masters_model->get_unitlist();
-		//echo"sds";die;	
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
 		$this->parser->parse('add_item',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 	 }
 	 }
+/* function for update and create new item */	 
 	function add_item(){
-		if($this->is_logged_in()){
-			redirect('login');
-		}else{
-			//print_r($_POST);die; 
+		Authority::is_logged_in ();
 					if($this->input->post('submit')){
-						//print_r($_POST);die;
 						if($this->input->post('id')){
 							  $comma_separated = implode(",", $this->input->post('item_class_id'));
-							  		//  $item_info = $this->mhome->get_item_list($filter,'ssr_t_item');
-
 			            $info = array('dep_id'=>$this->input->post('dep_id'),
 						                   'chap_id'=>$this->input->post('chap_id'),
 						                   'item_class_id' => $comma_separated,
-																	                    //'item_class_id' =>$this->input->post('item_class_id'),
-								                                               //'item_class_id' =>$item_info[0]->item_class_id,
-
 										   'item_name'=>$this->input->post('item_name'),
 										    'item_desc'=>$this->input->post('item_desc'),
 											'unit_code'=>$this->input->post('unit_code'),
@@ -558,24 +400,18 @@ public function item($dep_id=false,$chap_id=false)
 		                                   'item_notes'=>$this->input->post('item_notes'),
 		                                   	 'created_by' => 1,
 												'created_on' => date("Y-m-d"));
-										
 							$this->mhome->update_item($info,array('item_id'=>$this->input->post('id')));
-								
 							$this->session->set_flashdata('message_type', 'success');        
 							$this->session->set_flashdata('message', $this->config->item("item").' updated successfully');
 					
 	                 }else{
-						   //print_r($_POST);die;
 					       $comma_separated = implode(",", $this->input->post('item_class_id'));
-                          // print_r($comma_separated);die;
-		                  
 					       $info = array('dep_id'=>$this->input->post('dep_id'),
 						                   'chap_id'=>$this->input->post('chap_id'),
 						                    'item_class_id' => $comma_separated,
 										   'item_name'=>$this->input->post('item_name'),
 										    'item_desc'=>$this->input->post('item_desc'),
 											'unit_code'=>$this->input->post('unit_code'),
-		                  
 						  'item_qty_base'=>$this->input->post('item_qty_base'),
 		                                   'item_cost_total'=>$this->input->post('item_cost_total'),
 		                                   'item_cost_per_unit'=>$this->input->post('item_cost_per_unit'),
@@ -583,15 +419,9 @@ public function item($dep_id=false,$chap_id=false)
 		                                   'item_notes'=>$this->input->post('item_notes'),
 		                                   'created_by' => 1,
 										   'created_on' => date("Y-m-d"));
-												
 								  $item_class_id = $this->input->post('item_class_id');
-									//print_r($info);die;
-							
 											 $c_id=$this->mhome->manage_item($info);
-											
-																
 						  }   
-					
 					if($this->input->post('id')){
 						redirect('home/item/'.$this->input->post('dep_id').'/'.$this->input->post('chap_id'));
 					}else{
@@ -601,37 +431,25 @@ public function item($dep_id=false,$chap_id=false)
 					}
 				}
              }
-	}
+/* function for item where we getting deparetment list */	
 	public function manage_item($id=false){
-		if($this->is_logged_in()){
-			redirect('login');
-		}else{
+		Authority::is_logged_in ();
 			
-	  $this->data['dep'] = $this->mhome->get_deplist('ssr_t_department');			
-			//print_r($this->data);die;
-			//Breadcrumb section start
+	  $this->data['dep'] = $this->estimation_model->get_deplist('ssr_t_department');			
 			$this->breadcrumb->clear();
 		    $this->breadcrumb->add_crumb('Home', base_url());
 		    $this->breadcrumb->add_crumb('Departments', base_url().'index.php/home');
 		    $this->breadcrumb->add_crumb('Chapters','');
 		    $this->breadcrumb->add_crumb('Items','');
-		   
-		//Breadcrumb section end
 			$this->parser->parse('include/header',$this->data);
 			$this->parser->parse('include/leftmenu',$this->data);
 			$this->parser->parse('manage_item',$this->data);
 			$this->parser->parse('include/footer',$this->data);		
 		}	
-			
-	} 
+/* function for subitem list for the calcultaion */			
   public function subitem_list($id=false){
-	  if($this->is_logged_in()){
-			redirect('login');
-		}else{
-   $this->data['dep'] = $this->mhome->get_deplist('ssr_t_department');	
-		
-		
-		//print_r($this->data);die;
+	  Authority::is_logged_in ();
+   $this->data['dep'] = $this->estimation_model->get_deplist('ssr_t_department');	
 		//Breadcrumb section start
 			$this->breadcrumb->clear();
 		    $this->breadcrumb->add_crumb('Home', base_url());
@@ -647,13 +465,12 @@ public function item($dep_id=false,$chap_id=false)
 		$this->parser->parse('include/footer',$this->data);		
 		
 		}
- }	
+ /* function for unit list for the calculation */
+ 	
  public function manage_subitem($dep_id=false,$chap_id=false,$item_id=false,$subitem_id=false)
 	 {
-		 if($this->is_logged_in()){
-			redirect('login');
-		}
-		elseif(Authority::checkAuthority('manage_subitem'))
+		Authority::is_logged_in ();
+		if(Authority::checkAuthority('manage_subitem'))
 		{
 			redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);
 		}
@@ -675,8 +492,6 @@ public function item($dep_id=false,$chap_id=false)
 		                          'created_by' => 1,
 									'created_on' => date("Y-m-d"));
 			$this->data['subitem_id']=$subitem_id;
-								  
-		
 		}
 		//Breadcrumb section start
 			$this->breadcrumb->clear();
@@ -694,34 +509,23 @@ public function item($dep_id=false,$chap_id=false)
 	    $this->data['item_id']=$item_id;
 	      $filter = array('dep_id'=>$dep_id,'chap_id'=>$chap_id,'item_id'=>$item_id);
 	   $this->data['item_list'] = $this->mhome->get_item_list($filter,'ssr_t_item');	
-	
 		$class_ids=$this->data['item_list'][0]->item_class_id;
-		 
 	    $this->data['chap'] = $this->mhome->get_chapist('ssr_t_chapter');
 	    $this->data['item_cls_list']=$this->mhome->get_item_cls_list($class_ids);
-		
-		
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
 		$this->parser->parse('create_subitem',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 		
 	 }
-	 }	 
+	 }
+/* function for update and create new subitem */	 	 
 	 function add_subitem(){
-		 if($this->is_logged_in()){
-			redirect('login');
-		}else{
-			//print_r($_POST);die;
+		Authority::is_logged_in ();
 			if($this->input->post('submit')){
-					
 						$data = $this->input->post();
-		        
-		//print_r($data);die;
 		$value = "";
 		if($this->input->post('subitem_id')){
-			//echo"e";die;
-			
 					    $info = array( 'subitem_name'=>$this->input->post('subitem_name'),
 										'subitem_desc' => $this->input->post('subitem_desc'),
 										'unit_code' => $this->input->post('unit_code'),
@@ -746,10 +550,8 @@ public function item($dep_id=false,$chap_id=false)
 			
 			
 				if($this->mhome->manage_sitem(rtrim($value,","))){
-					#echo "Menus Added Sucessfully";
 					$this->session->set_flashdata('message_type', 'success');        
                         $this->session->set_flashdata('message', 'Subitem Added successfully');
-					//redirect("home/manage_subitem");
 					redirect("home/get_subitem_list/".$data['dep_id']."/".$data['chap_id']."/".$data['item_id']);
 					
 				}else{
@@ -758,14 +560,11 @@ public function item($dep_id=false,$chap_id=false)
 		}
     }
 }
-	 }	
- 
+ /* function for calculation of subtiem */
   public function create_sub_item($dep_id=false,$chap_id=false,$item_id=false,$subitem_id=false,$class_id=false)
 	{  
-	if($this->is_logged_in()){
-			redirect('login');
-		}
-		elseif(Authority::checkAuthority('create_sub_item'))
+	Authority::is_logged_in ();
+		if(Authority::checkAuthority('create_sub_item'))
 		{
 			redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);
 		}
@@ -775,12 +574,8 @@ public function item($dep_id=false,$chap_id=false)
 		       $this->data['item_id'] = $item_id;
 		       $this->data['subitem_id'] = $subitem_id;
 		       $this->data['class_id'] = $class_id;
-		    //  print_r("fh");die;
 		$filter = array('subitem_id'=>$subitem_id);
-		//print_r($filter);die;;
 		$this->data['subitem_costing'] = $this->masters_model->get_list($filter,'ssr_t_calculation');
-		//print_r($subitem_costing);
-		//print_r( $this->data['subitem_costing']);die;
 		$filter = array('dep_id'=>$dep_id);
 	    $this->data['dep_detail'] = $this->masters_model->get_list($filter,'ssr_t_department');
 		$filter = array('chap_id'=>$chap_id);
@@ -789,7 +584,6 @@ public function item($dep_id=false,$chap_id=false)
 	    $this->data['item_detail'] = $this->mhome->get_item_list($filter,'ssr_t_item');
 	    $filter = array('subitem_id'=>$subitem_id);
 	    $this->data['subitem_detail'] = $this->masters_model->get_list($filter,'ssr_t_subitem');
-		
 		//Breadcrumb section start
 			$this->breadcrumb->clear();
 		    $this->breadcrumb->add_crumb('Home', base_url());
@@ -798,7 +592,6 @@ public function item($dep_id=false,$chap_id=false)
 		    $this->breadcrumb->add_crumb($this->data['item_detail'][0]->item_name, base_url().'index.php/home/item/'.$dep_id.'/'.$chap_id);
 		    $this->breadcrumb->add_crumb($this->data['subitem_detail'][0]->subitem_name, base_url().'index.php/home/item/'.$dep_id.'/'.$chap_id);
 		//Breadcrumb section end
-		//print_r($this->data['chap_list']);die;
                    $this->data['subitem_des'] = $this->data['subitem_detail'][0]->subitem_desc;
                    $this->data['class_id'] = $this->data['subitem_detail'][0]->subitem_class_id;
 		 $this->data['cost_type'] = $this->masters_model->get_costtype('ssr_t_cost_type');
@@ -809,71 +602,38 @@ public function item($dep_id=false,$chap_id=false)
 		$this->parser->parse('include/footer',$this->data);
 	}
 	}
+/* function for subitem calcultaion for perticular subitem code   */	
 	public function create_sub_cal()
 	{  
-	if($this->is_logged_in()){
-			redirect('login');
-		}else{
+	Authority::is_logged_in ();
 		
 		$data = $this->input->post();
-		//print_r($data);die;
-		
 		$value = "";
 		if($this->input->post('edit_costing')==1){
-			
 			for($i=0;$i<=count($data['code'])-1; $i++){
-				
-				
-				
 				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['subitem_id']."','".$data['class_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."','".$data['Ovehead'][$i]."')".",";
 			}
-			
 			if($this->mhome->update_subitem_cal(rtrim($value,","),$data['final_total'],$data['dep_id'],$data['chap_id'],$data['item_id'],$data['subitem_id'])){
 				redirect("home/get_subitem_list/".$data['dep_id']."/".$data['chap_id']."/".$data['item_id']);
-				
 			}else{
 				echo "Error while Editing SubItem";
 			}
 		} else {
-			//echo "add"; die;
 		for($i=0;$i<=count($data['code'])-1; $i++){
-			
 				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['subitem_id']."','".$data['class_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."','".$data['Ovehead'][$i]."')".",";
 			}
-			//print_r($value);die;
-			
 			if($this->mhome->manage_subitem_cal(rtrim($value,","),$data['final_total'],$data['subitem_id'],$data['item_id'])){
-					
 				redirect("home/get_subitem_list/".$data['dep_id']."/".$data['chap_id']."/".$data['item_id']);
 				
 			}else{
 				echo "Error while Adding SubItem";
 			}
 		}
-       		
 	}
-	}
- function readExcel()
-	{
-		if($this->is_logged_in()){
-			redirect('login');
-		}else{
-			$this->load->library('csvreader');
-			$result =   $this->csvreader->parse_file('Test.csv');//path to csv file
-
-			$data['csvData'] =  $result;
-			$this->load->view('view_csv', $data);  
-	}
-	}	
-/*added by palak on 2 feb*/
-/*started*/
-
+	
+/* function  for subitem of item */
 function get_subitem_list($dep_id=false,$chap_id=false,$item_id=false){
-	       if($this->is_logged_in()){
-			redirect('login');
-		}
-		
-		else{
+	      Authority::is_logged_in ();
 			Authority::checkAuthority('get_subitem_list');
 		       $this->data['dep_id'] = $dep_id;
 		       $this->data['chap_id'] = $chap_id;
@@ -912,27 +672,10 @@ function get_subitem_list($dep_id=false,$chap_id=false,$item_id=false){
 		$this->parser->parse('include/footer',$this->data);
 		
 	}
-}
- 	
-public function gen_doc()
-	{ 
-	if($this->is_logged_in()){
-			redirect('login');
-		}else{
-       $this->parser->parse('include/header',$this->data);
-		$this->parser->parse('include/leftmenu',$this->data);
-		$this->load->view('gen_doc',$this->data);
-		$this->parser->parse('include/footer',$this->data);
-  
-	}
-	}
+/* when we delete item */	
 public function delete_item($dep_id=false,$chap_id=false,$item_id=false){
-	
-	
-	if($this->is_logged_in()){
-			redirect('login');
-		}
-		elseif(Authority::checkAuthority('delete_item'))
+	Authority::is_logged_in ();
+		if(Authority::checkAuthority('delete_item'))
 		{
 			redirect('home/item/'.$dep_id.'/'.$chap_id);
 		}
@@ -944,13 +687,10 @@ public function delete_item($dep_id=false,$chap_id=false,$item_id=false){
 								redirect('home/item/'.$dep_id.'/'.$chap_id);		
 }
 }
-
+/* function for delete subitem */
 public function delete_subitem($dep_id=false,$chap_id=false,$item_id=false,$subitem_id=false,$class_id=false){
-	
-	if($this->is_logged_in()){
-			redirect('login');
-		}
-		elseif(Authority::checkAuthority('delete_subitem'))
+	Authority::is_logged_in ();
+		if(Authority::checkAuthority('delete_subitem'))
 		{
 			redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);
 		}
@@ -963,32 +703,24 @@ public function delete_subitem($dep_id=false,$chap_id=false,$item_id=false,$subi
 						redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);		
 }
 }
- 
+ /* function for the carriage calculation */
 public function create_carriage_cal($carriage_id=false){
-	if($this->is_logged_in()){
-			redirect('login');
-		}else{
-	
+	Authority::is_logged_in ();
 	$filter = array('carriage_id'=>$carriage_id);
 $this->data['carriage_costing'] = $this->masters_model->get_list($filter,'ssr_t_carriage_cal');
   $this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
 		$this->load->view('carriage_cal',$this->data);
 		$this->parser->parse('include/footer',$this->data);	
-	
-	
-		}
-}	
+}
+/*  function is used for auto search of the calcultaion */	
 public function index1(){
-	if($this->is_logged_in()){
-			redirect('login');
-		}else{
+	Authority::is_logged_in ();
 		$search=  $this->input->post('search');
 		$query = $this->mhome->search_auto($search);
 		echo json_encode ($query);
-	}
 }
-
+/* function for show the authentication msessage */
 public function msg($dep_id=false)
 	{
 	$this->session->set_flashdata('category_error_block', 'success message');        
