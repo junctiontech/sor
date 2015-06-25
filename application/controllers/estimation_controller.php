@@ -170,7 +170,7 @@ public function estimation_val($subitem_id=false,$class_id=false,$select=false,$
 				'subitem_id'=>$subitem_id
 				);
 				if($this->estimation_model->update_estimate_cal(rtrim($value,","),$data['final_total'],$data['subitem_id'],$data['est_id'],$filter)){
-					$this->session->set_flashdata('category_success', 'success message');  
+				$this->session->set_flashdata('category_success', 'success message');  
 		$this->session->set_flashdata('message',$this->config->item("ref").' successfully saved');
 				redirect("estimation_controller/estimation/".$data['select']."/".$data['est_id']);
 				}else{
@@ -185,7 +185,8 @@ public function estimation_val($subitem_id=false,$class_id=false,$select=false,$
 				$value .= "('".$data['est_id']."','".$data['subitem_id']."',".$data['no'][$i].",'".$data['length'][$i]."','".$data['width'][$i]."','".$data['depth'][$i]."')".",";
 				}
 				if($this->estimation_model->manage_estimate_cal(rtrim($value,","),$data['final_total'],$data['subitem_id'],$data['est_id'])){
-					
+					$this->session->set_flashdata('category_success', 'success message');
+					$this->session->set_flashdata('message',$this->config->item("ref").' successfully saved');
 				redirect("estimation_controller/estimation/".$data['select']."/".$data['est_id']);
 				
 				}else{
@@ -232,6 +233,8 @@ function add_estsubitem_submit($select=false,$est_id=false)
 							$this->estimation_model->insert_estsitem($data);
 							$subitem_id = implode(',',$subitem_id);
 						    $select= $select.",".$subitem_id;
+						    $this->session->set_flashdata('ct_success', 'success message');
+						    $this->session->set_flashdata('message',$this->config->item("ref").' subitem successfully saved');
 						 redirect("estimation_controller/estimation/".$select."/".$est_id."/");
 						}
 					}
@@ -239,6 +242,8 @@ function add_estsubitem_submit($select=false,$est_id=false)
 					$subitem_id=$_POST['subitem_id'];
 					$subitem_id = implode(',',$subitem_id);
 					$select= $select.",".$subitem_id;
+					$this->session->set_flashdata('ct_success', 'success message');
+					$this->session->set_flashdata('message',$this->config->item("ref").' subitem successfully saved');
 					redirect("estimation_controller/estimation/".$select."/".$est_id."/");	
 				} 
 				}
@@ -376,6 +381,8 @@ function del_sitem_est($select = false, $est_id = false) {
 			$array = explode ( ',', $select );
 			$array = array_diff ( $array, $sub_select );
 			$select = implode ( ',', $array );
+			$this->session->set_flashdata('qqq_success', 'success message');
+			$this->session->set_flashdata('message',$this->config->item("ref").' subitem deleted  successfully');
 			redirect("estimation_controller/estimation/".$select."/".$est_id."/");
 		}
 	}
