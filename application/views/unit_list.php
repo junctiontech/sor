@@ -38,7 +38,7 @@
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/home/manage_unit"><i class="fa fa-plus"></i> UNIT</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_unit"><i class="fa fa-plus"></i> UNIT</a>
 				</div> 
 			 </div>  
 			 </br>       
@@ -62,7 +62,7 @@
 						  <td><?=$ul->unit_code?></td>
 						  <td><?=$ul->unit_desc?></td>
 						
-						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/manage_unit/<?=$ul->unit_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Unit? This will delete all the related records on this Uint as well.')" href="<?=base_url()?>index.php/home/delete_material/0/0/0/<?=$ul->unit_code?>"><i class="fa fa-edit"></i> DELETE</a>
+						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_unit/<?=$ul->unit_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Unit? This will delete all the related records on this Uint as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/<?=$ul->unit_code?>"><i class="fa fa-edit"></i> DELETE</a>
 						  </td>
 					 </tr>
 
