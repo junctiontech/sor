@@ -34,14 +34,14 @@
 <!--<li><a href="<?=base_url()?>index.php/home/manage_chapter_list"> Chapters</a></li>-->
 <!--<li><a href="<?=base_url()?>index.php/home/manage_item"> Items</a></li>-->
 <!--<li><a href="<?=base_url()?>index.php/home/subitem_list"> Sub Items</a></li>-->
-<li><a href="<?=base_url()?>index.php/home/material"> Material</a></li>
-<li><a href="<?=base_url()?>index.php/home/labour"> Labor</a></li>
-<li><a href="<?=base_url()?>index.php/home/overhead"> Overhead</a></li>
-<li><a href="<?=base_url()?>index.php/home/unit"> Units</a></li>
-<li><a href="<?=base_url()?>index.php/home/carriage"> Carriage</a></li>
-<li><a href="<?=base_url()?>index.php/home/plant">Plants</a></li>
-<li><a href="<?=base_url()?>index.php/home/item_class">Class</a></li>
-<li><a href="<?=base_url()?>index.php/home/refrence">Reference</a></li>
+<li><a href="<?=base_url()?>index.php/masters/material"> Material</a></li>
+<li><a href="<?=base_url()?>index.php/masters/labour"> Labor</a></li>
+<li><a href="<?=base_url()?>index.php/masters/overhead"> Overhead</a></li>
+<li><a href="<?=base_url()?>index.php/masters/unit"> Units</a></li>
+<li><a href="<?=base_url()?>index.php/masters/carriage"> Carriage</a></li>
+<li><a href="<?=base_url()?>index.php/masters/plant">Plants</a></li>
+<li><a href="<?=base_url()?>index.php/masters/item_class">Class</a></li>
+<li><a href="<?=base_url()?>index.php/masters/refrence">Reference</a></li>
 
 </ul>
 </li>
@@ -64,7 +64,7 @@
 	</ul>
 
 </li>
-<li><a href="<?=base_url()?>index.php/home/estimation_list"> <i class="fa fa-align-justify"></i><span>Estimations</span></a></li>
+<li><a href="<?=base_url()?>index.php/estimation_controller/estimation_list"> <i class="fa fa-align-justify"></i><span>Estimations</span></a></li>
 <li><a href="<?=base_url()?>index.php/role/user_role"> <i class="fa fa-user"></i><span>User Management</span></a></li>
 <li><a href="<?=base_url()?>index.php/role/role_management"> <i class="fa fa-users"></i><span>Role Management</span></a></li><!--
 <li class="">
