@@ -47,7 +47,7 @@
 										</div>
 										</div>
 								<?php }?> 
-			 <?php  if($this->session->flashdata('category_error')) {  ?>
+								<?php  if($this->session->flashdata('catt_error')) {  ?>
 									<div class="form-group">
 										<div class="alert alert-danger">
 										<a href="javascript:;" class="alert alert-danger"><strong><?=$this->session->flashdata('message')?></strong></a>
@@ -55,6 +55,23 @@
 										</div>
 										</div>
 								<?php }?> 
+								
+			 <?php  if($this->session->flashdata('category_error')) {  ?>
+									<div class="form-group">
+										<div class="alert alert-danger">
+										<a href="javascript:;" class="alert alert-danger"><strong><?=$this->session->flashdata('message')?></strong></a>
+	
+										</div>
+										</div>
+								<?php }?>
+								<?php  if($this->session->flashdata('aaa_error')) {  ?>
+									<div class="form-group">
+										<div class="alert alert-danger">
+										<a href="javascript:;" class="alert alert-danger"><strong><?=$this->session->flashdata('message')?></strong></a>
+	
+										</div>
+										</div>
+								<?php }?>  
 								
 		<div class="row">
 		<form action="<?=base_url()?>index.php/estimation_controller/del_sitem_est/<?=$select?>/<?=$est_id?>" method="post" name="myForm" id="form-del" >
