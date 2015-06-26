@@ -16,10 +16,69 @@ class Estimation_Controller extends CI_Controller {
 		$this->data ['base_url'] = base_url ();
 		$this->load->library ( 'authority' );
 	}
-/* function start for estimation in subitems. and  we used this function  in edit of estimation_list.php  */
 	public function estimation($select = false, $est_id = false) {
 		Authority::is_logged_in ();
 		$this->data ['est_id'] = $est_id;
+		$filter = $select;
+		if($est_id == ''){
+			if($select == '' && $est_id == '') {
+		$this->session->set_flashdata ( 'aaa_error', 'error' );
+				$this->session->set_flashdata ( 'message', $this->config->item ( "est" ) . ' Please Select Atleast One SubItem Code' );
+				$this->parser->parse ( 'include/header', $this->data );
+				$this->parser->parse ( 'include/leftmenu', $this->data );
+				$this->parser->parse ( 'estimation', $this->data );
+				$this->parser->parse ( 'include/footer', $this->data );
+				//redirect("home/get_subitem_list/".$dep_id."/".$chap_id."/".$item_id."");
+			}
+else{
+			if (! (isset ($_POST ['select'] ) ? $_POST ['select'] : '') == '') {
+				$filter = $_POST ['select'];
+				$filter = implode ( ',', $filter );
+				$this->data ['select'] = $filter;
+			}else {
+				$filter = $select;
+				$this->data ['select'] = $filter;
+			}
+			$this->data ['subitem_list'] = $this->estimation_model->get_subitem_ids_list_est ( $filter );
+			if ($est_id) {
+				$filter = $est_id;
+				$est_sub = $this->data ['est_sub'] = $this->estimation_model->get_subitem_est_cal ( $filter );
+			}
+			$this->parser->parse ( 'include/header', $this->data );
+			$this->parser->parse ( 'include/leftmenu', $this->data );
+			$this->parser->parse ( 'estimation', $this->data );
+			$this->parser->parse ( 'include/footer', $this->data );
+}	
+
+		}
+		else{	
+				if (! (isset ($_POST ['select'] ) ? $_POST ['select'] : '') == '') {
+					$filter = $_POST ['select'];
+					$filter = implode ( ',', $filter );
+					$this->data ['select'] = $filter;
+				} else {
+					$filter = $select;
+					$this->data ['select'] = $filter;
+				}
+				$this->data ['subitem_list'] = $this->estimation_model->get_subitem_ids_list_est ( $filter );
+				if ($est_id) {
+					$filter = $est_id;
+					$est_sub = $this->data ['est_sub'] = $this->estimation_model->get_subitem_est_cal ( $filter );
+				}
+				//$this->session->set_flashdata ( 'catt_error', 'error' );
+			//	$this->session->set_flashdata ( 'message', $this->config->item ( "ref" ) . ' Please Select Atleast One SubItem Code' );
+				$this->parser->parse ( 'include/header', $this->data );
+				$this->parser->parse ( 'include/leftmenu', $this->data );
+				$this->parser->parse ( 'estimation', $this->data );
+				$this->parser->parse ( 'include/footer', $this->data );
+					
+		}	
+		
+	}
+/* function start for estimation in subitems. and  we used this function  in edit of estimation_list.php  */
+/* public function estimation($select = false, $est_id = false) {
+		Authority::is_logged_in ();
+	$this->data ['est_id'] = $est_id;
 		$filter = $select;
 		if ($est_id){
 			if($select == '' && $est_id == '') {
@@ -66,13 +125,15 @@ class Estimation_Controller extends CI_Controller {
 				$filter = $est_id;
 				$est_sub = $this->data ['est_sub'] = $this->estimation_model->get_subitem_est_cal ( $filter );
 			}
+			
 			$this->parser->parse ( 'include/header', $this->data );
 			$this->parser->parse ( 'include/leftmenu', $this->data );
 			$this->parser->parse ( 'estimation', $this->data );
 			$this->parser->parse ( 'include/footer', $this->data );
+			
 		 	}
 		}
-	}
+	} */
 /* function end for estimation in subitems. and  we used this function  in edit of estimation_list.php  */
 /* function start for update-estimate ,update-estimate-subitem and insert-estimate, insert-estimate-subitem when we add estimate subitem and click on add buttion  */
 				function add_est_submit($select=false,$est_id=false)
