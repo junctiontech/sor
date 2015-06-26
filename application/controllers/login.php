@@ -24,8 +24,7 @@ class Login extends CI_Controller {
 		$this->parser->parse('login',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 	}
-
-				/* Function for login and create session */	
+/* Function for login and create session */	
 	function login_user($info=false)
 	{	
 			$data=array(
@@ -50,12 +49,15 @@ class Login extends CI_Controller {
 						redirect('home');
 					}
 			else{	
-				  redirect('home');
+				$this->session->set_flashdata('ct_error','error');
+				$this->session->set_flashdata('message',$this->config->item("user").'Invalid Username And Password');
+				  redirect('login');
+				  
 				}
 	}
 	
 		
-					/* Function for sign up for new user */
+/* Function for sign up for new user */
 	function sign_up()
 	{
 		$a = $this->input->post('usermailid');
@@ -70,7 +72,7 @@ class Login extends CI_Controller {
 		else
 		   {
 				$this->session->set_flashdata('category_success', 'success message	');        
-				$this->session->set_flashdata('message', $this->config->item("user").' Data Inserted successfully');
+				$this->session->set_flashdata('message', $this->config->item("user").' You Are Successfully Signup. Kindly Login');
 				redirect('login');
 		   }
 		
