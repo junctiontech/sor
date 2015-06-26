@@ -614,6 +614,8 @@ public function item($dep_id=false,$chap_id=false)
 				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['subitem_id']."','".$data['class_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."','".$data['Ovehead'][$i]."')".",";
 			}
 			if($this->mhome->update_subitem_cal(rtrim($value,","),$data['final_total'],$data['dep_id'],$data['chap_id'],$data['item_id'],$data['subitem_id'])){
+				$this->session->set_flashdata('ct_success', 'success');
+				$this->session->set_flashdata('message', 'Subitem Calcultaion Updated Successfully');
 				redirect("home/get_subitem_list/".$data['dep_id']."/".$data['chap_id']."/".$data['item_id']);
 			}else{
 				echo "Error while Editing SubItem";
@@ -623,6 +625,8 @@ public function item($dep_id=false,$chap_id=false)
 				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['subitem_id']."','".$data['class_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."','".$data['Ovehead'][$i]."')".",";
 			}
 			if($this->mhome->manage_subitem_cal(rtrim($value,","),$data['final_total'],$data['subitem_id'],$data['item_id'])){
+				$this->session->set_flashdata('cat_success', 'success');
+				$this->session->set_flashdata('message', 'Subitem Calcultaion Added Successfully');
 				redirect("home/get_subitem_list/".$data['dep_id']."/".$data['chap_id']."/".$data['item_id']);
 				
 			}else{
@@ -698,8 +702,8 @@ public function delete_subitem($dep_id=false,$chap_id=false,$item_id=false,$subi
 	
 						$this->mhome->delete_subitem($subitem_id);
 	
-	                   $this->session->set_flashdata('message_type', 'success');        
-                        $this->session->set_flashdata('message', $this->config->item("item").' DELETE successfully');
+	                   $this->session->set_flashdata('cate_success', 'success');        
+                        $this->session->set_flashdata('message', $this->config->item("subitem").' DELETE successfully');
 						redirect('home/get_subitem_list/'.$dep_id.'/'.$chap_id.'/'.$item_id);		
 }
 }
