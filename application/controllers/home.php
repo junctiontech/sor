@@ -29,7 +29,7 @@ class Home extends CI_Controller {
 		$this->load->view('dep_list',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 	}
-/* function for the record of the users */
+/* function for the finding record of the users */
 	function user()
    {
 	  Authority::is_logged_in ();
