@@ -15,10 +15,31 @@
 	    <div class="col-md-4 col-md-offset-8 ">
 		  
 			   <input type="button" value="ESTIMATION" onClick="document.getElementById('form-id').submit();" class="btn btn-primary "> 
-			<a href="<?=base_url()?>index.php/home/manage_subitem/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>"><button class="btn btn-primary "  ><i class="fa fa-plus"></i> SUBITEM</button></a>
+			<a href="<?=base_url()?>index.php/home/manage_subitem/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>"><button class="btn btn-primary "  ><i class="fa fa-plus"></i> SUBITEM </button></a>
 		</div>
 	 </div>
 	 </br>
+	  <?php  if($this->session->flashdata('ct_success')) { ?>
+								<div class="row-fluid">
+									<div class="alert alert-success">
+										<strong><?=$this->session->flashdata('message')?></strong> 
+									</div>
+									</div>
+<?php }?>
+ <?php  if($this->session->flashdata('cate_success')) { ?>
+								<div class="row-fluid">
+									<div class="alert alert-success">
+										<strong><?=$this->session->flashdata('message')?></strong> 
+									</div>
+									</div>
+<?php }?>
+  <?php  if($this->session->flashdata('cat_success')) { ?>
+								<div class="row-fluid">
+									<div class="alert alert-success">
+										<strong><?=$this->session->flashdata('message')?></strong> 
+									</div>
+									</div>
+<?php }?>
 	 <?php  if($this->session->flashdata('category_error')) { ?>
 								<div class="row-fluid">
 									<div class="alert alert-danger">
