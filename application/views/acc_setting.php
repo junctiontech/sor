@@ -1,7 +1,7 @@
 <div id="main-content">
 	<div class="page-title">
 		<div>
-		<h1><i class="fa fa-cog"></i> Account Settings</h1>
+		<h1><i class="fa fa-cog"></i> User Profile</h1>
 		</div>
 	</div>
 	<div id="breadcrumbs">
