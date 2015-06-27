@@ -39,6 +39,92 @@ class Mhome extends CI_Model {
 		}
 		return $id;
 	}
+	/*check user id present in database*/
+	function checkid($uid){
+		//print_r($uid);die;
+		$query=$this->db->query("SELECT usermailid FROM ssr_t_users WHERE usermailid='$uid'");
+		$a=$query->result();
+		if($a == null){
+			$query=$this->db->query("SELECT usermailid FROM ssr_t_users WHERE usermailid='$uid' and name='' ");
+			//print_r($query);die;
+			$a=$query->num_rows;
+			if($a !== 0){
+				$data=array(
+						'usermailid' =>$uid,
+						'name' =>'',
+						'image' =>'',
+						'phone_number' =>'',
+						'mobile' =>'',
+						'address' =>''
+				);
+				$this->db->update('ssr_t_users',$data);
+				//print_r($uid);die;
+				return TRUE;
+			}
+			else{
+					
+				$data=array(
+						'usermailid' =>$uid,
+						'name' =>'',
+						'image' =>'',
+						'phone_number' =>'',
+						'mobile' =>'',
+						'address' =>''
+				);
+				$this->db->insert('ssr_t_users',$data);
+				$this->db->insert_id();
+				return TRUE;
+			}
+		}else{
+			$ci = & get_instance();
+			$query = $ci->db->get_where('ssr_t_users',array('usermailid' => $uid));
+			$result=$query->Result();
+			$id=$result[0]->usermailid;
+	
+			//print_r($id);die;
+			if($uid == $id){
+				//print_r($b);die;
+				return TRUE;
+			}
+				
+		}
+	}
+	/* start fetching data and show stored data*/
+	function show_account($id){
+		$query =array($this->db->query("SELECT name,image,phone_number,mobile,address FROM ssr_t_users WHERE usermailid='$id'"));
+		foreach($query as $qry)
+		{
+			return $qry->row();
+		}
+	}
+	/* start storing data from logged user*/
+	function insertdatamy($filter=0,$name=0,$image=0,$phone_number=0,$mobile=0,$address=0)
+	{  if($image==null) {
+	
+		$ci = & get_instance();
+		$query = $ci->db->get_where('ssr_t_users',array('usermailid' => $filter));
+		$result=$query->Result();
+		$image=$result[0]->image;
+	}
+	//print_r($filter);die;
+	$data=array(
+			//'usermailid' =>$filter,
+			'name' =>$name,
+			'image' =>$image,
+			'phone_number' =>$phone_number,
+			'mobile' =>$mobile,
+			'address' =>$address
+	);
+	
+	
+	//$this->db->query("update name,image,phone,mobile,address from acc_stt_data where 'user_id' => $filter",$data);
+	$fill=array('usermailid' => $filter);
+	$this->db->where($fill);
+	$this->db->update('ssr_t_users',$data);
+	
+	//echo $this->db->last_query();die;
+	$this->show_account($filter);
+	}
 	
 /* function for update and create new chapter */
 	function manage_chapter($data=false,$filter=false)
