@@ -52,7 +52,7 @@ class Masters extends CI_Controller {
 	 	}
 	 	else{
 	 		if($mat_code){
-	 			$filter = array('mat_code'=>$mat_code);
+	 			$filter = array('mat_name'=>$mat_code);
 	 			$material_info = $this->masters_model->get_list($filter,'ssr_t_material');
 	 			$this->data['material_info'] = $this->masters_model->get_list($filter,'ssr_t_material');
 	 			$this->data = array('mat_name'=>$material_info[0]->mat_name,
@@ -62,7 +62,7 @@ class Masters extends CI_Controller {
 	 					'rate'=>$material_info[0]->rate,
 	 					'created_by' => 1,
 	 					'created_on' => date("Y-m-d"));
-	 			$this->data['mat_code']=$mat_code;
+	 			$this->data['mat_name']=$mat_code;
 	 	 		}else{
 	 			$this->data['material_info']='';
 	 		}
@@ -97,7 +97,11 @@ class Masters extends CI_Controller {
 	 						'created_on' => date("Y-m-d"),
 	 						'updated_by' => 1,
 	 						'updated_on' => date("Y-m-d"));
-	 				$this->masters_model->update_material($info,array('mat_code'=>$this->input->post('id')));
+	 				$this->masters_model->update_material($info,array('mat_name'=>$this->input->post('id')));
+	 				
+	 				$filter=array('code'=>$this->input->post('mat_name'));
+	 				$this->update_rate($filter);
+	 				
 	 				$this->session->set_flashdata('message_type', 'success');
 	 				$this->session->set_flashdata('message', $this->config->item("material").' updated successfully');
 	 				redirect("masters/material");
@@ -150,7 +154,7 @@ class Masters extends CI_Controller {
 	 	else{
 	 		$this->data['unit_list'] = $this->masters_model->get_unitlist();
 	 		if($labour_code){
-	 			$filter = array('labour_code'=>$labour_code);
+	 			$filter = array('labour_name'=>$labour_code);
 	 
 	 			$labour_info = $this->masters_model->get_list($filter,'ssr_t_labor');
 	 			$this->data = array('labour_name'=>$labour_info[0]->labour_name,
@@ -159,7 +163,7 @@ class Masters extends CI_Controller {
 	 					'labour_rate'=>$labour_info[0]->labour_rate,
 	 					'created_by' => 1,
 	 					'created_on' => date("Y-m-d"));
-	 			$this->data['labour_code']=$labour_code;
+	 			$this->data['labour_name']=$labour_code;
 	 		}
 	 		$this->breadcrumb->clear();
 	 		$this->breadcrumb->add_crumb('Home', base_url());
@@ -188,7 +192,11 @@ class Masters extends CI_Controller {
 	 						'created_on' => date("Y-m-d"),
 	 						'updated_by' => 1,
 	 						'updated_on' => date("Y-m-d"));
-	 				$this->masters_model->update_labour($info,array('labour_code'=>$this->input->post('id')));
+	 				$this->masters_model->update_labour($info,array('labour_name'=>$this->input->post('id')));
+	 				
+	 				$filter=array('code'=>$this->input->post('labour_name'));
+	 				$this->update_rate($filter);
+	 				
 	 				$this->session->set_flashdata('message_type', 'success');
 	 				$this->session->set_flashdata('message', $this->config->item("labour").' updated successfully');
 	 				redirect("masters/labour");
@@ -236,14 +244,14 @@ class Masters extends CI_Controller {
 	 		}
 	 		else{
 	 			if($overhead_code){
-	 				$filter = array('overhead_code'=>$overhead_code);
+	 				$filter = array('overhead_name'=>$overhead_code);
 	 				$overhead_info = $this->masters_model->get_list($filter,'ssr_t_overhead');
 	 				$this->data = array('overhead_name'=>$overhead_info[0]->overhead_name,
 	 						'overhead_desc'=>$overhead_info[0]->overhead_desc,
 	 						'overhead_percent'=>$overhead_info[0]->overhead_percent,
 	 						'created_by' => 1,
 	 						'created_on' => date("Y-m-d"));
-	 				$this->data['overhead_code']=$overhead_code;
+	 				$this->data['overhead_name']=$overhead_code;
 	 			}
 	 			$this->breadcrumb->clear();
 	 			$this->breadcrumb->add_crumb('Home', base_url());
@@ -272,7 +280,11 @@ class Masters extends CI_Controller {
 	 							'created_on' => date("Y-m-d"),
 	 							'updated_by' => 1,
 	 							'updated_on' => date("Y-m-d"));	 	
-	 					$this->masters_model->update_overhead($info,array('overhead_code'=>$this->input->post('id')));
+	 					$this->masters_model->update_overhead($info,array('overhead_name'=>$this->input->post('id')));
+	 					
+	 					$filter=array('code'=>$this->input->post('overhead_name'));
+	 					$this->update_rate($filter);
+	 					
 	 					$this->session->set_flashdata('message_type', 'success');
 	 					$this->session->set_flashdata('message', $this->config->item("overhead").' updated successfully');
 	 					redirect("masters/overhead");
@@ -406,7 +418,7 @@ class Masters extends CI_Controller {
 	 					else{
 	 					  
 	 						if($carriage_id){
-	 							$filter = array('carriage_id'=>$carriage_id);
+	 							$filter = array('carriage_code'=>$carriage_id);
 	 							$carriage_info = $this->masters_model->get_list($filter,'ssr_t_carriage');
 	 							$this->data = array('carriage_code'=>$carriage_info[0]->carriage_code,
 	 									'carriage_description'=>$carriage_info[0]->carriage_description,
@@ -416,7 +428,7 @@ class Masters extends CI_Controller {
 	 									'carriage_rate'=>$carriage_info[0]->carriage_rate,
 	 									'created_by' => 1,
 	 									'created_on' => date("Y-m-d"));
-	 							$this->data['carriage_id']=$carriage_id;
+	 							$this->data['carriage_code']=$carriage_id;
 	 						}
 	 						$this->breadcrumb->clear();
 	 						$this->breadcrumb->add_crumb('Home', base_url());
@@ -451,7 +463,11 @@ class Masters extends CI_Controller {
 	 										'created_on' => date("Y-m-d"),
 	 										'updated_by' => 1,
 	 										'updated_on' => date("Y-m-d"));
-	 								$this->masters_model->update_carriage($info,array('carriage_id'=>$this->input->post('carriage_id')));
+	 								$this->masters_model->update_carriage($info,array('carriage_code'=>$this->input->post('carriage_id')));
+	 								
+	 								$filter=array('code'=>$this->input->post('carriage_code'));
+	 								$this->update_rate($filter);
+	 								
 	 								$this->session->set_flashdata('message_type', 'success');
 	 								$this->session->set_flashdata('message', $this->config->item("carriage").' updated successfully');
 	 								redirect("masters/carriage");
@@ -541,6 +557,10 @@ class Masters extends CI_Controller {
 	 											'updated_by' => 1,
 	 											'updated_on' => date("Y-m-d"));
 	 									$this->masters_model->update_plant($info,array('pla_code'=>$this->input->post('id')));
+	 									
+	 									$filter=array('code'=>$this->input->post('pla_code'));
+	 									$this->update_rate($filter);
+	 									
 	 									$this->session->set_flashdata('message_type', 'success');
 	 									$this->session->set_flashdata('message', $this->config->item("Plan").' updated successfully');
 	 									redirect("masters/plant");
@@ -781,6 +801,10 @@ public function submit_ref_cal()
 				$value .= "('".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['ref_id']."',".$data['serial'][$i].",'".$data['item_type'][$i]."','".$data['item_desc'][$i]."','".$data['code'][$i]."','".$data['unit_code'][$i]."','".$data['amount'][$i]."','".$data['total_amount'][$i]."','".$data['quantity'][$i]."','".$data['rate'][$i]."','".$data['Ovehead'][$i]."')".",";
 			}
 			if($this->masters_model->update_rel_cal(rtrim($value,","),$data['final_total'],$data['dep_id'],$data['chap_id'],$data['item_id'],$data['ref_id'])){
+				
+				$filter=array('code'=>$ref_detail[0]->name);
+				$this->update_rate($filter);
+				
 				redirect("masters/refrence/");
 			}else{
 				echo "Error while Editing Refrence calculation";
@@ -892,4 +916,224 @@ public function submit_ref_cal()
 	 		}
 	 }
 	 /* function  end for DELETE SECTION OF MATERIAL,LABOUR,OVERHEAD,UNIT,CARRIAGE,PLANT,ITEMCLASS,REFRENCE    */
+	 
+	 function update_rate($filter=FALSE)
+	 {
+	 	
+	 		/*rate update coding stared.............................................................*/
+	 		$sub_detail=$this->data['$sub_detail']=$this->masters_model->get_cal_details($filter,'ssr_t_calculation');
+	 	 	
+	 		for($j=0;$j<=count($sub_detail)-1; $j++){
+	 			$subitem_id =array('subitem_id'=>$sub_detail[$j]->subitem_id);
+	 
+	 			$sub_detail_cal=$this->masters_model->get_cal_details($subitem_id,'ssr_t_calculation');
+	 
+	 			$total=0;
+	 			$overamount=array('');
+	 			for($i=0;$i<=count($sub_detail_cal)-1; $i++){
+	 					
+	 				if($sub_detail_cal[$i]->item_type=='material'){
+	 
+	 					$filter=array('mat_name'=>$sub_detail_cal[$i]->code);
+	 					$material=$this->masters_model->get_cal_details($filter,'ssr_t_material');
+	 					$overamount[$i]=$amount= $material[0]->rate  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 
+	 					$info=array('item_desc'=>$material[0]->mat_desc,
+	 							'unit_code'=> $material[0]->unit_code,
+	 							'rate'=>$material[0]->rate ,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->masters_model->update_rate($info,$filter);
+	 
+	 				}
+	 				elseif($sub_detail_cal[$i]->item_type=='labour'){
+	 
+	 					$filter=array('labour_name'=>$sub_detail_cal[$i]->code);
+	 
+	 					$labour=$this->masters_model->get_cal_details($filter,'ssr_t_labor');
+	 
+	 					$overamount[$i]=$amount= $labour[0]->labour_rate  * $sub_detail_cal[$i]->quantity;
+	 
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 
+	 					$info=array('item_desc'=>$labour[0]->labour_description,
+	 							'unit_code'=> $labour[0]->unit_code ,
+	 							'rate'=>$labour[0]->labour_rate ,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->masters_model->update_rate($info,$filter);
+	 
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='refrence'){
+	 
+	 					$filter=array('name'=>$sub_detail_cal[$i]->code);
+	 					$refrence=$this->masters_model->get_cal_details($filter,'ssr_t_reference');
+	 					$overamount[$i]=$amount= $refrence[0]->cost_total  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 					$info=array('item_desc'=>$refrence[0]->description,
+	 							'unit_code'=> $refrence[0]->unit_code,
+	 							'rate'=>$refrence[0]->cost_total,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->masters_model->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='overhead'){
+	 
+	 					$filter=array('overhead_name'=>$sub_detail_cal[$i]->code);
+	 					$overhead=$this->masters_model->get_cal_details($filter,' ssr_t_overhead');
+	 					$sub_detail_cal[$i]->quantity  ;
+	 
+	 					if($i==0){
+	 						$amount1= $overhead[0]->overhead_percent  * $total  ;
+	 						$overamount[$i]=$amount=$amount1/100;
+	 						$total=$amount;
+	 							
+	 
+	 					}else{
+	 						if(!$sub_detail_cal[$i]->over_head==''){
+	 							$sum=0;
+	 							$val=$sub_detail_cal[$i]->over_head;
+	 							$coma_sap_val=explode(",", $val);
+	 							for($v=0;$v<=count($coma_sap_val)-1;$v++){
+	 								$sum=$sum+$overamount[$coma_sap_val[$v]-1];
+	 							}
+	 
+	 							$amount1= $overhead[0]->overhead_percent  * $sum  ;
+	 							$overamount[$i]=$amount=$amount1/100;
+	 							$total=$amount+$total;
+	 
+	 						}else{
+	 							$amount1= $overhead[0]->overhead_percent  * $total  ;
+	 							$overamount[$i]=$amount=$amount1/100;
+	 							$total=$amount+$total;
+	 
+	 						}
+	 					}
+	 					$info=array('item_desc'=>$overhead[0]->overhead_desc,
+	 							'rate'=>$overhead[0]->overhead_percent,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->masters_model->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='carriage'){
+	 
+	 					$filter=array('carriage_code'=>$sub_detail_cal[$i]->code);
+	 					$carriage=$this->masters_model->get_cal_details($filter,'ssr_t_carriage');
+	 					$overamount[$i]=$amount= $carriage[0]->carriage_rate  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 
+	 					}
+	 					$info=array('item_desc'=>$carriage[0]->carriage_description,
+	 							'unit_code'=> $carriage[0]->unit_code,
+	 							'rate'=>$carriage[0]->carriage_rate,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->masters_model->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='plant'){
+	 
+	 					$filter=array('pla_code'=>$sub_detail_cal[$i]->code);
+	 					$plant=$this->masters_model->get_cal_details($filter,'ssr_t_plant');
+	 					$overamount[$i]=$amount= $plant[0]->rate  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 					$info=array('item_desc'=>$plant[0]->pla_desc,
+	 							'unit_code'=> $plant[0]->unit_code,
+	 							'rate'=>$plant[0]->rate,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->masters_model->update_rate($info,$filter);
+	 
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='subitem'){
+	 
+	 					$filter=array('subitem_name'=>$sub_detail_cal[$i]->code);
+	 					$subitem=$this->masters_model->get_cal_details($filter,'ssr_t_subitem');
+	 					$overamount[$i]=$amount= $subitem[0]->rate  * $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$total+$amount;
+	 							
+	 					}
+	 					$info=array('item_desc'=>$subitem[0]->subitem_desc,
+	 							'unit_code'=> $subitem[0]->unit_code,
+	 							'rate'=>$subitem[0]->rate,
+	 							'amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->masters_model->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='convert'){
+	 
+	 					$overamount[$i]=$amount= $total / $sub_detail_cal[$i]->quantity  ;
+	 					if($i==0){
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$total=$amount;
+	 							
+	 					}
+	 					$info=array('amount'=>$amount,
+	 							'total_amount'=>$total);
+	 					$filter=array('cal_id'=>$sub_detail_cal[$i]->cal_id);
+	 					$this->masters_model->update_rate($info,$filter);
+	 
+	 				}elseif($sub_detail_cal[$i]->item_type=='text'){
+	 
+	 					if($i==0){
+	 						$overamount[$i]=$amount= 0 ;
+	 						$total=$amount;
+	 							
+	 					}else{
+	 						$overamount[$i]=$amount= 0 ;
+	 						$total=$total;
+	 							
+	 					}
+	 				}
+	 			}
+	 
+	 			$finaltotal=round($total, 0, PHP_ROUND_HALF_UP);
+	 			$this->masters_model->update_subitem_rate($finaltotal,$sub_detail_cal[0]->item_id,$sub_detail_cal[0]->subitem_id);
+	 
+	 			/*rate update coding end.............................................................*/
+	 		}}
+	 
+	 
 }

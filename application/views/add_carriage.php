@@ -46,11 +46,11 @@
 			</tr>
 			</thead>
 			<tbody id="dataTable">
-				<?php if(isset($carriage_id)){?>
+				<?php if(isset($carriage_code)){?>
 					
 					
 			<tr>
-				 <input type="hidden" name="carriage_id" id="carriage_id" value="<?=isset($carriage_id)?$carriage_id:''?>"/>
+				 <input type="hidden" name="carriage_id" id="carriage_id" value="<?=isset($carriage_code)?$carriage_code:''?>"/>
 			<td>
 				   <input type="text" name="carriage_code" id="carriage_code" value="<?=isset($carriage_code)?$carriage_code:''?>" class="form-control" data-rule-required="true">
 					

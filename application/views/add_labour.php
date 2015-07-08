@@ -2,7 +2,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> <?=(isset($labour_code))?"Edit":"Add"?> Labour</h1>
+<h1><i class="fa fa-plus"></i> <?=(isset($labour_name))?"Edit":"Add"?> Labour</h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -17,11 +17,11 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i> <?=(isset($labour_code))?"Edit":"Add"?> Labour</h3>
+      	<h3><i class="fa fa-plus"></i> <?=(isset($labour_name))?"Edit":"Add"?> Labour</h3>
        </div>
       <div class="box-content">
       <form action="<?=base_url()?>index.php/masters/add_labour" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
-           <?php if(!isset($labour_code)){?>
+           <?php if(!isset($labour_name)){?>
 		<div class="row">
 	    <div class="col-md-2 col-md-offset-10">
 		
@@ -44,11 +44,11 @@
 			</tr>
 			</thead>
 			<tbody id="dataTable">
-				<?php if(isset($labour_code)){?>
+				<?php if(isset($labour_name)){?>
 					
 					
 			<tr>
-				 <input type="hidden" name="id" id="id" value="<?=isset($labour_code)?$labour_code:''?>"/>
+				 <input type="hidden" name="id" id="id" value="<?=isset($labour_name)?$labour_name:''?>"/>
 			<td>
 				  <input type="text" name="labour_name" onblur="check_labour(this)" id="labour_name" value="<?=isset($labour_name)?$labour_name:''?>" class="form-control" data-rule-required="true">
 					<span class="msg_box_lablour_name" ></span>

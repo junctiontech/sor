@@ -68,7 +68,7 @@ class masters_model extends CI_Model
     {
     	$this->db->where($filter);
     	$this->db->update('ssr_t_labor',$info);
-    	$id = $filter['labour_code'];
+    	$id = $filter['labour_name'];
     	return $id;
     }
     function manage_labour($info=false)
@@ -269,5 +269,25 @@ class masters_model extends CI_Model
     		return false;
     	}
     }
- /* function end for INSERT & UPDATE CALCULATION */    
+ /* function end for INSERT & UPDATE CALCULATION */   
+
+    /*Update rate and calculation in ssr_t_cal table start....................................*/
+    function get_cal_details($filter=false,$table=false)
+    {
+    	$query = $this->db->get_where($table, $filter);
+    	return $query->Result();
+    }
+    
+    function update_rate($info=false,$filter=false)
+    {
+    	$this->db->where($filter);
+    	$this->db->update('ssr_t_calculation',$info);
+    }
+    function update_subitem_rate($finaltotal=false,$item_id=false,$subitem_id=false)
+    {
+    	$this->db->query("UPDATE  ssr_t_subitem  SET rate = ".$finaltotal." WHERE subitem_id= '".$subitem_id."'");
+    	$this->db->query("UPDATE  ssr_t_item  SET item_cost_total = ".$finaltotal." WHERE item_id= '".$item_id."'");
+    }
+    /*Update rate and calculation in ssr_t_cal table end....................................*/
+    
 }
