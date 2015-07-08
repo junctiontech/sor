@@ -78,8 +78,10 @@
 			  <td><?=($unit_name)?$unit_name[0]->unit_code:''?></td>
 			
 			  <td><?=$li->carriage_rate?></td>
+
 			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_carriage/<?=$li->carriage_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Carriage? This will delete all the related records on this Carriage as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/<?=$li->carriage_code?>"><i class="fa fa-edit"></i> DELETE</a>
 			  <!--<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_carriage_cal/<?=$li->carriage_code?>"><i class="fa fa-edit"></i> Calculation</a></td>-->
+
 		</tr>
 
 		        <?php }?>

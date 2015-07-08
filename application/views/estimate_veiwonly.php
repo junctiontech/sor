@@ -22,14 +22,18 @@
       <div class="box-content">
 		 <div class="row">
 						<div class="col-md-4 col-md-offset-8">
-							<!--<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/add_estsubitem/<?=$select?>/<?=$est_id?>"><i class="fa fa-plus"></i> Add Subitems</a>
+
+							<!--<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/estimation_controller/add_estsubitem/<?=$select?>/<?=$est_id?>"><i class="fa fa-plus"></i> Add Subitems</a>
+
 							<a class="btn btn-primary btn-sm" onclick="deleteRow('dataTable')" href="javascript:;"><i class="fa fa-trash-o"></i> Delete Subitems</a>-->
 						</div> 
 					 </div>  
 					 </br>  
 
 		<div class="row">
-		<form action="index.php/home/add_est_submit/<?=$select?>" method="post" name="myForm" class="">
+
+		<form action="index.php/estimation_controller/add_est_submit/<?=$select?>" method="post" name="myForm" class="">
+
 			<div class="col-md-12">
 			
 			<div class="form-group" style="padding-bottom: 30px;">
@@ -129,7 +133,9 @@
 							
 									
 					<td>
-							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/home/estimation_val_view/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> View value</a>
+
+							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/estimation_controller/estimation_val_view/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> View value</a>
+
 													
 							</td>
 						

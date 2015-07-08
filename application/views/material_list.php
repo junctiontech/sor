@@ -79,7 +79,9 @@
 			 // print_r($unit_name[0]->unit_name);die;?>
 			  <td><?=($class_name)?$class_name[0]->class_name:''?></td>
 			  <td><?=$li->rate?></td>
+
 			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_material/<?=$li->mat_name?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Material? This will delete all the related records on this Material as well.')" href="<?=base_url()?>index.php/masters/delete_material/<?=$li->mat_name?>"><i class="fa fa-edit"></i> DELETE</a></td>
+
 		</tr>
 
 		        <?php }?>
