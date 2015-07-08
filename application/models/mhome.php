@@ -1,4 +1,3 @@
-
 <?php 
 //junctiontech 
 //Model Class for competition start
