@@ -12,7 +12,7 @@ class Home extends CI_Controller {
 	$this->load->model('mhome');
 	 $this->load->helper('pdf_helper');
 	$this->data['base_url']=base_url();
-	//fjkdshdf
+	
 	 }
 	 
 	public function index()
