@@ -36,7 +36,7 @@
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/home/manage_refrence"><i class="fa fa-plus"></i> REFERENCE</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_refrence"><i class="fa fa-plus"></i> REFERENCE</a>
 				</div> 
 			 </div>  
 			 </br>  
@@ -71,10 +71,10 @@
 			  <td><?=($unit_name)?$unit_name[0]->unit_code:''?></td>
 			  <td><?=$subil->cost_total?></td>
               <?php if($subil->cost_total==0) {?>
-			   <td><a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/home/create_ref_cal/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->id?>/<?=$subil->class_id?>"><i class="fa fa-money"></i> Calculation</a>&nbsp;<a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/home/manage_refrence/<?=$subil->id?>"><i class="fa fa-edit"></i> REFRENCE</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Item? This will delete all the related records on this Item as well.')" onClick="return confirm('Are you sure to delete this Refrence? This will delete all the related records on this Refrence as well.')" href="<?=base_url()?>index.php/home/delete_material/0/0/0/0/0/0/0/<?=$subil->id?>"><i class="fa fa-edit"></i> DELETE</a></td>
+			   <td><a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/masters/create_ref_cal/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->id?>/<?=$subil->class_id?>"><i class="fa fa-money"></i> Calculation</a>&nbsp;<a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/masters/manage_refrence/<?=$subil->id?>"><i class="fa fa-edit"></i> REFRENCE</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Item? This will delete all the related records on this Item as well.')" onClick="return confirm('Are you sure to delete this Refrence? This will delete all the related records on this Refrence as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/0/0/<?=$subil->id?>"><i class="fa fa-edit"></i> DELETE</a></td>
 				<?php } else {?>
 
-				<td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/create_ref_cal/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->id?>/<?=$subil->class_id?>"><i class="fa fa-money"></i> Calculation </a>&nbsp;<a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/home/manage_refrence/<?=$subil->id?>"><i class="fa fa-edit"></i> REFRENCE</a> <a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/delete_material/0/0/0/0/0/0/0/<?=$subil->id?>" onClick="return confirm('Are you sure to delete this Refrence? This will delete all the related records on this Refrence as well.')"><i class="fa fa-edit"></i> DELETE</a></td>
+				<td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/create_ref_cal/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->id?>/<?=$subil->class_id?>"><i class="fa fa-money"></i> Calculation </a>&nbsp;<a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/masters/manage_refrence/<?=$subil->id?>"><i class="fa fa-edit"></i> REFRENCE</a> <a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/0/0/<?=$subil->id?>" onClick="return confirm('Are you sure to delete this Refrence? This will delete all the related records on this Refrence as well.')"><i class="fa fa-edit"></i> DELETE</a></td>
 					<?php } }?>
 				</tr>
 		

@@ -16,10 +16,69 @@ class Estimation_Controller extends CI_Controller {
 		$this->data ['base_url'] = base_url ();
 		$this->load->library ( 'authority' );
 	}
-/* function start for estimation in subitems. and  we used this function  in edit of estimation_list.php  */
 	public function estimation($select = false, $est_id = false) {
 		Authority::is_logged_in ();
 		$this->data ['est_id'] = $est_id;
+		$filter = $select;
+		if($est_id == ''){
+			if($select == '' && $est_id == '') {
+		$this->session->set_flashdata ( 'aaa_error', 'error' );
+				$this->session->set_flashdata ( 'message', $this->config->item ( "est" ) . ' Please Select Atleast One SubItem Code' );
+				$this->parser->parse ( 'include/header', $this->data );
+				$this->parser->parse ( 'include/leftmenu', $this->data );
+				$this->parser->parse ( 'estimation', $this->data );
+				$this->parser->parse ( 'include/footer', $this->data );
+				//redirect("home/get_subitem_list/".$dep_id."/".$chap_id."/".$item_id."");
+			}
+else{
+			if (! (isset ($_POST ['select'] ) ? $_POST ['select'] : '') == '') {
+				$filter = $_POST ['select'];
+				$filter = implode ( ',', $filter );
+				$this->data ['select'] = $filter;
+			}else {
+				$filter = $select;
+				$this->data ['select'] = $filter;
+			}
+			$this->data ['subitem_list'] = $this->estimation_model->get_subitem_ids_list_est ( $filter );
+			if ($est_id) {
+				$filter = $est_id;
+				$est_sub = $this->data ['est_sub'] = $this->estimation_model->get_subitem_est_cal ( $filter );
+			}
+			$this->parser->parse ( 'include/header', $this->data );
+			$this->parser->parse ( 'include/leftmenu', $this->data );
+			$this->parser->parse ( 'estimation', $this->data );
+			$this->parser->parse ( 'include/footer', $this->data );
+}	
+
+		}
+		else{	
+				if (! (isset ($_POST ['select'] ) ? $_POST ['select'] : '') == '') {
+					$filter = $_POST ['select'];
+					$filter = implode ( ',', $filter );
+					$this->data ['select'] = $filter;
+				} else {
+					$filter = $select;
+					$this->data ['select'] = $filter;
+				}
+				$this->data ['subitem_list'] = $this->estimation_model->get_subitem_ids_list_est ( $filter );
+				if ($est_id) {
+					$filter = $est_id;
+					$est_sub = $this->data ['est_sub'] = $this->estimation_model->get_subitem_est_cal ( $filter );
+				}
+				//$this->session->set_flashdata ( 'catt_error', 'error' );
+			//	$this->session->set_flashdata ( 'message', $this->config->item ( "ref" ) . ' Please Select Atleast One SubItem Code' );
+				$this->parser->parse ( 'include/header', $this->data );
+				$this->parser->parse ( 'include/leftmenu', $this->data );
+				$this->parser->parse ( 'estimation', $this->data );
+				$this->parser->parse ( 'include/footer', $this->data );
+					
+		}	
+		
+	}
+/* function start for estimation in subitems. and  we used this function  in edit of estimation_list.php  */
+/* public function estimation($select = false, $est_id = false) {
+		Authority::is_logged_in ();
+	$this->data ['est_id'] = $est_id;
 		$filter = $select;
 		if ($est_id){
 			if($select == '' && $est_id == '') {
@@ -66,13 +125,15 @@ class Estimation_Controller extends CI_Controller {
 				$filter = $est_id;
 				$est_sub = $this->data ['est_sub'] = $this->estimation_model->get_subitem_est_cal ( $filter );
 			}
+			
 			$this->parser->parse ( 'include/header', $this->data );
 			$this->parser->parse ( 'include/leftmenu', $this->data );
 			$this->parser->parse ( 'estimation', $this->data );
 			$this->parser->parse ( 'include/footer', $this->data );
+			
 		 	}
 		}
-	}
+	} */
 /* function end for estimation in subitems. and  we used this function  in edit of estimation_list.php  */
 /* function start for update-estimate ,update-estimate-subitem and insert-estimate, insert-estimate-subitem when we add estimate subitem and click on add buttion  */
 				function add_est_submit($select=false,$est_id=false)
@@ -170,7 +231,7 @@ public function estimation_val($subitem_id=false,$class_id=false,$select=false,$
 				'subitem_id'=>$subitem_id
 				);
 				if($this->estimation_model->update_estimate_cal(rtrim($value,","),$data['final_total'],$data['subitem_id'],$data['est_id'],$filter)){
-					$this->session->set_flashdata('category_success', 'success message');  
+				$this->session->set_flashdata('category_success', 'success message');  
 		$this->session->set_flashdata('message',$this->config->item("ref").' successfully saved');
 				redirect("estimation_controller/estimation/".$data['select']."/".$data['est_id']);
 				}else{
@@ -185,7 +246,8 @@ public function estimation_val($subitem_id=false,$class_id=false,$select=false,$
 				$value .= "('".$data['est_id']."','".$data['subitem_id']."',".$data['no'][$i].",'".$data['length'][$i]."','".$data['width'][$i]."','".$data['depth'][$i]."')".",";
 				}
 				if($this->estimation_model->manage_estimate_cal(rtrim($value,","),$data['final_total'],$data['subitem_id'],$data['est_id'])){
-					
+					$this->session->set_flashdata('category_success', 'success message');
+					$this->session->set_flashdata('message',$this->config->item("ref").' successfully saved');
 				redirect("estimation_controller/estimation/".$data['select']."/".$data['est_id']);
 				
 				}else{
@@ -232,6 +294,8 @@ function add_estsubitem_submit($select=false,$est_id=false)
 							$this->estimation_model->insert_estsitem($data);
 							$subitem_id = implode(',',$subitem_id);
 						    $select= $select.",".$subitem_id;
+						    $this->session->set_flashdata('ct_success', 'success message');
+						    $this->session->set_flashdata('message',$this->config->item("ref").' subitem successfully saved');
 						 redirect("estimation_controller/estimation/".$select."/".$est_id."/");
 						}
 					}
@@ -239,6 +303,8 @@ function add_estsubitem_submit($select=false,$est_id=false)
 					$subitem_id=$_POST['subitem_id'];
 					$subitem_id = implode(',',$subitem_id);
 					$select= $select.",".$subitem_id;
+					$this->session->set_flashdata('ct_success', 'success message');
+					$this->session->set_flashdata('message',$this->config->item("ref").' subitem successfully saved');
 					redirect("estimation_controller/estimation/".$select."/".$est_id."/");	
 				} 
 				}
@@ -376,6 +442,8 @@ function del_sitem_est($select = false, $est_id = false) {
 			$array = explode ( ',', $select );
 			$array = array_diff ( $array, $sub_select );
 			$select = implode ( ',', $array );
+			$this->session->set_flashdata('qqq_success', 'success message');
+			$this->session->set_flashdata('message',$this->config->item("ref").' subitem deleted  successfully');
 			redirect("estimation_controller/estimation/".$select."/".$est_id."/");
 		}
 	}

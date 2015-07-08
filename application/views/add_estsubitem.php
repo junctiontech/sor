@@ -31,7 +31,7 @@
                                 <h3><i class="icon-reorder"></i> Add Estimation Subitems</h3>
                             </div>
                             <div class="box-content">
-                                <form action="index.php/home/add_estsubitem_submit/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$select?>/<?=$est_id?>" method="post"class="form-horizontal form-row-separated">
+                                <form action="index.php/estimation_controller/add_estsubitem_submit/<?=$select?>/<?=$est_id?>" method="post"class="form-horizontal form-row-separated">
                                       <div class="control-group">
                                       <label class="control-label">Department</label>
                                       <div class="controls">

@@ -29,14 +29,18 @@ class Mhome extends CI_Model {
 	/*Get table details start*/
     function get_list($filter=false,$table=false)
     {
-		
-				
-		$query = $this->db->get_where($table, $filter);
-		//echo $this->db->last_query();die;
+		$query = $this->db->get_where($table , $filter);
 		return $query->Result();
 	
     }
 	/*Get table details end*/
+    
+    function get_list_chap($filter=false,$table=false)
+    {	$this->db->order_by("chap_name", "ASC");
+    	$query = $this->db->get_where($table , $filter);
+    	return $query->Result();
+    
+    }
 	
 	function manage_department($data=false,$filter=false)
 	{  
@@ -661,7 +665,7 @@ function update_rel_cal($info=false,$finaltotal=false,$dep_id=false,$chap_id=fal
 	
 	function manage_estimate_cal($info=false,$finaltotal=false,$dep_id=false,$chap_id=false,$item_id=false,$subitem_id=false,$est_id=false){
 		
-		$v = $this->db->query("INSERT ignore INTO ssr_t_estimate_cal (est_id,dep_id,chap_id,item_id,subitem_id,number,length,width,heigth) VALUES ".$info."");
+		$v = $this->db->query("INSERT ignore INTO ssr_t_estimate_cal (est_id,subitem_id,number,length,width,heigth) VALUES ".$info."");
 //	print_r($v);die;
 		if($finaltotal){
 			/*$info=array('est_id'=>$est_id,
@@ -683,10 +687,10 @@ function update_rel_cal($info=false,$finaltotal=false,$dep_id=false,$chap_id=fal
 		}
 	}
 	
-	function update_estimate_cal($info=false,$finaltotal=false,$dep_id=false,$chap_id=false,$item_id=false,$subitem_id=false,$est_id=false,$filter=false){
+	function update_estimate_cal($info=false,$finaltotal=false,$subitem_id=false,$est_id=false,$filter=false){
 		
 	$this->db->delete('ssr_t_estimate_cal', $filter); 
-	 $this->db->query("INSERT ignore INTO ssr_t_estimate_cal (est_id,dep_id,chap_id,item_id,subitem_id,number,length,width,heigth) VALUES ".$info."");
+	 $this->db->query("INSERT ignore INTO ssr_t_estimate_cal (est_id,subitem_id,number,length,width,heigth) VALUES ".$info."");
 	// print_r($v);die;
 	
 	if($finaltotal){

@@ -27,6 +27,14 @@
 									</div>
 									</div>
 							<?php }?>
+							<?php  if($this->session->flashdata('ct_error')) { ?>
+								<div class="form-group">
+									<div class="alert alert-danger">
+			
+									<strong><?=$this->session->flashdata('message')?></strong> 
+									</div>
+									</div>
+							<?php }?>
 					<?php  if($this->session->flashdata('category_success')) {  ?>
 									<div class="form-group">
 										<div class="alert alert-success">

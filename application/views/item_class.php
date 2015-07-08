@@ -38,7 +38,7 @@
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/home/manage_item_class"><i class="fa fa-plus"></i> Class</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_item_class"><i class="fa fa-plus"></i> Class</a>
 				</div> 
 			 </div>  
 			 </br>      
@@ -66,7 +66,7 @@
 						  <td><?=$cl->class_heading?></td>
 						  <td><?=$cl->class_notes?></td>
 						
-						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/manage_item_class/<?=$cl->id?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Class? This will delete all the related records on this Class as well.')" href="<?=base_url()?>index.php/home/delete_material/0/0/0/0/0/0/<?=$cl->id?>"><i class="fa fa-edit"></i> DELETE</a>
+						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_item_class/<?=$cl->id?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Class? This will delete all the related records on this Class as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/0/<?=$cl->id?>"><i class="fa fa-edit"></i> DELETE</a>
 						  </td>
 					 </tr>
 

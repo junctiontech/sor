@@ -13,6 +13,8 @@ class Common_functions extends CI_Controller {
 		$this->data = array();
 		$this->load->library('parser');
 		$this->load->model('mhome');
+		$this->load->model('masters_model');
+		
 		$this->data['base_url']=base_url();
 	}
 	
@@ -183,7 +185,7 @@ $this->load->library('email', $config);
 		       $this->data['chap_id'] = $chap_id;
 		       $this->data['dep_id'] = $dep_id;
 			$filter = array('item_id'=>$item_id,'chap_id'=>$chap_id,'dep_id'=>$dep_id);
-			$subitem_list=$this->data['subitem_list'] = $this->mhome->get_list($filter,'ssr_t_subitem');
+			$subitem_list=$this->data['subitem_list'] = $this->masters_model->get_list($filter,'ssr_t_subitem');
 		
 		echo "<select multiple name='subitem_id[]' id='subitem_id' class='form-control' data-rule-required='true'  >
 				<option value='' >Select</option> ";
@@ -228,7 +230,7 @@ public function show_item_list($chap_id=false,$dep_id=false){
 	
 	         $this->data['chap_id'] = $chap_id;
 			$filter = array('chap_id'=>$chap_id,'dep_id'=>$dep_id);
-			$this->data['item_list'] = $this->mhome->get_list($filter,'ssr_t_item');
+			$this->data['item_list'] = $this->masters_model->get_list($filter,'ssr_t_item');
 			
 			//print_r($this->data['item_list']);die;
 			
@@ -239,7 +241,7 @@ public function show_chapterlist($dep_id=false){
 	
 	         $this->data['dep_id'] = $dep_id;
 			$filter = array('dep_id'=>$dep_id);
-			$this->data['chap_list'] = $this->mhome->get_list($filter,'ssr_t_chapter');
+			$this->data['chap_list'] = $this->masters_model->get_list($filter,'ssr_t_chapter');
 			
 			//print_r($this->data['subitem_list']);die;
 			

@@ -38,7 +38,7 @@
 		
 		
 	
-	 <form action="index.php/home/submit_ref_cal" method="post" name="myForm" <?php if(!empty($ref_costing)){ ?> onsubmit="return(validate('editTable'));" <?php } else {?> onsubmit="return(validate('dataTable'));" <?php } ?> >
+	 <form action="index.php/masters/submit_ref_cal" method="post" name="myForm" <?php if(!empty($ref_costing)){ ?> onsubmit="return(validate('editTable'));" <?php } else {?> onsubmit="return(validate('dataTable'));" <?php } ?> >
 	    <input type="hidden"  name="dep_id" value="<?=$dep_id?>" />
 		<input type="hidden"  name="chap_id" value="<?=$chap_id?>" />
 		<input type="hidden"  name="item_id" value="<?=$item_id?>" />

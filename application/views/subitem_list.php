@@ -34,7 +34,7 @@
 										</div>
 										</div>
 								<?php }?> 
-	 <form action="<?=base_url()?>index.php/home/estimation/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>" method="post" id="form-id">
+	 <form action="<?=base_url()?>index.php/home/estimation" method="post" id="form-id">
 
 <?php if(count($subitem_list) && is_array($subitem_list)){?>
 <div class="table-big">

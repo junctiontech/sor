@@ -21,7 +21,7 @@
       	<h3><i class="fa fa-plus"></i> <?=(isset($unit_code))?"Edit":"Add"?> Unit</h3>
        </div>
       <div class="box-content">
-      <form action="<?=base_url()?>index.php/home/add_unit" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
+      <form action="<?=base_url()?>index.php/masters/add_unit" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
      <?php if(!isset($unit_code)){?>
        <div class="row">
 			<div class="col-md-2 col-md-offset-10">

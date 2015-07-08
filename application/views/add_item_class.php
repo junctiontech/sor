@@ -21,7 +21,7 @@
       	<h3><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> Class</h3>
        </div>
       <div class="box-content">
-      <form action="<?=base_url()?>index.php/home/add_item_class" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
+      <form action="<?=base_url()?>index.php/masters/add_item_class" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
      <?php if(!isset($id)){?>
        <div class="row">
 			<div class="col-md-2 col-md-offset-10">

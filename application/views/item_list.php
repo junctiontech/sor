@@ -11,6 +11,18 @@
 <li class="active"><?php echo($this->breadcrumb->output());?> </li>
 </ul>
 </div>
+<?php  if($this->session->flashdata('message_type')) { ?>
+								<div class="row-fluid">
+									<div class="alert alert-success">
+									
+								
+									<strong><?=$this->session->flashdata('message')?></strong> 
+									
+								
+									
+									</div>
+									</div>
+<?php }?>
 <?php  if($this->session->flashdata('category_error')) { ?>
 								<div class="row-fluid">
 									<div class="alert alert-danger">
@@ -65,11 +77,16 @@
 	</div>
 
 	</div>
+	
+	</div>		
 	</div>
-	</div>
-     
-            <?php }?>
+	
+
+      <?php }?>
 
 
 
- <?php }?>
+ <?php } else {?>
+				   <div class="row-fluid" style="padding:9px;"><div class="alert alert-warning"><strong>No Record found </strong> </div></div>
+				  <?php } ?>
+           

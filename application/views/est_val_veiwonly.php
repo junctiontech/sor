@@ -26,10 +26,8 @@
 							$row_table = $row_table + 1;
 							} ?>
   					
-	 <form action="index.php/home/estimation_create/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>" method="post" name="myForm" <?php if(!empty($estimate_cal)){ ?> onsubmit="return(validate('editTable'));" <?php } else {?> onsubmit="return(validate('dataTable'));" <?php } ?> >
-			<input type="hidden"  name="dep_id" value="<?=$dep_id?>" />
-			<input type="hidden"  name="chap_id" value="<?=$chap_id?>" />
-			<input type="hidden"  name="item_id" value="<?=$item_id?>" />
+	 <form action="index.php/home/estimation_create/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>" method="post" name="myForm" <?php if(!empty($estimate_cal)){ ?> onsubmit="return(validate('editTable'));" <?php } else {?> onsubmit="return(validate('dataTable'));" <?php } ?> >
+			
 			<input type="hidden"  name="subitem_id" value="<?=$subitem_id?>" />
 			<input type="hidden"  name="class_id" value="<?=$class_id?>" />
 			<input type="hidden"  name="select" value="<?=$select?>" />

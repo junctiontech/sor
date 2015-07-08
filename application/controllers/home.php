@@ -116,7 +116,9 @@ class Home extends CI_Controller {
 		
 	}
 	}
-  function manage_department(){
+	
+	// 
+	  function manage_department(){
 			if($this->is_logged_in()){
 			redirect('login');
 		}else{
@@ -251,34 +253,23 @@ class Home extends CI_Controller {
 					
 			}
 			}
-			/*Estimation Coding start on 07may2015 bye rohit.................................................................*/
-			public function estimation($dep_id=false,$chap_id=false,$item_id=false,$select=false,$est_id=false)
-			{	
+/*Estimation Coding start on 07may2015 bye rohit.................................................................*/
+public function estimation($select=false,$est_id=false)
+	{	
 			if($this->is_logged_in()){
 			redirect('login');
-		}else{
-			//print_r($dep_id);die;
-				$this->data['dep_id'] = $dep_id;
-				$this->data['chap_id'] = $chap_id;
-				$this->data['item_id'] = $item_id;
-				$this->data['est_id'] = $est_id;
-				//echo $est_id;die;
-			//	if($_POST['select']==''){
-				//	$this->session->set_flashdata('cat_error', 'error');        
-                  //        $this->session->set_flashdata('message', $this->config->item("ref").' Please Select Atleast One Item');
-				//redirect("home/get_subitem_list/".$dep_id."/".$chap_id."/".$item_id."");
-			//	redirect("home/estimation/".$dep_id."/".$chap_id."/".$item_id."/".$sub."/".$est_id."/");
-					//redirect ('sbuitem_list');
+			}else{
+				if($est_id){
 					
+				}else{
+					
+				$this->data['est_id'] = $est_id;
 				
-			//	}
-				//else{
 				if(!(isset($_POST['select'])?$_POST['select']:'')==''){
 				$filter=$_POST['select'];
 				$filter = implode(',',$filter);
 				$this->data['select'] =$filter;
 				}else{
-					//print_r($select);die;
 					$filter= $select;
 					$this->data['select'] =$filter;
 				}
@@ -295,16 +286,17 @@ class Home extends CI_Controller {
 				$this->parser->parse('estimation',$this->data);
 				$this->parser->parse('include/footer',$this->data);
 				}
+				}
 			
 			}
-				function add_est_submit($dep_id=false,$chap_id=false,$item_id=false,$select=false,$est_id=false)
+				function add_est_submit($select=false,$est_id=false)
 				{	
 				if($this->is_logged_in()){
 			redirect('login');
 		}
 		elseif(Authority::checkAuthority('add_est_submit'))
 		{
-			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
+			redirect('home/estimation/'.$select);
 		}
 		else{
 				if($this->input->post('est_id')){
@@ -318,18 +310,14 @@ class Home extends CI_Controller {
 						
 					for($i=0;$i<=count($subitem_id)-1; $i++){
 						$filter=array('est_id'=>$this->input->post('est_id'),
-						'dep_id'=>$dep_id,
-						'chap_id'=>$chap_id,
-						'item_id'=>$item_id,
-						'subitem_id'=>$subitem_id[$i],
-						);
+						'subitem_id'=>$subitem_id[$i]);
 						$amount=$this->input->post('amount');
 					$data=array('amount'=>$amount[$i],
 					'updated_by'=>'rohit');
 					$this->mhome->update_estsitem($data,$filter);
 					}
 						$filter=$this->input->post('est_id');
-				redirect("home/estimation/".$dep_id."/".$chap_id."/".$item_id."/".$select."/".$filter."/");
+				redirect("home/estimation/".$select."/".$filter."/");
 				}else{
 					echo "Error while Adding Estimate";
 				}
@@ -338,15 +326,12 @@ class Home extends CI_Controller {
 							'est_status'=>'new',
 							'est_total' => $this->input->post('final_total'),
 							'created_by'=>'rohit',
-							'updated_by'=>'rohit'
-							);
+							'updated_by'=>'rohit');
 				if($est_id=$this->mhome->insert_estimate($data)){
 					$subitem_id=explode(",",$select);
 					for($i=0;$i<=count($subitem_id)-1; $i++){
 					$data=array('est_id'=>$est_id,
-					'dep_id'=>$dep_id,
-					'chap_id'=>$chap_id,
-					'item_id'=>$item_id,
+					
 					'subitem_id'=>$subitem_id[$i],
 					'amount'=>0,
 					'quantity'=>0,
@@ -355,7 +340,7 @@ class Home extends CI_Controller {
 					$this->mhome->insert_estsitem($data);
 					}
 					
-				redirect("home/estimation/".$dep_id."/".$chap_id."/".$item_id."/".$select."/".$est_id."/");
+				redirect("home/estimation/".$select."/".$est_id."/");
 				
 				}else{
 					echo "Error while Adding Estimate";
@@ -363,27 +348,23 @@ class Home extends CI_Controller {
 				}
 				}
 				}
-				public function estimation_val($dep_id=false,$chap_id=false,$item_id=false,$subitem_id=false,$class_id=false,$select=false,$est_id=false)
+				public function estimation_val($subitem_id=false,$class_id=false,$select=false,$est_id=false)
 				{
 					if($this->is_logged_in()){
 			redirect('login');
 		}
 		elseif(Authority::checkAuthority('estimation_val'))
 		{
-			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$subitem_id);
+			redirect('home/estimation/'.$subitem_id);
 		}
 		else{
-				$this->data['dep_id'] = $dep_id;
-				$this->data['chap_id'] = $chap_id;
-				$this->data['item_id'] = $item_id;
+				
 				$this->data['subitem_id'] = $subitem_id;
 				$this->data['class_id'] = $class_id;
 				$this->data['select'] = $select;
 				$this->data['est_id'] = $est_id;
 				
-				$filter = array('dep_id'=>$dep_id,
-				'chap_id'=>$chap_id,
-				'item_id'=>$item_id,
+				$filter = array(
 				'subitem_id'=>$subitem_id,
 				'est_id'=>$est_id);
 				
@@ -398,7 +379,7 @@ class Home extends CI_Controller {
 				$this->parser->parse('include/footer',$this->data);
 				}
 				}
-	public function estimation_create($dep_id=false,$chap_id=false,$item_id=false,$subitem_id=false,$class_id=false,$select=false,$est_id=false){
+	public function estimation_create($subitem_id=false,$class_id=false,$select=false,$est_id=false){
 					if($this->is_logged_in()){
 			redirect('login');
 		}else{
@@ -407,58 +388,51 @@ class Home extends CI_Controller {
 				$value = "";
 				if($this->input->post('edit_costing')==1){
 				for($i=0;$i<=count($data['no'])-1; $i++){
-				$value .= "('".$data['est_id']."','".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['subitem_id']."',".$data['no'][$i].",'".$data['length'][$i]."','".$data['width'][$i]."','".$data['depth'][$i]."')".",";
+				$value .= "('".$data['est_id']."','".$data['subitem_id']."',".$data['no'][$i].",'".$data['length'][$i]."','".$data['width'][$i]."','".$data['depth'][$i]."')".",";
 				}
 				$filter=array('est_id'=>$data['est_id'],
-				'dep_id'=>$dep_id,
-				'chap_id'=>$chap_id,
-				'item_id'=>$item_id,
-				'subitem_id'=>$subitem_id,
+				
+				'subitem_id'=>$subitem_id
 				);
-				//print_r($filter);die;
-				if($this->mhome->update_estimate_cal(rtrim($value,","),$data['final_total'],$data['dep_id'],$data['chap_id'],$data['item_id'],$data['subitem_id'],$data['est_id'],$filter)){
+				if($this->mhome->update_estimate_cal(rtrim($value,","),$data['final_total'],$data['subitem_id'],$data['est_id'],$filter)){
 					$this->session->set_flashdata('category_success', 'success message');  
 		$this->session->set_flashdata('message',$this->config->item("ref").' successfully saved');
-					//echo "success";
-				redirect("home/estimation/".$data['dep_id']."/".$data['chap_id']."/".$data['item_id']."/".$data['select']."/".$data['est_id']);
+				redirect("home/estimation/".$data['select']."/".$data['est_id']);
 				
 				}else{
 					$this->session->set_flashdata('category_error', 'error message');  
 		$this->session->set_flashdata('message',$this->config->item("ref").' subitem does not contain rate');
-		redirect("home/estimation/".$data['dep_id']."/".$data['chap_id']."/".$data['item_id']."/".$data['select']."/".$data['est_id']);
-					//echo "Error while Editing Estimate";
+		redirect("home/estimation/".$data['select']."/".$data['est_id']);
 				}
 				} else {
 				
 				for($i=0;$i<=count($data['no'])-1; $i++){
 			
-				$value .= "('".$data['est_id']."','".$data['dep_id']."','".$data['chap_id']."','".$data['item_id']."','".$data['subitem_id']."',".$data['no'][$i].",'".$data['length'][$i]."','".$data['width'][$i]."','".$data['depth'][$i]."')".",";
+				$value .= "('".$data['est_id']."','".$data['subitem_id']."',".$data['no'][$i].",'".$data['length'][$i]."','".$data['width'][$i]."','".$data['depth'][$i]."')".",";
 				}
-				if($this->mhome->manage_estimate_cal(rtrim($value,","),$data['final_total'],$data['dep_id'],$data['chap_id'],$data['item_id'],$data['subitem_id'],$data['est_id'])){
+				if($this->mhome->manage_estimate_cal(rtrim($value,","),$data['final_total'],$data['subitem_id'],$data['est_id'])){
 					
-				redirect("home/estimation/".$data['dep_id']."/".$data['chap_id']."/".$data['item_id']."/".$data['select']."/".$data['est_id']);
+				redirect("home/estimation/".$data['select']."/".$data['est_id']);
 				
 				}else{
 					$this->session->set_flashdata('category_error', 'error message');  
 		$this->session->set_flashdata('message',$this->config->item("ref").' subitem does not contain rate');
-		redirect("home/estimation/".$data['dep_id']."/".$data['chap_id']."/".$data['item_id']."/".$data['select']."/".$data['est_id']);
+		redirect("home/estimation/".$data['select']."/".$data['est_id']);
 				}
 				}
 				}
 				}
-				function add_estsubitem($dep_id=false,$chap_id=false,$item_id=false,$select=false,$est_id=false)
+				function add_estsubitem($select=false,$est_id=false)
 				{
 					if($this->is_logged_in()){
 			redirect('login');
 		}
 		elseif(Authority::checkAuthority('add_estsubitem'))
 		{
-			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
+			redirect('home/estimation/'.$select);
 		}
 		else{
-				$this->data['dep_id'] = $dep_id;
-				$this->data['chap_id'] = $chap_id;
-				$this->data['item_id'] = $item_id;
+				
 				$this->data['select'] = $select;
 				$this->data['est_id'] = $est_id;
 				$this->data['dep'] = $this->mhome->get_deplist('ssr_t_department');
@@ -468,7 +442,7 @@ class Home extends CI_Controller {
 				$this->parser->parse('include/footer',$this->data);
 				} 
 				}
-				function add_estsubitem_submit($dep_id=false,$chap_id=false,$item_id=false,$select=false,$est_id=false)
+				function add_estsubitem_submit($select=false,$est_id=false)
 				{
 if($this->is_logged_in()){
 			redirect('login');
@@ -477,19 +451,17 @@ if($this->is_logged_in()){
 					$subitem_id=$_POST['subitem_id'];
 					$subitem_id = implode(',',$subitem_id);
 					$select= $select.",".$subitem_id;
-					redirect("home/estimation/".$dep_id."/".$chap_id."/".$item_id."/".$select."/".$est_id."/");	
+					redirect("home/estimation/".$select."/".$est_id."/");	
 				} 
 				}
 				
-				function estimation_list($dep_id=false,$chap_id=false,$item_id=false,$select=false)
+				function estimation_list($select=false)
 				{
 					if($this->is_logged_in()){
 			redirect('login');
 		}else{
 				Authority::checkAuthority('estimation_list');
-				$this->data['dep_id'] = $dep_id;
-				$this->data['chap_id'] = $chap_id;
-				$this->data['item_id'] = $item_id;
+				
 				$this->data['select'] = $select;
 				$filter = array('est_id !=' => '');
 				$this->data['estimate'] = $this->mhome->get_list($filter,'ssr_t_estimate');
@@ -508,9 +480,7 @@ if($this->is_logged_in()){
 			else{
 					$value = array('');
 					$sub="";
-					$dep_id="";
-					$chap_id="";
-					$item_id="";
+					
 					$this->data['value']="";
 					$filter=array('est_id'=>$est_id);
 					$value=$this->data['value']=$this->mhome->get_list($filter,'ssr_t_estimate_sitem');
@@ -520,16 +490,14 @@ if($this->is_logged_in()){
 					$value=$this->data['value']=$this->mhome->get_list($filter,'ssr_t_estimate_sitem');
 					
 					$sub.="".$value[$i]->subitem_id."".",";
-					$dep_id=$value[0]->dep_id;
-					$chap_id=$value[0]->chap_id;
-					$item_id=$value[0]->item_id;
+					
 	
 					}
 					$sub=rtrim($sub,",");
 					if($v==1){
-					redirect("home/estimation_view/".$dep_id."/".$chap_id."/".$item_id."/".$sub."/".$est_id."/");
+					redirect("home/estimation_view/".$sub."/".$est_id."/");
 					}else{
-						redirect("home/estimation/".$dep_id."/".$chap_id."/".$item_id."/".$sub."/".$est_id."/");
+						redirect("home/estimation/".$sub."/".$est_id."/");
 					}
 					}
 				}
@@ -567,14 +535,12 @@ if($this->is_logged_in()){
 					print_r("Generate PFD");die;
 				}
 				}
-				public function estimation_view($dep_id=false,$chap_id=false,$item_id=false,$select=false,$est_id=false)
+				public function estimation_view($select=false,$est_id=false)
 			{
 if($this->is_logged_in()){
 			redirect('login');
 		}else{				
-				$this->data['dep_id'] = $dep_id;
-				$this->data['chap_id'] = $chap_id;
-				$this->data['item_id'] = $item_id;
+				
 				$this->data['est_id'] = $est_id;
 				if(!(isset($_POST['select'])?$_POST['select']:'')==''){
 				$filter=$_POST['select'];
@@ -598,22 +564,18 @@ if($this->is_logged_in()){
 				$this->parser->parse('include/footer',$this->data);
 				} 
 			}
-				public function estimation_val_view($dep_id=false,$chap_id=false,$item_id=false,$subitem_id=false,$class_id=false,$select=false,$est_id=false)
+				public function estimation_val_view($subitem_id=false,$class_id=false,$select=false,$est_id=false)
 				{
 					if($this->is_logged_in()){
 			redirect('login');
 		}else{
-				$this->data['dep_id'] = $dep_id;
-				$this->data['chap_id'] = $chap_id;
-				$this->data['item_id'] = $item_id;
+				
 				$this->data['subitem_id'] = $subitem_id;
 				$this->data['class_id'] = $class_id;
 				$this->data['select'] = $select;
 				$this->data['est_id'] = $est_id;
 				
-				$filter = array('dep_id'=>$dep_id,
-				'chap_id'=>$chap_id,
-				'item_id'=>$item_id,
+				$filter = array(
 				'subitem_id'=>$subitem_id,
 				'est_id'=>$est_id);
 				
@@ -628,29 +590,27 @@ if($this->is_logged_in()){
 				$this->parser->parse('include/footer',$this->data);
 				}
 				}
-				function del_sitem_est($dep_id=false,$chap_id=false,$item_id=false,$select=false,$est_id=false){
+				function del_sitem_est($select=false,$est_id=false){
 					if($this->is_logged_in()){
 			redirect('login');
 		}
 		elseif(Authority::checkAuthority('del_sitem_est'))
 		{
-			redirect('home/estimation/'.$dep_id.'/'.$chap_id.'/'.$item_id.'/'.$select);
+			redirect('home/estimation/'.$select);
 		}
 		else{
 					
 					$sub_select=$_POST['select'];
 					for($i=0;$i<=count($sub_select);$i++){
 					$filter=array('est_id'=>$est_id,
-					'dep_id'=>$dep_id,
-					'chap_id'=>$chap_id,
-					'item_id'=>$item_id,
+					
 					'subitem_id'=>$sub_select[$i]);
 					$this->mhome->delete_estimate_sitem($filter);
 					}
 					$array = explode(',',$select);
 					$array = array_diff($array,$sub_select);
 					$select = implode(',',$array);
-					redirect("home/estimation/".$dep_id."/".$chap_id."/".$item_id."/".$select."/".$est_id."/");		
+					redirect("home/estimation/".$select."/".$est_id."/");		
 				}
 				}
 	/*Estimation Coding END...............................................................................*/
@@ -698,7 +658,7 @@ if($this->is_logged_in()){
 			Authority::checkAuthority('chapter');
 	$filter = array('dep_id'=>$dep_id);
 	    	
-		$this->data['chap_list'] = $this->mhome->get_list($filter,'ssr_t_chapter');
+		$this->data['chap_list'] = $this->mhome->get_list_chap($filter,'ssr_t_chapter');
 		
 	    $this->data['dep_detail'] = $this->mhome->get_list($filter,'ssr_t_department');			
 		//print_r($this->data['chap_list']);die;

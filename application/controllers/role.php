@@ -60,12 +60,7 @@ class Role extends CI_Controller {
 			/* Function for change password */
 	function change_pass($info=false)
 	{
-	   if($this->is_logged_in())
-	    {
-			redirect('login');
-		}									
-		else
-		{
+	  	Authority::is_logged_in();
 			$user_data=$user_session_data = $this->session->userdata('user_data');
 			$data = array(
 				'password' => $this->input->post('password')
@@ -78,7 +73,7 @@ class Role extends CI_Controller {
 				$this->session->set_flashdata('message', $this->config->item("user").'Password updated successfully');
 				redirect('home');
 		}		
-	}
+	
 	
 			/* function for user role view */
 	function user_role()

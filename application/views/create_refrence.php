@@ -21,7 +21,7 @@
 		<h3><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> Refrence</h3>
        </div>
       <div class="box-content">
-     <form action="<?=base_url()?>index.php/home/add_refrence" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
+     <form action="<?=base_url()?>index.php/masters/add_refrence" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
      
   <div class="row">
 		 <input type="hidden" name="dep_id" id="dep_id" value="2147483647"/>

@@ -22,14 +22,14 @@
       <div class="box-content">
 		 <div class="row">
 						<div class="col-md-4 col-md-offset-8">
-							<!--<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/add_estsubitem/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$select?>/<?=$est_id?>"><i class="fa fa-plus"></i> Add Subitems</a>
+							<!--<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/home/add_estsubitem/<?=$select?>/<?=$est_id?>"><i class="fa fa-plus"></i> Add Subitems</a>
 							<a class="btn btn-primary btn-sm" onclick="deleteRow('dataTable')" href="javascript:;"><i class="fa fa-trash-o"></i> Delete Subitems</a>-->
 						</div> 
 					 </div>  
 					 </br>  
 
 		<div class="row">
-		<form action="index.php/home/add_est_submit/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$select?>" method="post" name="myForm" class="">
+		<form action="index.php/home/add_est_submit/<?=$select?>" method="post" name="myForm" class="">
 			<div class="col-md-12">
 			
 			<div class="form-group" style="padding-bottom: 30px;">
@@ -109,10 +109,8 @@
 					  <td><?=($unit_name)?$unit_name[0]->unit_code:''?></td>
 					  
 					<?php if(!empty($est_sub)==1){	$filter = array('est_id'=>$est_sub[0]->est_id,
-					'subitem_id'=>$subil->subitem_id,
-					'dep_id'=>$dep_id,
-					'chap_id'=>$chap_id,
-					'item_id'=>$item_id);
+					'subitem_id'=>$subil->subitem_id
+					);
 					 $subitem_est_quantity= $this->utilities->get_est('ssr_t_estimate_sitem',$filter); ?>
 					<input type="hidden" name="est_id" id="est_id_<?=$key+1?>"  
 					
@@ -131,7 +129,7 @@
 							
 									
 					<td>
-							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/home/estimation_val_view/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> View value</a>
+							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/home/estimation_val_view/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> View value</a>
 													
 							</td>
 						
