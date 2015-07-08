@@ -36,7 +36,7 @@
 										   <div class="control-group">
 											  <label class="control-label">User Name</label>
 											  <div class="controls">
-												 <input type="text" class="span6" name="name" value="<?=$abc['name']?>" class="form-control"/>
+												 <input type="text" class="span6" name="name" data-rule-required="true" value="<?=$abc['name']?>" class="form-control"/>
 												 <span class="help-inline">Enter Your User Name</span>
 											  </div>
 
@@ -47,11 +47,11 @@
                                       <div class="controls">
                                          <div class="fileupload fileupload-new" data-provides="fileupload">
                                             <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                               <img src="img/<?=$abc['image']?>">
+                                               <img src="img/<?=$abc['image']?>" >
                                             </div>
                                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                             <div>
-                                               <span class="btn btn-file"><span class="fileupload-new">Select image</span>
+                                               <span class="btn btn-file"><span class="fileupload-new" data-rule-required="true">Select image</span>
                                                <span class="fileupload-exists">Change</span>
                                                <input type="file" class="default" name="image" id="image"/></span>
                                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
@@ -66,14 +66,14 @@
 								      <div class="control-group">
                                         <label class="control-label">Phone</label>
                                         <div class="controls">
-                                            <input type="text" name="phone_number" value="<?=$abc['phone_number']?>">
+                                            <input type="text" data-mask="(999) 999-9999" name="phone_number" value="<?=$abc['phone_number']?>">
                                            
                                         </div>
                                     </div>
 									   <div class="control-group">
                                         <label class="control-label">Mobile No</label>
                                         <div class="controls">
-                                            <input type="text" name="mobile" value="<?=$abc['mobile']?>">                                        </div>
+                                            <input type="text" data-mask="(999) 999-9999" name="mobile" value="<?=$abc['mobile']?>" data-rule-required="true">                                        </div>
                                     </div>
 									   <div class="control-group">
                                       <label class="control-label">Address</label>

@@ -66,7 +66,7 @@ echo date("h:i:s");
  ?>
 </li>
 <li>
-<a href="<?=base_url();?>index.php/role/acc_setting">
+<a href="<?=base_url();?>index.php/home/acc_setting">
 <i class="fa fa-cog"></i>
 Account Settings
 </a>
