@@ -20,7 +20,9 @@
       <div class="box-content">
 		 <div class="row">
 						<div class="col-md-4 col-md-offset-8">
+
 							<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/estimation_controller/add_estsubitem/<?=$select?>/<?=$est_id?>"><i class="fa fa-plus"></i> Add Subitems</a>
+
 							<a class="btn btn-primary btn-sm" onClick="document.getElementById('form-del').submit();" ><i class="fa fa-trash-o"></i> Delete Subitems</a>
 						</div> 
 					 </div>  
@@ -74,7 +76,9 @@
 								<?php }?>  
 								
 		<div class="row">
+
 		<form action="<?=base_url()?>index.php/estimation_controller/del_sitem_est/<?=$select?>/<?=$est_id?>" method="post" name="myForm" id="form-del" >
+
 			<div class="col-md-12">
 					<div class="form-group"  style="padding-bottom: 30px;">
 						  <label class="col-sm-3 col-lg-2 control-label">Estimate Description</label>
@@ -172,7 +176,9 @@
 							
 									
 					<td>
+
 							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/estimation_controller/estimation_val/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> Enter value</a>
+
 													
 							</td>
 						
@@ -192,7 +198,9 @@
 				</table>
 				</div>
 				
+
 				<input type="submit" name="save" formaction="index.php/estimation_controller/add_est_submit/<?=$select?>" class="btn btn-primary pull-right"  value="Save Changes">
+
   		
 	</div>
 		</form>

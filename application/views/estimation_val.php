@@ -26,7 +26,9 @@
 							$row_table = $row_table + 1;
 							} ?>
   					
+
 	 <form action="index.php/estimation_controller/estimation_create/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>" method="post" name="myForm" <?php if(!empty($estimate_cal)){ ?> onsubmit="return(validate('editTable'));" <?php } else {?> onsubmit="return(validate('dataTable'));" <?php } ?> >
+
 			
 			<input type="hidden"  name="subitem_id" value="<?=$subitem_id?>" />
 			<input type="hidden"  name="class_id" value="<?=$class_id?>" />
