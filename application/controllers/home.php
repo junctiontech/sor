@@ -146,12 +146,7 @@ class Home extends CI_Controller {
 	/* function for view and update the logged user profile data  */	
 	function acc_setting($info=false)
 	{
-		if($this->is_logged_in()){
-	
-			//redirect('login');
-	
-		}
-		else{
+		Authority::is_logged_in ();
 			$user_data=$user_session_data = $this->session->userdata('user_data');
 			//print_r($user_data);die;
 			$filter=$user_data['usermailid'];
@@ -173,7 +168,7 @@ class Home extends CI_Controller {
 			$this->parser->parse('include/leftmenu',$this->data);
 			$this->load->view('acc_setting',$this->data);
 			$this->parser->parse('include/footer',$this->data);
-		}
+		
 	}
 /* function for update the depatment and we create new department */	
   function manage_department(){
