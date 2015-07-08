@@ -25,6 +25,7 @@ class Home extends CI_Controller {
          $this->session->set_flashdata('message',$this->config->item("user").'First Login With Your Account.');
  		redirect('login');
 		
+ 		
 	}									
 	else{
 		
