@@ -32,7 +32,7 @@
                             <div class="box-content">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab-1-1">
-                                   <form action="<?=base_url();?>index.php/Home/insertdatamy" class="form-horizontal" id="validation-form" method="post" enctype="multipart/form-data">
+                                   <form action="<?=base_url();?>index.php/home/insertdatamy" class="form-horizontal" id="validation-form" method="post" enctype="multipart/form-data">
 										   <div class="control-group">
 											  <label class="control-label">User Name</label>
 											  <div class="controls">

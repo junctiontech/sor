@@ -24,7 +24,15 @@ class masters_model extends CI_Model
     	return $query->Result();
     }
  /* function end for INSERT CLASS , UNIT AND MATERIAL NAME IN MATERIAL */
-     
+    
+/* function start for TABLE DETAILS OF chapter list */
+    function get_chap_list($filter=false,$table=false)
+    {	$this->db->order_by("chap_name", "ASC");
+    	$query = $this->db->get_where($table, $filter);
+    	return $query->Result();
+    }
+/* function end for TABLE DETAILS OF chapter list  */
+	
 /* function start for TABLE DETAILS OF MATERIAL */
     function get_list($filter=false,$table=false)
     {

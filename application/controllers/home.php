@@ -293,7 +293,7 @@ class Home extends CI_Controller {
 Authority::is_logged_in ();
 			Authority::checkAuthority('chapter');
 	$filter = array('dep_id'=>$dep_id);
-		$this->data['chap_list'] = $this->masters_model->get_list($filter,'ssr_t_chapter');
+		$this->data['chap_list'] = $this->masters_model->get_chap_list($filter,'ssr_t_chapter');
 	    $this->data['dep_detail'] = $this->masters_model->get_list($filter,'ssr_t_department');			
 		//Breadcrumb section start
 			$this->breadcrumb->clear();
