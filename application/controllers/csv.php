@@ -34,15 +34,16 @@ class Csv extends CI_Controller {
 	 }
 	 
 	
-    function index($listname=false) {
+    function index($listname=false,$msg=false) {
 		if($this->is_logged_in()){
 			redirect('login');
 		}else{
 		Authority::checkAuthority('index');
 		 $this->data['list_name']=$this->uri->segment(3);
-		//print_r($listname);die;
+		 $this->data['csv_data']='';
+		if($msg){
 		if($listname=='material'){
-		//	print_r($listname);die;
+		
                   $this->data['csv_data'] = $this->csv_model->get_csv_list('ssr_t_material');
 	    }else if($listname=='item'){
 			
@@ -61,6 +62,7 @@ class Csv extends CI_Controller {
 			
 			 $this->data['csv_data'] = $this->csv_model->get_csv_list('ssr_t_plant');
 		}
+		}
        
 		$this->parser->parse('include/header',$this->data);
 		$this->parser->parse('include/leftmenu',$this->data);
@@ -77,15 +79,15 @@ class Csv extends CI_Controller {
 					redirect('csv/index');
 			}
 		else{
-   //print_r($_POST);die;
+  
     
    	if($this->input->post('submit')){
 		
           $this->data['list_name']=$this->input->post('list_type');
             if($this->input->post('list_type')=='material'){
-			//print_r($listname);die;
+			
         $this->data['csv_data'] = $this->csv_model->get_csv_list('ssr_t_material');
-        //print_r($data['csv_data']);die;
+       
 	    }else if($this->input->post('list_type')=='item'){
 			
 		 $this->data['csv_data'] = $this->csv_model->get_csv_list('ssr_t_item');
@@ -117,7 +119,7 @@ class Csv extends CI_Controller {
 			
             $this->data['error'] = $this->upload->display_errors();
  
-            $this->load->view('csv', $data);
+            $this->load->view('csv', $this->data);
         } else {
 			 
             $file_data = $this->upload->data();
@@ -141,12 +143,12 @@ class Csv extends CI_Controller {
 		                        'updated_by'=>1,
 		                        'updated_on'=>date("Y-m-d"),
 		                    );
-		         $this->csv_model->insert_csv('ssr_t_material',$insert_data);
+		         $this->csv_model->insert_csv('ssr_t_material',$insert_data,'mat_name');
 				 
                         }
                         $this->session->set_flashdata('success', 'Csv Data Imported Succesfully');
 						 //redirect(base_url().'csv/index/material'); 
-                      redirect('csv/index/material'); 
+                      redirect('csv/index/material/msg'); 
 	    }else if($this->input->post('list_type')=='item'){
 			
 		         foreach ($csv_array as $row) {
@@ -161,10 +163,10 @@ class Csv extends CI_Controller {
                         'updated_by'=>1,
                         'updated_on'=>date("Y-m-d"),
                     );
-                     $this->csv_model->insert_csv('ssr_t_item',$insert_data);
+                     $this->csv_model->insert_csv('ssr_t_item',$insert_data,'item_name');
                     }
 		    $this->session->set_flashdata('success', 'Csv Data Imported Succesfully');
-                      redirect('csv/index/item'); 	
+                      redirect('csv/index/item/msg'); 	
 		}else if($this->input->post('list_type')=='subitem'){
 			
 		          foreach ($csv_array as $row) {
@@ -188,7 +190,7 @@ class Csv extends CI_Controller {
 					$finaltotal=$row['total_amount'];
 					$subitem_id=$this->input->post('subitem_id');
                   //  print_r($insert_data);die;
-                      $this->csv_model->insert_csv('ssr_t_calculation',$insert_data);
+                      $this->csv_model->insert_csv('ssr_t_calculation',$insert_data,'subitem_id');
 					 $this->csv_model->update_subitem_rate($subitem_id,$finaltotal);
                     }	
 		      $this->session->set_flashdata('success', 'Csv Data Imported Succesfully');
@@ -205,10 +207,10 @@ class Csv extends CI_Controller {
                         'updated_by'=>1,
                         'updated_on'=>date("Y-m-d"),
                     );
-                     $this->csv_model->insert_csv('ssr_t_labor',$insert_data);
+                     $this->csv_model->insert_csv('ssr_t_labor',$insert_data,'labour_name');
                     }
                     $this->session->set_flashdata('success', 'Csv Data Imported Succesfully');
-                      redirect('csv/index/labour'); 
+                      redirect('csv/index/labour/msg'); 
 			
 		}else if($this->input->post('list_type')=='carriage'){
 			   foreach ($csv_array as $row) {
@@ -222,10 +224,10 @@ class Csv extends CI_Controller {
                         'updated_by'=>1,
                         'updated_on'=>date("Y-m-d"),
                     );
-                     $this->csv_model->insert_csv('ssr_t_carriage',$insert_data);
+                     $this->csv_model->insert_csv('ssr_t_carriage',$insert_data,'carriage_name');
                     }
                      $this->session->set_flashdata('success', 'Csv Data Imported Succesfully');
-                      redirect('csv/index/carriage'); 
+                      redirect('csv/index/carriage/msg'); 
 			
 		}else{
 			
@@ -240,23 +242,16 @@ class Csv extends CI_Controller {
                         'updated_by'=>1,
                         'updated_on'=>date("Y-m-d"),
                     );
-                     $this->csv_model->insert_csv('ssr_t_plant',$insert_data);
+                     $this->csv_model->insert_csv('ssr_t_plant',$insert_data,'pla_code');
                     }
                       $this->session->set_flashdata('success', 'Csv Data Imported Succesfully');
-                      redirect('csv/index/plant');
+                      redirect('csv/index/plant/msg');
                     
 		}  
-             
-            
-                    
-                 // print_r($insert_data);die;  
-                   
-                
-              
-                //echo "<pre>"; print_r($insert_data);
+              //echo "<pre>"; print_r($insert_data);
             } else 
                 $data['error'] = "Error occured";
-                $this->load->view('csv', $data);
+                $this->load->view('csv', $this->data);
             }
  
         } 

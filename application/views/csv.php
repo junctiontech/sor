@@ -48,7 +48,8 @@
 					
 				</div> 
 			 </div>  
-			 </br>                     
+			 </br>  
+			 <?php if($csv_data){ ?>                  
 	<div class="table-big">
 			<table class="table table-hover fill-head table-advance" id="table1">
 									<thead>
@@ -250,7 +251,7 @@
                 </tbody>
 					</table>
 	</div>
-	
+	<?php } ?>
 				  
  
       </div>
