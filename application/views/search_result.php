@@ -4,7 +4,7 @@ error_reporting(0);
 <div id="main-content">
 	<div class="page-title">
 		<div>
-		<h1><i class="fa fa-search"></i> Search</h1>
+		<h1><i class="fa fa-search"></i><?php if(isset($namehome)==1){echo $namehome[77]->text;}else{echo "Search";}?> </h1>
 		</div>
 	</div>
 	<div id="breadcrumbs">
@@ -16,7 +16,7 @@ error_reporting(0);
 	<div class="col-md-12">
 		<div class="box box-blue">
 			<div class="box-title">
-				<h3><i class="fa fa-search"></i> Search </h3>
+				<h3><i class="fa fa-search"></i><?php if(isset($namehome)==1){echo $namehome[77]->text;}else{echo "Search";}?> </h3>
 			</div>
 			<div class="box-content">
 				<!-- BEGIN Tab Content -->
@@ -62,7 +62,7 @@ error_reporting(0);
 									</select>
 								</div>
 								<div class="btn-group">
-									<button type="submit" name="submit" class="btn btn-primary show-tooltip"  ><i class="fa fa-search"></i> Search</button>
+									<button type="submit" name="submit" class="btn btn-primary show-tooltip"  ><i class="fa fa-search"></i><?php if(isset($namehome)==1){echo $namehome[77]->text;}else{echo "Search";}?></button>
 								</div>
 							</form>
 						</div>

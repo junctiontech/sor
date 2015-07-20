@@ -1,7 +1,7 @@
- <div id="main-content" >
+. <div id="main-content" >
 	<div class="page-title">
 	<div>
-	<h1><i class="fa fa-keyboard-o"></i> Add Role</h1>
+	<h1><i class="fa fa-keyboard-o"></i> <?php if(isset($namehome)==1){echo $namehome[126]->text;}else{echo "Add Role";}?> </h1>
 	</div>
 	</div>
 
@@ -17,7 +17,7 @@
                     <div class="span12">
                         <div class="box">
                             <div class="box-title">
-                                <h3><i class="icon-table"></i> Add Role</h3>
+                                <h3><i class="icon-table"></i> <?php if(isset($namehome)==1){echo $namehome[126]->text;}else{echo "Add Role";}?> </h3>
                                
                             </div>
                             <div class="box-content">
@@ -33,9 +33,9 @@
 								    <table class="table table-striped table-bordered ">
 										<thead>
 											<tr>
-												<th>Functions</th>
-												<th>Read</th>
-												<th>Execute</th>
+												<th><?php if(isset($namehome)==1){echo $namehome[127]->text;}else{echo "Functions";}?></th>
+												<th><?php if(isset($namehome)==1){echo $namehome[128]->text;}else{echo "Read";}?></th>
+												<th><?php if(isset($namehome)==1){echo $namehome[129]->text;}else{echo "Execute";}?></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -71,8 +71,8 @@
 									</table>
 								</br>
 								   <div class="form-actions">
-                                      <button type="submit" class="btn btn-primary">Submit</button>
-                                      <button type="button" class="btn">Cancel</button>
+                                      <button type="submit" class="btn btn-primary"><?php if(isset($namehome)==1){echo $namehome[123]->text;}else{echo "Submit";}?></button>
+                                      <button type="button" class="btn"><?php if(isset($namehome)==1){echo $namehome[13]->text;}else{echo "Cancel";}?></button>
                                    </div>
 							</form>
                                

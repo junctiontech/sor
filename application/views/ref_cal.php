@@ -1,7 +1,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-keyboard-o"></i> Refrence Calculation</h1>
+<h1><i class="fa fa-keyboard-o"></i> <?php if(isset($namehome)==1){echo $namehome[94]->text;}else{echo "Refrence Calculation";}?></h1>
 </div>
 </div>
 
@@ -73,17 +73,17 @@
 			<thead>
 				<tr>
 				<th class="subitem">#</th>
-				<th class="subitem">Order</th>
-				<th class="subitem">Type</th>
-				<th class="subitem">Code</th>
-				<th class="subitem">Description </th>
-				<th class="subitem">Unit</th>
+				<th class="subitem"><?php if(isset($namehome)==1){echo $namehome[80]->text;}else{echo "Order";}?></th>
+				<th class="subitem"><?php if(isset($namehome)==1){echo $namehome[81]->text;}else{echo "Type";}?></th>
+				<th class="subitem"><?php if(isset($namehome)==1){echo $namehome[26]->text;}else{echo "Code";}?></th>
+				<th class="subitem"><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?> </th>
+				<th class="subitem"><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?></th>
 				
-				<th class="subitem">Quantity</th>
-				<th class="subitem">Rate</th>
-				<th class="subitem">Amount</th>
-				<th class="subitem">Total</th>
-				<th>Ovehead</th>
+				<th class="subitem"><?php if(isset($namehome)==1){echo $namehome[82]->text;}else{echo "Quantity";}?></th>
+				<th class="subitem"><?php if(isset($namehome)==1){echo $namehome[35]->text;}else{echo "Rate";}?></th>
+				<th class="subitem"><?php if(isset($namehome)==1){echo $namehome[58]->text;}else{echo "Amount";}?></th>
+				<th class="subitem"><?php if(isset($namehome)==1){echo $namehome[83]->text;}else{echo "Total";}?></th>
+				<th><?php if(isset($namehome)==1){echo $namehome[62]->text;}else{echo "Ovehead";}?></th>
 				</tr>
 				</thead>
 			
@@ -249,10 +249,10 @@
     			  </div>				
 			  <input type="hidden" readonly name="final_total" id="final_total" value="" />
                  	      <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-4">
-              <button type="button" class="btn" onClick="window.history.back();">Cancel</button>
+              <button type="button" class="btn" onClick="window.history.back();"><?php if(isset($namehome)==1){echo $namehome[13]->text;}else{echo "Cancel";}?></button>
            
                      
-    			<input type="submit" name="save" class="btn btn-primary " value="Save Changes">
+    			<input type="submit" name="save" class="btn btn-primary " value="<?php if(isset($namehome)==1){ echo $namehome[14]->text;  }else{echo"Save Changes";}?>">
           </div>
  </form>
 	

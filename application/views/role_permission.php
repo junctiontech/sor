@@ -7,7 +7,7 @@ $a=$per->role_id;
 <div id="main-content" >
 	<div class="page-title">
 	<div>
-	<h1><i class="fa fa-keyboard-o"></i> Role Permissions</h1>
+	<h1><i class="fa fa-keyboard-o"></i><?php if(isset($namehome)==1){echo $namehome[131]->text;}else{echo "Role Permissions";}?> </h1>
 	</div>
 	</div>
 
@@ -23,7 +23,7 @@ $a=$per->role_id;
                     <div class="span12">
                         <div class="box">
                             <div class="box-title">
-                                <h3><i class="icon-table"></i> Role Permissions</h3>
+                                <h3><i class="icon-table"></i><?php if(isset($namehome)==1){echo $namehome[131]->text;}else{echo "Role Permissions";}?> </h3>
                                
                             </div>
                             <div class="box-content">
@@ -32,9 +32,9 @@ $a=$per->role_id;
 										<thead>
 											<tr>
 												
-												<th>Functions</th>
-												<th>Read</th>
-												<th>Execute</th>
+												<th><?php if(isset($namehome)==1){echo $namehome[127]->text;}else{echo "Functions";}?></th>
+												<th><?php if(isset($namehome)==1){echo $namehome[128]->text;}else{echo "Read";}?></th>
+												<th><?php if(isset($namehome)==1){echo $namehome[129]->text;}else{echo "Execute";}?></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -73,8 +73,8 @@ $a=$per->role_id;
 									</table>
 									   </br>
 									   <div class="form-actions">
-										  <button type="submit" class="btn btn-primary">Submit</button>
-										  <button type="button" class="btn">Cancel</button>
+										  <button type="submit" class="btn btn-primary"><?php if(isset($namehome)==1){echo $namehome[123]->text;}else{echo "Submit";}?></button>
+										  <button type="button" class="btn"><?php if(isset($namehome)==1){echo $namehome[13]->text;}else{echo "Cancel";}?></button>
 									   </div>
 								</form>
                             </div>

@@ -484,8 +484,6 @@ function search($keyword)
 			}
 		}
 	//function for data table search in subitemcal.php end 22 may by ankit 		
-			
-			
-			
+		
 }
 ?>

@@ -18,9 +18,14 @@ class Csv_model extends CI_Model {
         }
     }
  
-    function insert_csv($table=false,$data=false) {
-		
-        $this->db->insert($table, $data);
+    function insert_csv($table=false,$data=false,$field_name=false) {
+    	
+    	if ($this->db->field_exists($field_name, $table))
+    	{
+    		
+    	}else{
+   $this->db->insert($table, $data);
+    	} 
     }
     function update_subitem_rate($subitem_id=false,$finaltotal=false) {
    

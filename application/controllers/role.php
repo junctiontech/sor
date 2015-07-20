@@ -11,12 +11,19 @@ class Role extends CI_Controller {
 		$this->data['url'] = base_url();
 		$this->load->model('login_model');
 		$this->load->model('authority_model');
+		$this->load->model('login_model');
+		$this->load->model('mhome');
+		
 		$this->load->library('parser');
 		$this->load->helper('url');
 		$this->load->library('form_validation');
 		$this->data['base_url']=base_url();
 		$this->load->library('session');
-		$this->load->library('authority');	
+		$this->load->library('authority');
+		$user_session_data = $this->session->userdata('user_data');
+	//	print_r($user_data);die;
+		$name=$user_session_data['language_id'];
+		$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
 	
 	 }
 	public function index()
@@ -38,15 +45,102 @@ class Role extends CI_Controller {
 		redirect('login');
 	}
 	
-			/* Function for account settings view */
 	function acc_setting($info=false)
-	{ 
-	if($this->is_logged_in()){
-		
-		redirect('login');
-		
+	{
+		Authority::is_logged_in ();
+		//print_r($user_data);die;
+			$user_data=$user_session_data = $this->session->userdata('user_data');
+			//print_r($user_data);die;	
+		$filter=$user_session_data['usermailid'];
+		//print_r($filter);die;
+		$a=$this->authority_model->checkid($filter);
+		if($a=='' || $a==TRUE){
+			$aa=$this->authority_model->show_account($filter);
+			$abc=array('name' => $aa->name,
+					'image' => $aa->image,
+					'phone_number' => $aa->phone_number,
+					'mobile' => $aa->mobile,
+					'address' => $aa->address);
+				
+			$this->data['abc']=$abc;
+		}
+	
+		$this->data['user_data']=$this->session->userdata('user_data');
+		$userdata=$this->session->userdata('user_data');
+		$this->parser->parse('include/header',$this->data);
+		$this->parser->parse('include/leftmenu',$this->data);
+		$this->load->view('acc_setting',$this->data);
+		$this->parser->parse('include/footer',$this->data);
+	
 	}
-	else{
+	function insertdatamy()
+	{
+		$this->acc_setting();
+		$user_data=$user_session_data = $this->session->userdata('user_data');
+		//print_r($user_data);die;
+		$filter=$user_data['usermailid'];
+		//print_r($filter);die;
+		if($_FILES['image']['name']!='')
+		{
+			$data['image_z1']= $_FILES['image']['name'];
+			 
+			$image=sha1($_FILES['image']['name']).time().rand(0, 9);
+			if(!empty($_FILES['image']['name']))
+			{
+				 
+				$config =  array(
+						'upload_path'	  => './img/',
+						//	'upload_url'      => base_url()."img/",
+						'file_name'       => $image,
+						'allowed_types'   => "gif|jpg|png|jpeg|JPG|JPEG|PNG|JPG",
+						'overwrite'       => true,
+				);
+				//var_dump($config);
+				$this->upload->initialize($config);
+				$this->load->library('upload');
+				 
+				if($this->upload->do_upload("image"))
+				{
+					$upload_data = $this->upload->data();
+					$image=$upload_data['file_name'];
+					//print_r($image);die;
+				}
+				else
+				{
+					$this->upload->display_errors()."file upload failed";
+					$image    ="";
+				}
+			}
+		}
+		else
+		{
+			$data['image_error']="Please Select Upload Photo";
+			$image ='';
+		}
+		 
+		if(isset($_POST['submit'])){
+			//print_r($filter);die;
+			$name=$this->input->post('name');
+			//$image=$this->input->post('image');
+			$phone_number=$this->input->post('phone_number');
+			//print_r($name);die;
+			$mobile =$this->input->post('mobile');
+			$address=$this->input->post('address');
+			$row=$this->authority_model->insertdatamy($filter,$name,$image,$phone_number,$mobile,$address);
+			$this->session->set_flashdata('message_type', 'success');
+			$this->session->set_flashdata('message', $this->config->item("user_id").' updated successfully');
+			redirect('home/acc_setting');
+		}else{
+			echo "not inserted";
+			 
+		}
+		 
+		 
+	}
+			/* Function for account settings view */
+/*	function acc_setting($info=false)
+	{ 
+	Authority::is_logged_in();
 		$user_data=$user_session_data = $this->session->userdata('user_data');
 		$this->data['user_data']=$this->session->userdata('user_data');
 		$userdata=$this->session->userdata('user_data');
@@ -55,7 +149,7 @@ class Role extends CI_Controller {
 		$this->load->view('acc_setting',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 		}
-	}
+*/	
 	
 			/* Function for change password */
 	function change_pass($info=false)

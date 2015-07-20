@@ -3,7 +3,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> Unit</h1>
+<h1><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -32,13 +32,13 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i>Unit</h3>
+      	<h3><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?></h3>
        </div>
       
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_unit"><i class="fa fa-plus"></i> UNIT</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_unit"><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[66]->text;}else{echo "UNIT";}?> </a>
 				</div> 
 			 </div>  
 			 </br>       
@@ -48,8 +48,8 @@
 						<thead>
 						<tr>
 						<th>#</th>
-						<th>Unit</th>
-						<th>Description</th>
+						<th><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?></th>
+						<th><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?></th>
 						
 						<th></th>
 						</tr>
@@ -62,7 +62,7 @@
 						  <td><?=$ul->unit_code?></td>
 						  <td><?=$ul->unit_desc?></td>
 						
-						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_unit/<?=$ul->unit_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Unit? This will delete all the related records on this Uint as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/<?=$ul->unit_code?>"><i class="fa fa-edit"></i> DELETE</a>
+						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_unit/<?=$ul->unit_code?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[55]->text;}else{echo "Edit";}?> </a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Unit? This will delete all the related records on this Uint as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/<?=$ul->unit_code?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[56]->text;}else{echo "DELETE";}?> </a>
 						  </td>
 					 </tr>
 

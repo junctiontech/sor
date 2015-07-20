@@ -2,7 +2,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> <?=(isset($mat_code))?"Edit":"Add"?> Material</h1>
+<h1><i class="fa fa-plus"></i> <?=(isset($mat_name))?"Edit":"Add"?> Material</h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -17,11 +17,11 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i> <?=(isset($mat_code))?"Edit":"Add"?> Material</h3>
+      	<h3><i class="fa fa-plus"></i> <?=(isset($mat_name))?"Edit":"Add"?> Material</h3>
        </div>
       <div class="box-content">
       <form action="<?=base_url()?>index.php/masters/add_material" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
-       <?php if(!isset($mat_code)){?>
+       <?php if(!isset($mat_name)){?>
        <div class="row">
 	    <div class="col-md-2 col-md-offset-10">
 		
@@ -45,10 +45,10 @@
 			</tr>
 			</thead>
 			<tbody id="dataTable">
-				<?php if(isset($mat_code)){?>
+				<?php if(isset($mat_name)){?>
 				
 			<tr>
-				<input type="hidden" name="id" id="id" value="<?=isset($mat_code)?$mat_code:''?>"/> 
+				<input type="hidden" name="id" id="id" value="<?=isset($mat_name)?$mat_name:''?>"/> 
 			<td>
 				
 					  <input type="text"  name="mat_name" onblur="check_material(this)" id="mat_name"  value="<?=isset($mat_name)?$mat_name:''?>" class="form-control" data-rule-required="true" >

@@ -2,7 +2,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> <?=(isset($overhead_code))?"Edit":"Add"?> Overhead</h1>
+<h1><i class="fa fa-plus"></i> <?=(isset($overhead_name))?"Edit":"Add"?> Overhead</h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -18,11 +18,11 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i> <?=(isset($overhead_code))?"Edit":"Add"?> Overhead</h3>
+      	<h3><i class="fa fa-plus"></i> <?=(isset($overhead_name))?"Edit":"Add"?> Overhead</h3>
        </div>
       <div class="box-content">
       <form action="<?=base_url()?>index.php/masters/add_overhead" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
-     <?php if(!isset($overhead_code)){?>
+     <?php if(!isset($overhead_name)){?>
        <div class="row">
 			<div class="col-md-2 col-md-offset-10">
 			
@@ -44,10 +44,10 @@
 						</tr>
 			</thead>
 			<tbody id="dataTable">
-				<?php if(isset($overhead_code)){?>
+				<?php if(isset($overhead_name)){?>
 			<tr>
 				
-				  <input type="hidden" name="id" id="id" value="<?=isset($overhead_code)?$overhead_code:''?>"/>
+				  <input type="hidden" name="id" id="id" value="<?=isset($overhead_name)?$overhead_name:''?>"/>
 			<td>
 				    <input type="text" name="overhead_name" id="overhead_name" value="<?=isset($overhead_name)?$overhead_name:''?>" class="form-control" data-rule-required="true">
 					</td>

@@ -1,7 +1,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> Reference</h1>
+<h1><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[75]->text;}else{echo "Reference";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -30,13 +30,13 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i>Reference</h3>
+      	<h3><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[75]->text;}else{echo "Reference";}?></h3>
        </div>
        
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_refrence"><i class="fa fa-plus"></i> REFERENCE</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_refrence"><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[51]->text;}else{echo "REFERENCE";}?> </a>
 				</div> 
 			 </div>  
 			 </br>  
@@ -46,10 +46,10 @@
 									<thead>
 									<tr>
 									<th>#</th>
-									<th style="width:10%">Reference Code </th>
-									<th style="width:20%">Description</th>
-									<th style="width:10%">Unit </th>
-									<th style="width:20%">Rate</th>
+									<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[76]->text;}else{echo "Reference Code";}?> </th>
+									<th style="width:20%"><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?></th>
+									<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?> </th>
+									<th style="width:20%"><?php if(isset($namehome)==1){echo $namehome[35]->text;}else{echo "Rate";}?></th>
 									<th style="width:45%"></th>
 									</tr>
 									</thead>
@@ -71,10 +71,10 @@
 			  <td><?=($unit_name)?$unit_name[0]->unit_code:''?></td>
 			  <td><?=$subil->cost_total?></td>
               <?php if($subil->cost_total==0) {?>
-			   <td><a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/masters/create_ref_cal/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->id?>/<?=$subil->class_id?>"><i class="fa fa-money"></i> Calculation</a>&nbsp;<a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/masters/manage_refrence/<?=$subil->id?>"><i class="fa fa-edit"></i> REFRENCE</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Item? This will delete all the related records on this Item as well.')" onClick="return confirm('Are you sure to delete this Refrence? This will delete all the related records on this Refrence as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/0/0/<?=$subil->id?>"><i class="fa fa-edit"></i> DELETE</a></td>
+			   <td><a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/masters/create_ref_cal/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->id?>/<?=$subil->class_id?>"><i class="fa fa-money"></i><?php if(isset($namehome)==1){echo $namehome[31]->text;}else{echo "Calculation";}?> </a>&nbsp;<a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/masters/manage_refrence/<?=$subil->id?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[51]->text;}else{echo "REFRENCE";}?> </a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Item? This will delete all the related records on this Item as well.')" onClick="return confirm('Are you sure to delete this Refrence? This will delete all the related records on this Refrence as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/0/0/<?=$subil->id?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[56]->text;}else{echo "DELETE";}?> </a></td>
 				<?php } else {?>
 
-				<td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/create_ref_cal/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->id?>/<?=$subil->class_id?>"><i class="fa fa-money"></i> Calculation </a>&nbsp;<a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/masters/manage_refrence/<?=$subil->id?>"><i class="fa fa-edit"></i> REFRENCE</a> <a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/0/0/<?=$subil->id?>" onClick="return confirm('Are you sure to delete this Refrence? This will delete all the related records on this Refrence as well.')"><i class="fa fa-edit"></i> DELETE</a></td>
+				<td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/create_ref_cal/<?=$dep_id?>/<?=$chap_id?>/<?=$item_id?>/<?=$subil->id?>/<?=$subil->class_id?>"><i class="fa fa-money"></i><?php if(isset($namehome)==1){echo $namehome[31]->text;}else{echo "Calculation";}?>  </a>&nbsp;<a class="btn btn-inverse btn-sm" href="<?=base_url()?>index.php/masters/manage_refrence/<?=$subil->id?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[51]->text;}else{echo "REFRENCE";}?> </a> <a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/0/0/<?=$subil->id?>" onClick="return confirm('Are you sure to delete this Refrence? This will delete all the related records on this Refrence as well.')"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[56]->text;}else{echo "DELETE";}?> </a></td>
 					<?php } }?>
 				</tr>
 		

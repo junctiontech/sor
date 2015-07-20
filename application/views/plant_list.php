@@ -3,7 +3,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> Plant</h1>
+<h1><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[71]->text;}else{echo "Plant";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -32,13 +32,13 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i>Plant</h3>
+      	<h3><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[71]->text;}else{echo "Plant";}?></h3>
        </div>
       
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_plant"><i class="fa fa-plus"></i> PLANT</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_plant"><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[72]->text;}else{echo "PLANT";}?> </a>
 				</div> 
 			 </div>  
 			 </br>   
@@ -48,10 +48,10 @@
 									<thead>
 									<tr>
 									<th>#</th>
-									<th>Plant Code</th>
-									<th>Description</th>
-									<th>Unit </th>
-									<th>Rate</th>
+									<th><?php if(isset($namehome)==1){echo $namehome[73]->text;}else{echo "Plant Code";}?></th>
+									<th><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?></th>
+									<th><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?> </th>
+									<th><?php if(isset($namehome)==1){echo $namehome[35]->text;}else{echo "Rate";}?></th>
 									<th></th>
 									</tr>
 									</thead>
@@ -68,7 +68,7 @@
 			  <td><?=($unit_name)?$unit_name[0]->unit_code:''?></td>
 			  
 			  <td><?=$li->rate?></td>
-			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_plant/<?=$li->pla_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Plant? This will delete all the related records on this Plant as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/<?=$li->pla_code?>"><i class="fa fa-edit"></i> DELETE</a></td>
+			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_plant/<?=$li->pla_code?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[55]->text;}else{echo "Edit";}?> </a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Plant? This will delete all the related records on this Plant as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/<?=$li->pla_code?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[56]->text;}else{echo "DELETE";}?> </a></td>
 		</tr>
 
 		        <?php }?>

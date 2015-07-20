@@ -1,8 +1,8 @@
-
+<?php $user_session_data = $this->session->userdata('user_data'); ?>
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-dashboard"></i> Dashboard</h1>
+<h1><i class="fa fa-dashboard"></i><?php if(isset($namehome)==1){ echo $namehome[15]->text;  }else{echo"Dashboard";}?> </h1>
 
 </div>
 </div>
@@ -45,7 +45,7 @@
 <div class="row">
 	<div class="col-md-4 col-md-offset-8" style="text-align: right;">
 		
-		 <a href="<?=base_url()?>index.php/home/create_item/<?=$dep_id?>/<?=$chap_id?>"><button class="btn btn-primary "><i class="fa fa-plus"></i> ITEM</button></a>
+		 <a href="<?=base_url()?>index.php/home/create_item/<?=$dep_id?>/<?=$chap_id?>"><button class="btn btn-primary "><i class="fa fa-plus"></i><?php if(isset($namehome)==1){ echo $namehome[21]->text;  }else{echo"ITEM";}?> </button></a>
 	</div>
 
 </div> </br> 
@@ -58,12 +58,12 @@
 	<h3><i class="fa fa-th-list"></i><a href="javascript:;" class="text-white"> <?=$il->item_name?></a></h3>
 	<div class="box-tool">
 		<a href="<?=base_url()?>index.php/home/create_item/<?=$il->dep_id?>/<?=$il->chap_id?>/<?=$il->item_id?>" ><button class="btn btn-default btn-sm "style="margin-top: -5px;
-"><i class="fa fa-edit"></i> EDIT ITEM</button></a>
+"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){ echo $namehome[22]->text;  }else{echo"EDIT ITEM";}?> </button></a>
 <a href="<?=base_url()?>index.php/home/delete_item/<?=$il->dep_id?>/<?=$il->chap_id?>/<?=$il->item_id?>" onClick="return confirm('Are you sure to delete this Item? This will delete all the related records on this Item as well.')"><button class="btn btn-default btn-sm "style="margin-top: -5px;
-"><i class="fa fa-close"></i> DELETE ITEM</button></a>
+"><i class="fa fa-close"></i><?php if(isset($namehome)==1){ echo $namehome[23]->text;  }else{echo"DELETE ITEM";}?> </button></a>
 
 	<a href="<?=base_url()?>index.php/home/get_subitem_list/<?=$il->dep_id?>/<?=$il->chap_id?>/<?=$il->item_id?>" ><button class="btn btn-default btn-sm "style="margin-top: -5px;
-"><i class="fa fa-list"></i> SUBITEM</button></a>
+"><i class="fa fa-list"></i><?php if(isset($namehome)==1){ echo $namehome[24]->text;  }else{echo"SUBITEM";}?> </button></a>
 	<a data-action="collapse" href="#"><i class="fa fa-chevron-up"></i></a>
 	
 	</div>

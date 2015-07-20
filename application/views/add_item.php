@@ -1,8 +1,9 @@
 <!--header starts added by palak on 13 jan -->
+<?php $user_session_data = $this->session->userdata('user_data');?>
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> <?=(isset($item_id))?"Edit":"Add"?> Item</h1>
+<h1><i class="fa fa-plus"></i> <?=(isset($item_id))?"Edit":"Add"?> <?php if(isset($namehome)==1){ echo $namehome[78]->text;  }else{echo"Item";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -18,12 +19,12 @@
       <div class="box box-blue">
       <div class="box-title">
       	
-		<h3><i class="fa fa-plus"></i> <?=(isset($item_id))?"Edit":"Add"?> Items</h3>
+		<h3><i class="fa fa-plus"></i> <?=(isset($item_id))?"Edit":"Add"?> <?php if(isset($namehome)==1){ echo $namehome[78]->text;  }else{echo"Items";}?> </h3>
        </div>
       <div class="box-content">
      <form action="<?=base_url()?>index.php/home/add_item" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
      <div class="form-group">
-           <label class="control-label">Department</label>
+           <label class="control-label"><?php if(isset($namehome)==1){ echo $namehome[19]->text;  }else{echo"Department";}?></label>
             <div class="controls">
               <select class="form-control" name="dep_id" id="dep_id" tabindex="1" data-rule-required="true" onChange="show_chapter(this.value,0)">
 			    <option  value="">Select Department</option>
@@ -36,7 +37,7 @@
     	</div>
         
         <div class="form-group">
-           <label class="control-label">Chapter</label>
+           <label class="control-label"><?php if(isset($namehome)==1){ echo $namehome[16]->text;  }else{echo"Chapter";}?></label>
             <div class="controls"  id="show_chap" >
                <select name="chap_id" id="chap_id" class="form-control" data-rule-required="true">
 				<option value=''>Chapter</option>
@@ -50,7 +51,7 @@
 		
 		<!--Class div added-->
 									<div class="form-group">
-                                      <label class="control-label">Class</label>
+                                      <label class="control-label"><?php if(isset($namehome)==1){ echo $namehome[25]->text;  }else{echo"Class";}?></label>
                                       <div class="controls">
                                           <div class="controls">
                                          <select class="col-md-12" name="item_class_id[]" id="item_class_id" multiple="multiple" data-rule-required="true" data-placeholder="Choose a Category">
@@ -68,14 +69,14 @@
                                    </div>
      
       <div class="form-group">
-      <label for="textfield3" class=" control-label">Code</label>
+      <label for="textfield3" class=" control-label"><?php if(isset($namehome)==1){ echo $namehome[26]->text;  }else{echo"Code";}?></label>
       <div class="controls">
       <input type="text" name="item_name" id="item_name" data-rule-required="true" value="<?=isset($item_name)?$item_name:''?>" placeholder="Enter Name" class="form-control">
       </div>
       </div>
            
       <div class="form-group">
-      <label for="textarea3" class="control-label">Description</label>
+      <label for="textarea3" class="control-label"><?php if(isset($namehome)==1){ echo $namehome[10]->text;  }else{echo"Description";}?></label>
       <div class="controls">
       <textarea name="item_desc" id="item_desc" data-rule-required="true" rows="5" class="form-control"><?=isset($item_desc)?$item_desc:''?></textarea>
       </div>
@@ -126,23 +127,23 @@
       </div>
       </div>-->
         <div class="form-group">
-      <label for="textfield3" class="control-label">Item Heading</label>
+      <label for="textfield3" class="control-label"><?php if(isset($namehome)==1){ echo $namehome[27]->text;  }else{echo"Item Heading";}?></label>
       <div class="controls">
       <input type="text" name="item_heading" id="item_heading"  value="<?=isset($item_heading)?$item_heading:''?>" placeholder="Item Heading" class="form-control">
       </div>
       </div>
         <div class="form-group">
-      <label for="textfield3" class="control-label">item Notes</label>
+      <label for="textfield3" class="control-label"><?php if(isset($namehome)==1){ echo $namehome[28]->text;  }else{echo"item Notes";}?></label>
       <div class="controls">
       <input type="text" name="item_notes" id="item_notes"  value="<?=isset($item_notes)?$item_notes:''?>" placeholder="item Notes" class="form-control">
       </div>
       </div>
       <div class="form-group last">
       <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-        <button type="button" class="btn" onClick="window.history.back();">Cancel</button>
+        <button type="button" class="btn" onClick="window.history.back();"><?php if(isset($namehome)==1){ echo $namehome[13]->text;  }else{echo"Cancel";}?></button>
        <input type="hidden" name="id" id="id" value="<?=isset($item_id)?$item_id:''?>"/>
 
-        <input  type="submit" name="submit" value="Save changes" class="btn btn-primary"/>   
+        <input  type="submit" name="submit" value="<?php if(isset($namehome)==1){ echo $namehome[14]->text;  }else{echo"Save changes";}?>" class="btn btn-primary"/>   
       </div>
       </div>
        </form>

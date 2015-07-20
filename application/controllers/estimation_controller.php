@@ -8,6 +8,8 @@ class Estimation_Controller extends CI_Controller {
 		$this->data ['user_data'] = "";
 		$this->data ['url'] = base_url ();
 		$this->load->model ( 'masters_model' );
+		$this->load->model ( 'login_model' );
+		
 		$this->load->model ( 'authority_model' );
 		$this->load->model ( 'estimation_model' );
 		$this->load->library ( 'parser' );
@@ -15,6 +17,9 @@ class Estimation_Controller extends CI_Controller {
 		$this->load->library ( 'session' );
 		$this->data ['base_url'] = base_url ();
 		$this->load->library ( 'authority' );
+		$user_session_data = $this->session->userdata('user_data');
+		$name=$user_session_data['language_id'];
+		$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
 	}
 	public function estimation($select = false, $est_id = false) {
 		Authority::is_logged_in ();
@@ -23,7 +28,7 @@ class Estimation_Controller extends CI_Controller {
 		if($est_id == ''){
 			if($select == '' && $est_id == '') {
 		$this->session->set_flashdata ( 'aaa_error', 'error' );
-				$this->session->set_flashdata ( 'message', $this->config->item ( "est" ) . ' Please Select Atleast One SubItem Code' );
+				$this->session->set_flashdata ( 'message', $this->config->item ( "est" ) . 'Please Select Atleast One SubItem Code' );
 				$this->parser->parse ( 'include/header', $this->data );
 				$this->parser->parse ( 'include/leftmenu', $this->data );
 				$this->parser->parse ( 'estimation', $this->data );

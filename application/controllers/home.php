@@ -146,12 +146,7 @@ class Home extends CI_Controller {
 	/* function for view and update the logged user profile data  */	
 	function acc_setting($info=false)
 	{
-		if($this->is_logged_in()){
-	
-			//redirect('login');
-	
-		}
-		else{
+		Authority::is_logged_in ();
 			$user_data=$user_session_data = $this->session->userdata('user_data');
 			//print_r($user_data);die;
 			$filter=$user_data['usermailid'];
@@ -173,7 +168,7 @@ class Home extends CI_Controller {
 			$this->parser->parse('include/leftmenu',$this->data);
 			$this->load->view('acc_setting',$this->data);
 			$this->parser->parse('include/footer',$this->data);
-		}
+		
 	}
 /* function for update the depatment and we create new department */	
   function manage_department(){
@@ -298,7 +293,7 @@ class Home extends CI_Controller {
 Authority::is_logged_in ();
 			Authority::checkAuthority('chapter');
 	$filter = array('dep_id'=>$dep_id);
-		$this->data['chap_list'] = $this->masters_model->get_list($filter,'ssr_t_chapter');
+		$this->data['chap_list'] = $this->masters_model->get_chap_list($filter,'ssr_t_chapter');
 	    $this->data['dep_detail'] = $this->masters_model->get_list($filter,'ssr_t_department');			
 		//Breadcrumb section start
 			$this->breadcrumb->clear();
@@ -830,4 +825,6 @@ public function msg($dep_id=false)
 	}
 }
 /* Ended */
+
+
 

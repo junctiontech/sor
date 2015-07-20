@@ -5,7 +5,7 @@
 
 <div>
 
-<h1><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> Estimation Subitems</h1>
+<h1><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> <?php if(isset($namehome)==1){echo $namehome[107]->text;}else{echo "Estimation Subitems";}?> </h1>
 
 </div>
 
@@ -28,12 +28,12 @@
                     <div class="span12">
                         <div class="box">
                             <div class="box-title">
-                                <h3><i class="icon-reorder"></i> Add Estimation Subitems</h3>
+                                <h3><i class="icon-reorder"></i> <?php if(isset($namehome)==1){echo $namehome[107]->text;}else{echo "Add Estimation Subitems";}?> </h3>
                             </div>
                             <div class="box-content">
                                 <form action="index.php/estimation_controller/add_estsubitem_submit/<?=$select?>/<?=$est_id?>" method="post"class="form-horizontal form-row-separated">
                                       <div class="control-group">
-                                      <label class="control-label">Department</label>
+                                      <label class="control-label"><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Department";}?></label>
                                       <div class="controls">
                                          <select onchange="if (this.selectedIndex) show_chapter(this.value,0);" class="span6 chosen" data-placeholder="Choose a Category" tabindex="1">
                                             <option value="" > </option>
@@ -44,7 +44,7 @@
                                       </div>
                                    </div>
 								      <div class="control-group" >
-                                      <label class="control-label">Chapter</label>
+                                      <label class="control-label"><?php if(isset($namehome)==1){echo $namehome[108]->text;}else{echo "Chapter";}?></label>
                                       <div class="controls" id="show_chap">
 									 
                                          <select  class="span6 chosen" onchange="if (this.selectedIndex) show_item(this.value,0);" data-placeholder="Choose a Category" tabindex="1">
@@ -59,7 +59,7 @@
                                       </div>
                                    </div>
 								      <div class="control-group">
-                                      <label class="control-label">Item</label>
+                                      <label class="control-label"><?php if(isset($namehome)==1){echo $namehome[78]->text;}else{echo "Item";}?></label>
                                       <div class="controls" id="show_item">
                                          <select class="span6 chosen" onchange="if (this.selectedIndex) show_sitem(this.value,0);" data-placeholder="Choose a Category" tabindex="1">
                                             <option value=""> </option>
@@ -69,7 +69,7 @@
                                       </div>
                                    </div>
 								      <div class="control-group">
-                                      <label class="control-label">SubItem</label>
+                                      <label class="control-label"><?php if(isset($namehome)==1){echo $namehome[30]->text;}else{echo "SubItem";}?></label>
                                       <div class="controls" id="show_subitem">
                                          <select class="span6 chosen" data-placeholder="Choose a Category" tabindex="1">
                                             <option value=""> </option>
@@ -79,8 +79,8 @@
                                       </div>
                                    </div>
                                     <div class="form-actions">
-                                       <button type="submit"  class="btn btn-primary"><i class="fa fa-check"></i> Add</button>
-                                       <button type="button" onClick="window.history.back();" class="btn btn-default"><i class="fa fa-times"></i> Cancel</button>
+                                       <button type="submit"  class="btn btn-primary"><i class="fa fa-check"></i><?php if(isset($namehome)==1){echo $namehome[109]->text;}else{echo "Add";}?> </button>
+                                       <button type="button" onClick="window.history.back();" class="btn btn-default"><i class="fa fa-times"></i><?php if(isset($namehome)==1){echo $namehome[13]->text;}else{echo "Cancel";}?> </button>
                                     </div>
                                  </form>
                             </div>

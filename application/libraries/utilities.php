@@ -18,7 +18,16 @@ public function __construct() {
 		
 	 }
 	 
-
+	 function get_lang($language_id)
+	 {
+	 	$CI = & get_instance();
+	 
+	 	$CI->db->where('language_id',$language_id);
+	 //	$CI->db->order_by('chap_id','asc');
+	 	$query = $CI->db->get('ssr_t_language');
+	 
+	 	return $query->result();
+	 }
 	
 	/* Function to get list of chapter according to selected department*/
 	function get_chapter($dep_id)
@@ -32,6 +41,7 @@ public function __construct() {
 		return $query->result();
 	}
 	/* Function to get list of item according to selected chapter*/
+
 	function get_item($filter=false)
 	{ 
 		$CI = & get_instance();

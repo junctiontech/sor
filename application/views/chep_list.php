@@ -2,7 +2,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-dashboard"></i> Dashboard</h1>
+<h1><i class="fa fa-dashboard"></i><?php if(isset($namehome)==1){ echo $namehome[15]->text;  }else{echo"Dashboard";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -41,7 +41,7 @@
 				<!--ADD CODE -->
 				<div class="row">
 				   <div class="col-md-2 col-md-offset-10">
-					<a href="<?=base_url()?>index.php/home/add_chapter/<?=$dep_id?>"><button class="btn btn-primary pull-right"  ><i class="fa fa-plus"></i> CHAPTER</button></a>
+					<a href="<?=base_url()?>index.php/home/add_chapter/<?=$dep_id?>"><button class="btn btn-primary pull-right"  ><i class="fa fa-plus"></i><?php if(isset($namehome)==1){ echo $namehome[16]->text;  }else{echo"CHAPTER";}?></button></a>
 					</div>
 				</div>
 			</br>
@@ -58,7 +58,7 @@
 					</div>
 					<div class="title">
 					<h3><a href="<?=base_url()?>index.php/home/item/<?=$cl->dep_id?>/<?=$cl->chap_id?>"><?=$cl->chap_name?></a></h3>
-					<p ><a class="pull-right" style=" margin-right: 9px; color: #fff;"href="<?=base_url()?>index.php/home/add_chapter/<?=$cl->dep_id?>/<?=$cl->chap_id?>"><i class="fa fa-edit"></i> Edit </a>
+					<p ><a class="pull-right" style=" margin-right: 9px; color: #fff;"href="<?=base_url()?>index.php/home/add_chapter/<?=$cl->dep_id?>/<?=$cl->chap_id?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){ echo $namehome[8]->text;  }else{echo"Edit";}?>  </a>
 					<?php foreach($list_permision as $var){
 					if($user_session_data['role_id']==$var->role_id && $var->function_id=='pdf_file' && $var->auth_read==0 && $var->auth_execute==0)
 					{
@@ -73,9 +73,9 @@
 					{
 					?>
 					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
-					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> Generate PDF</a>
+					href="<?=base_url()?>PDFGeneration/index.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> <?php if(isset($namehome)==1){ echo $namehome[18]->text;  }else{echo"Generate PDF";}?></a>
 					<a class="pull-right" style="margin-right: 9px; color: #fff;" 
-					href="<?=base_url()?>PDFGeneration/subpdf.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i> Generate Subitem PDF</a></p>
+					href="<?=base_url()?>PDFGeneration/subpdf.php/?dep_id=<?=$cl->dep_id?>&chap_id=<?=$cl->chap_id?>" target="_blank"><i class="fa fa-download"></i><?php if(isset($namehome)==1){ echo $namehome[17]->text;  }else{echo"Generate Subitem PDF";}?> </a></p>
 					<?php 
 					} 
 					}
