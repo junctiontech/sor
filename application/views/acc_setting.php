@@ -38,7 +38,9 @@
 											  <label class="control-label"><?php if(isset($namehome)==1){echo $namehome[153]->text;}else{echo "User Name";}?></label>
 											  <div class="controls">
 												 <input type="text" class="span6" name="name" data-rule-required="true" value="<?=$abc['name']?>" class="form-control"/>
+
 												 <span class="help-inline"><?php if(isset($namehome)==1){echo $namehome[154]->text;}else{echo "Enter Your User Name";}?></span>
+
 											  </div>
 
 										   </div>
@@ -52,10 +54,10 @@
                                             </div>
                                             <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
                                             <div>
+
                                                <span class="btn btn-file"><span class="fileupload-new" data-rule-required="true"><?php if(isset($namehome)==1){echo $namehome[156]->text;}else{echo "Select Image";}?></span>
                                                <span class="fileupload-exists"><?php if(isset($namehome)==1){echo $namehome[157]->text;}else{echo "Change";}?></span>
-                                               <span class="btn btn-file"><span class="fileupload-new" data-rule-required="true">Select image</span>
-                                               <span class="fileupload-exists">Change</span>
+
                                                <input type="file" class="default" name="image" id="image"/></span>
                                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload"><?php if(isset($namehome)==1){echo $namehome[158]->text;}else{echo "Remove";}?></a>
                                             </div>

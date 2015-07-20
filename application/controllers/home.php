@@ -826,5 +826,3 @@ public function msg($dep_id=false)
 }
 /* Ended */
 
-
-
