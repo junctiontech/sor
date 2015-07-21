@@ -33,7 +33,7 @@
                             <div class="box-content">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="tab-1-1">
-                                   <form action="<?=base_url();?>index.php/home/insertdatamy" class="form-horizontal" id="validation-form" method="post" enctype="multipart/form-data">
+                                   <form action="<?=base_url();?>index.php/role/insertdatamy" class="form-horizontal" id="validation-form" method="post" enctype="multipart/form-data">
 										   <div class="control-group">
 											  <label class="control-label"><?php if(isset($namehome)==1){echo $namehome[153]->text;}else{echo "User Name";}?></label>
 											  <div class="controls">
@@ -94,7 +94,7 @@
 										</form>
                                     </div>
                                     <div class="tab-pane" id="tab-1-2">
-                                        <form action="<?=base_url();?>index.php/Home/change_pass" class="form-horizontal" id="validation-form" method="post">
+                                        <form action="<?=base_url();?>index.php/role/change_pass" class="form-horizontal" id="validation-form" method="post">
                                   <div class="control-group">
                                         <label class="control-label" for="password"><?php if(isset($namehome)==1){echo $namehome[122]->text;}else{echo "Password";}?>:</label>
                                         <div class="controls">

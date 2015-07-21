@@ -59,7 +59,8 @@ class Authority_model extends CI_Model
     
     	}
     }
-    /* start fetching data and show stored data*/
+    
+/* start fetching data and show stored data*/
     function show_account($id){
     	$query =array($this->db->query("SELECT name,image,phone_number,mobile,address FROM ssr_t_users WHERE usermailid='$id'"));
     	foreach($query as $qry)
@@ -67,7 +68,8 @@ class Authority_model extends CI_Model
     		return $qry->row();
     	}
     }
-    /* start storing data from logged user*/
+    
+ /* start storing data from logged user*/
     function insertdatamy($filter=0,$name=0,$image=0,$phone_number=0,$mobile=0,$address=0)
     {  if($image==null) {
     
@@ -96,7 +98,7 @@ class Authority_model extends CI_Model
     $this->show_account($filter);
     }
     
-		/*   Function for start assign user list for user_role view    */
+/*   Function for start assign user list for user_role view    */
 	function verify_list()
 	{
 		$this->db->select('*');
@@ -105,7 +107,7 @@ class Authority_model extends CI_Model
 		return $qry->result();
 	}
 	
-		/*    Start function for retrieve function list for add role     */
+/*    Start function for retrieve function list for add role     */
 	function list_function()
 	{
 		$this->db->select('*');
@@ -113,7 +115,7 @@ class Authority_model extends CI_Model
 		return $qry->result();
 	}
 		
-		/*     Start function for retrieve role list from role table for user role view     */
+/* Start function for retrieve role list from role table for user role view     */
 	function role_list()
 	{		
 			$this->db->select('*');
@@ -121,7 +123,7 @@ class Authority_model extends CI_Model
 			return $qry->result();
 	}
 		
-		/*    Start function for read check authority permission for role id     */
+/* Start function for read check authority permission for role id     */
 	function list_permision($role)
 	{
 		$this->db->select('*');
@@ -138,7 +140,7 @@ class Authority_model extends CI_Model
 		}
 	}
 		
-		/*    Start function for list role_id for role management view    */ 
+/*    Start function for list role_id for role management view    */ 
 	function list_permsn($a=false)
 	{
 		//print_r($a);die;

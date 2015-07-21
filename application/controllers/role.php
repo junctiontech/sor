@@ -13,7 +13,6 @@ class Role extends CI_Controller {
 		$this->load->model('authority_model');
 		$this->load->model('login_model');
 		$this->load->model('mhome');
-		
 		$this->load->library('parser');
 		$this->load->helper('url');
 		$this->load->library('form_validation');

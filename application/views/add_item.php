@@ -37,7 +37,7 @@
     	</div>
         
         <div class="form-group">
-           <label class="control-label"><?php if(isset($namehome)==1){ echo $namehome[16]->text;  }else{echo"Chapter";}?></label>
+           <label class="control-label"><?php if(isset($namehome)==1){ echo $namehome[108]->text;  }else{echo"Chapter";}?></label>
             <div class="controls"  id="show_chap" >
                <select name="chap_id" id="chap_id" class="form-control" data-rule-required="true">
 				<option value=''>Chapter</option>

@@ -2,7 +2,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?><?php if(isset($namehome)==1){echo $namehome[75]->text;}else{echo "Refrence";}?> </h1>
+<h1><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> <?php if(isset($namehome)==1){echo $namehome[75]->text;}else{echo "Refrence";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -18,7 +18,7 @@
       <div class="box box-blue">
       <div class="box-title">
       	
-		<h3><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?><?php if(isset($namehome)==1){echo $namehome[75]->text;}else{echo "Refrence";}?> </h3>
+		<h3><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> <?php if(isset($namehome)==1){echo $namehome[75]->text;}else{echo "Refrence";}?> </h3>
        </div>
       <div class="box-content">
      <form action="<?=base_url()?>index.php/masters/add_refrence" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">

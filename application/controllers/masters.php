@@ -7,6 +7,8 @@ class Masters extends CI_Controller {
 		$this->data['user_data']="";
 		$this->data['url'] = base_url();
 		$this->load->model('masters_model');
+		$this->load->model('login_model');
+		
 		$this->load->model('authority_model');
 		$this->load->model('mhome');
 		$this->load->library('parser');
@@ -14,6 +16,9 @@ class Masters extends CI_Controller {
 		$this->load->library('session');
 		$this->data['base_url']=base_url();
 		$this->load->library('authority');
+		$user_session_data = $this->session->userdata('user_data');
+		$name=$user_session_data['language_id'];
+		$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
 	 }
  public function index()
 	 {
@@ -152,6 +157,9 @@ class Masters extends CI_Controller {
 	 		redirect('masters/labour');
 	 	}
 	 	else{
+	 		$user_session_data = $this->session->userdata('user_data');
+	 		$name=$user_session_data['language_id'];
+	 		$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
 	 		$this->data['unit_list'] = $this->masters_model->get_unitlist();
 	 		if($labour_code){
 	 			$filter = array('labour_name'=>$labour_code);
@@ -164,6 +172,11 @@ class Masters extends CI_Controller {
 	 					'created_by' => 1,
 	 					'created_on' => date("Y-m-d"));
 	 			$this->data['labour_name']=$labour_code;
+	 			if($labour_code !== ''){
+	 			
+	 				$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 				
+	 			}
 	 		}
 	 		$this->breadcrumb->clear();
 	 		$this->breadcrumb->add_crumb('Home', base_url());
@@ -243,6 +256,10 @@ class Masters extends CI_Controller {
 	 			redirect('masters/overhead');
 	 		}
 	 		else{
+	 			$user_session_data = $this->session->userdata('user_data');
+	 			$name=$user_session_data['language_id'];
+	 			$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 			
 	 			if($overhead_code){
 	 				$filter = array('overhead_name'=>$overhead_code);
 	 				$overhead_info = $this->masters_model->get_list($filter,'ssr_t_overhead');
@@ -252,6 +269,11 @@ class Masters extends CI_Controller {
 	 						'created_by' => 1,
 	 						'created_on' => date("Y-m-d"));
 	 				$this->data['overhead_name']=$overhead_code;
+	 				if($overhead_code !== ''){
+	 					$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 					
+	 					
+	 				}
 	 			}
 	 			$this->breadcrumb->clear();
 	 			$this->breadcrumb->add_crumb('Home', base_url());
@@ -331,6 +353,10 @@ class Masters extends CI_Controller {
 	 				redirect('masters/unit');
 	 			}
 	 			else{
+	 				$user_session_data = $this->session->userdata('user_data');
+	 				$name=$user_session_data['language_id'];
+	 				$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 				
 	 				if($unit_code){
 	 					$unit_code=urldecode($unit_code);
 	 					$filter = array('unit_code'=>$unit_code);
@@ -342,6 +368,11 @@ class Masters extends CI_Controller {
 	 							'created_by' =>1,
 	 							'created_on' =>date("Y-m-d"));
 	 					$this->data['unit_code']=urldecode($unit_code);
+	 					if($unit_code !== ''){
+	 						$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 						
+	 						
+	 					}
 	 				}
 	 				$this->breadcrumb->clear();
 	 				$this->breadcrumb->add_crumb('Home', base_url());
@@ -416,7 +447,9 @@ class Masters extends CI_Controller {
 	 						redirect('masters/carriage');
 	 					}
 	 					else{
-	 					  
+	 						$user_session_data = $this->session->userdata('user_data');
+	 						$name=$user_session_data['language_id'];
+	 						$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
 	 						if($carriage_id){
 	 							$filter = array('carriage_code'=>$carriage_id);
 	 							$carriage_info = $this->masters_model->get_list($filter,'ssr_t_carriage');
@@ -429,6 +462,12 @@ class Masters extends CI_Controller {
 	 									'created_by' => 1,
 	 									'created_on' => date("Y-m-d"));
 	 							$this->data['carriage_code']=$carriage_id;
+	 							if($carriage_id !== ''){
+	 								
+	 								$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 									
+	 								
+	 							}
 	 						}
 	 						$this->breadcrumb->clear();
 	 						$this->breadcrumb->add_crumb('Home', base_url());
@@ -513,6 +552,10 @@ class Masters extends CI_Controller {
 	 							redirect('masters/plant');
 	 						}
 	 						else{
+	 							$user_session_data = $this->session->userdata('user_data');
+	 							$name=$user_session_data['language_id'];
+	 							$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 								
 	 							$this->data['unit_list'] = $this->masters_model->get_unitlist();
 	 							if($plan_code){
 	 								$plan_code=urldecode($plan_code);
@@ -527,6 +570,11 @@ class Masters extends CI_Controller {
 	 										'created_by' => 1,
 	 										'created_on' => date("Y-m-d"));
 	 								$this->data['plan_code']=urldecode($plan_code);
+	 								if($plan_code !== '' ){
+	 									
+	 									$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 										
+	 								}
 	 							}
 	 							$this->breadcrumb->clear();
 	 							$this->breadcrumb->add_crumb('Home', base_url());
@@ -606,6 +654,10 @@ class Masters extends CI_Controller {
 	 								redirect('masters/item_class');
 	 							}
 	 							else{
+	 								$user_session_data = $this->session->userdata('user_data');
+	 								$name=$user_session_data['language_id'];
+	 								$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 									
 	 								if($id){
 	 									$filter = array('id'=>$id);
 	 									$class_info = $this->masters_model->get_list($filter,'ssr_t_class');
@@ -616,6 +668,11 @@ class Masters extends CI_Controller {
 	 											'created_by' => 1,
 	 											'created_on' => date("Y-m-d"));
 	 									$this->data['id']=$id;
+	 									if($id !== ''){
+	 										$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 											
+	 										
+	 									}
 	 								}
 	 								$this->breadcrumb->clear();
 	 								$this->breadcrumb->add_crumb('Home', base_url());
@@ -693,6 +750,10 @@ class Masters extends CI_Controller {
 	 								redirect('masters/refrence');
 	 							}
 	 							else{
+	 								$user_session_data = $this->session->userdata('user_data');
+	 								$name=$user_session_data['language_id'];
+	 								$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 									
 	 								if($id){
 	 									$filter = array('id'=>$id);
 	 									$refrence_info = $this->masters_model->get_list($filter,'ssr_t_reference');
@@ -707,6 +768,11 @@ class Masters extends CI_Controller {
 	 											'heading'=>$refrence_info[0]->heading,
 	 											'notes'=>$refrence_info[0]->notes);
 	 									$this->data['id']=$id;
+	 									if($id !== ''){
+	 										
+	 										$namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+	 											
+	 									}
 	 								}
 	 								$this->breadcrumb->clear();
 	 								$this->breadcrumb->add_crumb('Home', base_url());
