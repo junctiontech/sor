@@ -1,7 +1,7 @@
-<div id="main-content" >
+ <?php //print_r($namehome);die;?><div id="main-content" >
 	<div class="page-title">
 		<div>
-			<h1><i class="fa fa-keyboard-o"></i> User Management</h1>
+			<h1><i class="fa fa-keyboard-o"></i><?php if(isset($namehome)==1){echo $namehome[115]->text;}else{echo "User Management";}?> </h1>
 		</div>
 	</div>
 
@@ -67,7 +67,7 @@
                     <div class="span12">
                         <div class="box">
                             <div class="box-title">
-                                <h3><i class="icon-table"></i> Assign Role </h3>
+                                <h3><i class="icon-table"></i><?php if(isset($namehome)==1){echo $namehome[116]->text;}else{echo "Assign Role";}?>  </h3>
                                 <div class="box-tool">
                                     <a data-action="collapse" href="#"><i class="icon-chevron-up"></i></a>
                                     <a data-action="close" href="#"><i class="icon-remove"></i></a>
@@ -76,7 +76,7 @@
                             <div class="box-content">
 							<div class="btn-toolbar pull-right">
                                     <div class="btn-group">
-                                        <a class="btn btn-primary show-tooltip" title="" href="<?php echo base_url(); ?>index.php/role/manage_users" data-original-title="Add "><i class="fa fa-plus"></i> Add User</a>
+                                        <a class="btn btn-primary show-tooltip" title="" href="<?php echo base_url(); ?>index.php/role/manage_users" data-original-title="Add "><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[117]->text;}else{echo "Add User";}?> </a>
                                     </div>
                             </div>
 								 <br>
@@ -85,9 +85,9 @@
 									<thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Email</th>
-											<th>Role</th>
-                                            <th>Action</th>
+                                            <th><?php if(isset($namehome)==1){echo $namehome[120]->text;}else{echo "Email";}?></th>
+											<th><?php if(isset($namehome)==1){echo $namehome[121]->text;}else{echo "Role";}?></th>
+                                            <th><?php if(isset($namehome)==1){echo $namehome[36]->text;}else{echo "Action";}?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -110,9 +110,9 @@
 													</td>
 													<td>
 													   <div class="btn-group">
-															<button class="btn btn-small show-tooltip" type="submit"  title="edit" ><i class="fa fa-check"></i>   Assign</button>
-															<a class="btn btn-small btn-danger show-tooltip" title="Delete" onClick="return confirm('Are you sure to delete this user? This will delete all the related records on this user as well.')" href="<?=base_url()?>index.php/role/delete_user/<?=$list->user_id?>"><i class="fa fa-times"></i> Delete</a>
-															<a class="btn btn-small btn-primary show-tooltip"  title="Block/Unblock" href="<?=base_url()?>index.php/role/blocked_user/<?=$list->user_id?>"><i class="fa fa-ban"></i> Block</a>
+															<button class="btn btn-small show-tooltip" type="submit"  title="edit" ><i class="fa fa-check"></i> <?php if(isset($namehome)==1){echo $namehome[118]->text;}else{echo "Assign";}?>  </button>
+															<a class="btn btn-small btn-danger show-tooltip" title="Delete" onClick="return confirm('Are you sure to delete this user? This will delete all the related records on this user as well.')" href="<?=base_url()?>index.php/role/delete_user/<?=$list->user_id?>"><i class="fa fa-times"></i><?php if(isset($namehome)==1){echo $namehome[101]->text;}else{echo "Delete";}?> </a>
+															<a class="btn btn-small btn-primary show-tooltip"  title="Block/Unblock" href="<?=base_url()?>index.php/role/blocked_user/<?=$list->user_id?>"><i class="fa fa-ban"></i><?php if(isset($namehome)==1){echo $namehome[119]->text;}else{echo "Block";}?> </a>
 													   </div>
 													</td>
 											</form>

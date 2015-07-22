@@ -2,7 +2,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> <?=(isset($plan_code))?"Edit":"Add"?> Plant</h1>
+<h1><i class="fa fa-plus"></i> <?=(isset($plan_code))?"Edit":"Add"?> <?php if(isset($namehome)==1){echo $namehome[71]->text;}else{echo "Plant";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -17,7 +17,7 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i> <?=(isset($plan_code))?"Edit":"Add"?> Plant</h3>
+      	<h3><i class="fa fa-plus"></i> <?=(isset($plan_code))?"Edit":"Add"?> <?php if(isset($namehome)==1){echo $namehome[71]->text;}else{echo "Plant";}?> </h3>
        </div>
       <div class="box-content">
       <form action="<?=base_url()?>index.php/masters/add_plant" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
@@ -37,10 +37,10 @@
 			<table class="table table-striped table-hover fill-head">
 			<thead>
 			<tr>
-			<th style="width:20%">Plant</th>
-			<th style="width:45%">Description</th>
-			<th style="width:15%">Unit</th>
-			<th style="width:20%">Amount</th>
+			<th style="width:20%"><?php if(isset($namehome)==1){echo $namehome[71]->text;}else{echo "Plant";}?></th>
+			<th style="width:45%"><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?></th>
+			<th style="width:15%"><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?></th>
+			<th style="width:20%"><?php if(isset($namehome)==1){echo $namehome[58]->text;}else{echo "Amount";}?></th>
 			</tr>
 			</thead>
 			<tbody id="dataTable">
@@ -106,9 +106,9 @@
 	  
       <div class="form-group last">
       <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-          <button type="button" class="btn" onClick="window.history.back();">Cancel</button>
+          <button type="button" class="btn" onClick="window.history.back();"><?php if(isset($namehome)==1){echo $namehome[13]->text;}else{echo "Cancel";}?></button>
        
-        <input  type="submit" name="submit" value="Save changes" class="btn btn-primary"/> 
+        <input  type="submit" name="submit" value="<?php if(isset($namehome)==1){ echo $namehome[14]->text;  }else{echo"Save Changes";}?>" class="btn btn-primary"/> 
       </div>
       </div>
        </form>

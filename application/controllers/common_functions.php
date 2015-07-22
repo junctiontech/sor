@@ -17,6 +17,22 @@ class Common_functions extends CI_Controller {
 		
 		$this->data['base_url']=base_url();
 	}
+	public function show_language()
+	{
+		$language_id = $this->input->post('language_id');
+		//$current_val = $this->input->post('current_value');
+	
+		$language_list = $this->utilities->get_language($language_id);
+		foreach($language_list as $ct)
+		{
+			if($current_val==$ct->language_id)
+				echo "<option value='".$ct->language_id."' selected >".$ct->language_name."</option>";
+			else
+				echo "<option value='".$ct->language_id."'>".$ct->language_name."</option>";
+		}
+		echo "</select>";
+	
+	}
 	
 	/*function get_subitem_list($dep_id,$chap_id,$item_id){
 	       
@@ -35,8 +51,22 @@ class Common_functions extends CI_Controller {
 	}*/
 	public function check_email($edit_mode=false)
 	{ 
+		//print_r($edit_mode);die;
 		$email = $this->input->post('email');
 		$this->mhome->check_email($email,$edit_mode);
+	}
+	
+	public function check_language($edit_mode=false)
+	{
+		//$edit_mode=$_GET['edit_mode'];
+		//print_r($edit_mode);die;
+		$language_id = $this->input->post('language_id');
+		$this->mhome->check_language($language_id,$edit_mode);
+		//print_r($language_id);die;
+		//	$text_id=$this->data['text_id'] =$this->mhome->check_language($edit_mode,'ssr_t_text');
+			//$this->parser->parse('include/header',$this->data);
+			//$this->parser->parse('login',$this->data);
+			//$this->parser->parse('include/footer',$this->data);
 	}
 	
 public function check_forget($edit_mode=false)
@@ -131,6 +161,30 @@ $this->load->library('email', $config);
 			 
 		
 	}
+	
+/*	public function show_language()
+	{
+		$language_id = $this->input->post('language_id');
+		//print_r($language_id);die;
+		
+	
+		$get_value = $this->utilities->get_language($language_id);
+		$demo_function='show_item(this.value,0,"'.$language_id.'")';
+		$demo_function_2="onChange='".$demo_function."'";
+		echo "<select name='language_id' id='language_id' class='form-control' data-rule-required='true' ".$demo_function_2." >
+				<option value='' >Select</option> ";
+		foreach($get_value as $lang)
+		{
+			if($language_id==$lang->language_id)
+				echo "<option value='".$lang->language_id."' selected >".$lang->language_name."</option>";
+			else
+				echo "<option value='".$lang->language_id."'>".$lang->language_name."</option>";
+		}
+		echo "</select>";
+		echo "<span for='select'  class='help-block'>This field is required.</span>";
+	
+	}
+	*/
 	public function show_chapter()
 	{
 		$dep_id = $this->input->post('dep_id');
@@ -280,8 +334,21 @@ public function check_material($edit_mode=false)
 		$this->utilities->check_material($material,$edit_mode);
 		
 	}
+	
+	
+	
+	
+ function code()
+ {
+ 	$value = $this->input->post('value');
+ 	$serach_lang = $this->data['serach_lang']= $this->mhome->search_lang($value);
  
-   //function for data table search in subitemcal.php start 15 may by ankit 
+ 	//print_r($serach_lang);die;
+ 	
+ }
+ 
+ 
+   //function for data table search in subitemcal.php start 15 may by ankit
    public function search_code_ajax()
 {
 	 $type_val = $this->input->post('value');

@@ -1,9 +1,26 @@
+<?php 
+$user_session_data =$this->session->userdata('user_data'); 
+//print_r($namehome);die;
+//$i=1;
+//foreach ($namehome as $t)
+//{
+	//$t='text'=>$list->text;
+	 // echo $i;
+	//$t= $namehome[0]->text;
+	//print_r($t);die;
+	//$i++;
+//}
+//print_r($t); die;
+?>
 <!--  Department list -->
 <!--  Department list -->
 <div id="main-content">
 <div class="page-title">
+
+ 
+					
 <div>
-<h1><i class="fa fa-dashboard"></i> Departments</h1>
+<h1><i class="fa fa-dashboard"></i><?php if(isset($namehome)==1){ echo $namehome[5]->text;  }else{echo"Departments";}?></h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -16,11 +33,7 @@
 <?php  if($this->session->flashdata('category_error')) { ?>
 								<div class="row-fluid">
 									<div class="alert alert-danger">
-																
 									<strong><?=$this->session->flashdata('message')?></strong> 
-									
-								
-									
 									</div>
 									</div>
 <?php }?>
@@ -38,8 +51,6 @@
 								
 									<strong><?=$this->session->flashdata('message')?></strong> 
 									
-								
-									
 									</div>
 									</div>
 							<?php }?>				
@@ -47,7 +58,7 @@
 				<!--ADD CODE -->
 				<div class="row">
 				   <div class="col-md-2 col-md-offset-10">
-					<a href="<?=base_url()?>index.php/home/add_department"><button class="btn btn-primary pull-right"  ><i class="fa fa-plus"></i> DEPARTMENT</button></a>
+					<a href="<?=base_url()?>index.php/home/add_department"><button class="btn btn-primary pull-right"  ><i class="fa fa-plus"></i><?php if(isset($namehome)==1){ echo $namehome[19]->text;  }else{echo"Department";}?></button></a>
 					</div>
 				</div>
 			</br>
@@ -64,7 +75,7 @@
 						</div>
 							<div class="title">
 							<h3><a href="<?=base_url()?>index.php/home/chapter/<?=$dl->dep_id?>"><?=$dl->dep_name?></a></h3>
-							<p><a class="pull-right" style="margin-right: 9px; color: #fff;"href="<?=base_url()?>index.php/home/add_department/<?=$dl->dep_id?>"><i class="fa fa-edit"></i> Edit </a>
+							<p><a class="pull-right" style="margin-right: 9px; color: #fff;"href="<?=base_url()?>index.php/home/add_department/<?=$dl->dep_id?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){ echo $namehome[8]->text;  }else{echo"Edit";}?>  </a>
 							
 							</div>
 					</div>

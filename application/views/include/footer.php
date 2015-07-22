@@ -1,5 +1,5 @@
 <footer style="text-align: center;color:#fff;">
-<p>2015 © Junction Tech.All Rights Reserved.</p>
+<p>2015 © <?php if(isset($namehome)==1){echo $namehome[170]->text;}else{echo "Junction Tech.All Rights Reserved.";}?></p>
 </footer>
 	<a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i class="fa fa-chevron-up"></i></a>
 

@@ -41,10 +41,21 @@ $user_session_data = $this->session->userdata('user_data');
 <small>
 <strong>
 	<i class="fa fa-home"></i>
-	SOR
+		<?php if(isset($namehome)==1){ echo $namehome[0]->text;  }else{echo"SOR";}?>
 </strong>
 </small>
 </a>
+<ul class="nav flaty-nav pull-left"    >
+<li  class="dropdown" name="name" >
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" ><?php if(isset($namehome)==1){ echo $namehome[173]->text;  }else{echo"Select Language";}?> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        <li value="ENG"><a href="<?=base_url()?>index.php/home/select_language_code/ENG"><?php if(isset($namehome)==1){ echo $namehome[174]->text;  }else{echo"ENGLISH";}?></a></li>
+                        <li value="HIN"><a href="<?=base_url()?>index.php/home/select_language_code/HIN"><?php if(isset($namehome)==1){ echo $namehome[175]->text;  }else{echo"HINDI";}?></a></li>
+                        <li><a href="<?=base_url()?>index.php/home/language"><?php if(isset($namehome)==1){ echo $namehome[176]->text;  }else{echo"ADD MORE LANGUAGE";}?></a></li>
+                    </ul>
+                </li>
+                </ul>
 <ul class="nav flaty-nav pull-right">
 
 
@@ -66,9 +77,9 @@ echo date("h:i:s");
  ?>
 </li>
 <li>
-<a href="<?=base_url();?>index.php/home/acc_setting">
+<a href="<?=base_url();?>index.php/role/acc_setting">
 <i class="fa fa-cog"></i>
-Account Settings
+<?php if(isset($namehome)==1){echo $namehome[171]->text;}else{echo "Account Settings";}?>
 </a>
 </li>
 <!--<li>
@@ -82,7 +93,7 @@ Edit Profile
 <li>
 <a href="<?php echo base_url(); ?>index.php/role/logout">
 <i class="fa fa-off"></i>
-Logout
+<?php if(isset($namehome)==1){echo $namehome[172]->text;}else{echo "Logout";}?>
 </a>
 </li>
 </ul>

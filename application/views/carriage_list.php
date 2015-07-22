@@ -3,7 +3,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> Carriage</h1>
+<h1><i class="fa fa-plus"></i> <?php if(isset($namehome)==1){echo $namehome[67]->text;}else{echo "Carriage";}?></h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -32,13 +32,13 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i>Carriage</h3>
+      	<h3><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[67]->text;}else{echo "Carriage";}?></h3>
        </div>
       
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_carriage"><i class="fa fa-plus"></i> Carriage</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_carriage"><i class="fa fa-plus"></i> <?php if(isset($namehome)==1){echo $namehome[67]->text;}else{echo "Carriage";}?></a>
 				</div> 
 			 </div>  
 			 </br>   
@@ -48,12 +48,12 @@
 									<thead>
 									<tr>
 									<th>#</th>
-									<th style="width:10%">Carriage Code</th>
-									<th style="width:20%">Description</th>
-									<th style="width:15%">Carriage Category</th>
-									<th style="width:10%">Carriage Subcategory</th>
-									<th style="width:10%">Unit </th>
-									<th style="width:10%">Rate</th>
+									<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[68]->text;}else{echo "Carriage Code";}?></th>
+									<th style="width:20%"><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?></th>
+									<th style="width:15%"><?php if(isset($namehome)==1){echo $namehome[69]->text;}else{echo "Carriage Category";}?></th>
+									<th style="width:10%"> <?php if(isset($namehome)==1){echo $namehome[70]->text;}else{echo "Carriage Subcategory";}?></th>
+									<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?> </th>
+									<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[35]->text;}else{echo "Rate";}?></th>
 									<th style="width:35%"></th>
 									</tr>
 									</thead>
@@ -79,7 +79,7 @@
 			
 			  <td><?=$li->carriage_rate?></td>
 
-			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_carriage/<?=$li->carriage_code?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Carriage? This will delete all the related records on this Carriage as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/<?=$li->carriage_code?>"><i class="fa fa-edit"></i> DELETE</a>
+			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_carriage/<?=$li->carriage_code?>"><i class="fa fa-edit"></i> <?php if(isset($namehome)==1){echo $namehome[55]->text;}else{echo "Edit";}?></a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Carriage? This will delete all the related records on this Carriage as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/<?=$li->carriage_code?>"><i class="fa fa-edit"></i> <?php if(isset($namehome)==1){echo $namehome[56]->text;}else{echo "DELETE";}?></a>
 			  <!--<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_carriage_cal/<?=$li->carriage_code?>"><i class="fa fa-edit"></i> Calculation</a></td>-->
 
 		</tr>

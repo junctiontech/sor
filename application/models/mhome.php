@@ -22,6 +22,90 @@ class Mhome extends CI_Model {
 		/* Load database connection */
 		$this->load->database();
     }
+    function login_check_lang()
+    {
+    	$this->db->select('usermailid');
+    	$qry=$this->db->get('ssr_t_users');
+    	return $qry->Result();
+    }
+    /* function used for the text of the pages for language */
+     
+    function get_text_list($ul=false){
+    	$this->db->select('*');
+    	$this->db->where('page',$ul);
+    	$qry=$this->db->get('ssr_t_text');
+    	return $qry->Result();
+    }
+    /* function used for the show the values of text  */
+    function get_lang_text_list($filter=false,$table=false)
+    {
+    	$query = $this->db->get_where($table, $filter);
+    	return $query->Result();
+    }
+    
+    /* function used for the add and edit text for the hindi and english language */
+    function update_text($info=false,$filter=false)
+    {
+    	$this->db->where($filter);
+    	$qry =	$this->db->update('ssr_t_text',$info);
+    	return $qry ;
+    }
+    function manage_text($info=false)
+    {
+    	$this->db->query("INSERT ignore INTO ssr_t_text (text_id,language_id,page,text) VALUES ".$info."");
+    	if($this->db->affected_rows()>0){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
+    /* function used for the delete text for language(hindi and english) */
+    function delete_text($filter=false,$table=false){
+    	$this->db->delete($table, $filter);
+    }
+    
+    /* function used for the pages of language */
+    function get_language_page_list(){
+    	$this->db->distinct();
+    	$this->db->select('page');
+    	$qry=$this->db->get('ssr_t_text');
+    	return $qry->Result();
+    }
+    /* function used for the pages of language */
+    
+    /* function used for the language list  */
+    function get_language_list(){
+    	$query=$this->db->query("SELECT * from `ssr_t_language` ORDER BY `language_id` ASC");
+    	return $query->Result();
+    }
+    function get_lang_list($filter=false,$table=false)
+    {
+    	$query = $this->db->get_where($table, $filter);
+    	return $query->Result();
+    }
+    
+    /* function used for the add or edit the language */
+    function update_language($info=false,$filter=false)
+    {
+    	$this->db->where($filter);
+    	$this->db->update('ssr_t_language',$info);
+    	$id = $filter['language_id'];
+    	return $id;
+    }
+    function manage_language($info=false)
+    {
+    	$this->db->query("INSERT ignore INTO ssr_t_language (language_id,language_name) VALUES ".$info."");
+    	if($this->db->affected_rows()>0){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
+    /* function used for the delete language */
+    function delete_language($filter=false,$table=false){
+    	$this->db->delete($table, $filter);
+    }
+    
     /* function for update the depatment and we create new department */
 	function manage_department($data=false,$filter=false)
 	{  
@@ -39,92 +123,8 @@ class Mhome extends CI_Model {
 		}
 		return $id;
 	}
-	/*check user id present in database*/
-	function checkid($uid){
-		//print_r($uid);die;
-		$query=$this->db->query("SELECT usermailid FROM ssr_t_users WHERE usermailid='$uid'");
-		$a=$query->result();
-		if($a == null){
-			$query=$this->db->query("SELECT usermailid FROM ssr_t_users WHERE usermailid='$uid' and name='' ");
-			//print_r($query);die;
-			$a=$query->num_rows;
-			if($a !== 0){
-				$data=array(
-						'usermailid' =>$uid,
-						'name' =>'',
-						'image' =>'',
-						'phone_number' =>'',
-						'mobile' =>'',
-						'address' =>''
-				);
-				$this->db->update('ssr_t_users',$data);
-				//print_r($uid);die;
-				return TRUE;
-			}
-			else{
-					
-				$data=array(
-						'usermailid' =>$uid,
-						'name' =>'',
-						'image' =>'',
-						'phone_number' =>'',
-						'mobile' =>'',
-						'address' =>''
-				);
-				$this->db->insert('ssr_t_users',$data);
-				$this->db->insert_id();
-				return TRUE;
-			}
-		}else{
-			$ci = & get_instance();
-			$query = $ci->db->get_where('ssr_t_users',array('usermailid' => $uid));
-			$result=$query->Result();
-			$id=$result[0]->usermailid;
 	
-			//print_r($id);die;
-			if($uid == $id){
-				//print_r($b);die;
-				return TRUE;
-			}
-				
-		}
-	}
-	/* start fetching data and show stored data*/
-	function show_account($id){
-		$query =array($this->db->query("SELECT name,image,phone_number,mobile,address FROM ssr_t_users WHERE usermailid='$id'"));
-		foreach($query as $qry)
-		{
-			return $qry->row();
-		}
-	}
-	/* start storing data from logged user*/
-	function insertdatamy($filter=0,$name=0,$image=0,$phone_number=0,$mobile=0,$address=0)
-	{  if($image==null) {
-	
-		$ci = & get_instance();
-		$query = $ci->db->get_where('ssr_t_users',array('usermailid' => $filter));
-		$result=$query->Result();
-		$image=$result[0]->image;
-	}
-	//print_r($filter);die;
-	$data=array(
-			//'usermailid' =>$filter,
-			'name' =>$name,
-			'image' =>$image,
-			'phone_number' =>$phone_number,
-			'mobile' =>$mobile,
-			'address' =>$address
-	);
-	
-	
-	//$this->db->query("update name,image,phone,mobile,address from acc_stt_data where 'user_id' => $filter",$data);
-	$fill=array('usermailid' => $filter);
-	$this->db->where($fill);
-	$this->db->update('ssr_t_users',$data);
-	
-	//echo $this->db->last_query();die;
-	$this->show_account($filter);
-	}
+ 
 	
 /* function for update and create new chapter */
 	function manage_chapter($data=false,$filter=false)

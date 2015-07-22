@@ -15,7 +15,6 @@ class Login extends CI_Controller {
 		$this->data['base_url']=base_url();
 		$this->load->library('session');
 	}
-	
 	public function index()
 	{
 		$this->breadcrumb->clear();
@@ -24,38 +23,62 @@ class Login extends CI_Controller {
 		$this->parser->parse('login',$this->data);
 		$this->parser->parse('include/footer',$this->data);
 	}
+	
+	
+	function select_language($code=false)
+	{
+		//print_r($code);die;
+		$code = $_POST['name'];
+		$namehome=$this->data['text_id'] = $this->login_model->language($code,'ssr_t_text');
+		$this->parser->parse('include/header',$this->data);
+		$this->parser->parse('login',$this->data);
+		$this->parser->parse('include/footer',$this->data);
+	}
+	
 /* Function for login and create session */	
 	function login_user($info=false)
 	{	
-			$data=array(
+		$data=array(
 						'usermailid'=>$this->input->post('usermailid'),
 						'password'=>$this->input->post('password')
-						);		
-			$row=$this->login_model->login_check('ssr_t_users',$data);
+						);	
+			 $row=$this->login_model->login_check('ssr_t_users',$data);
+			 $name=$this->input->post('name');
+			$namehome = $this->data['text_id'] = $this->login_model->lang($name,'ssr_t_text');
+			//print_r($namehome);die;
+			
 			if($row->role_id=='blocked')
 			{
 				$this->session->set_flashdata('message_type','error');
 				$this->session->set_flashdata('message',$this->config->item("user").'your Id have a blocked Please contact administrator');
 				redirect('login');
 			}
+			
 			elseif($row){ 
+				
+				foreach ($namehome as $list){
 						$user_data = array(
 											 'usermailid' => $row->usermailid,
 											 'user_id' => $row->user_id,
-											 'role_id' => $row->role_id
+											 'role_id' => $row->role_id,
+											 'text_id'=>$list->text_id,
+											 'language_id'=>$list->language_id,
+											 'text'=>$list->text
 										  );
+						//print_r($user_data);die;
 						$this->session->set_userdata('user_data',$user_data);
 						$user_session_data = $this->session->userdata('user_data');
-						redirect('home');
+					 		
 					}
+					redirect('home');
+			}
 			else{	
+				
 				$this->session->set_flashdata('ct_error','error');
 				$this->session->set_flashdata('message',$this->config->item("user").'Invalid Username And Password');
 				  redirect('login');
-				  
 				}
 	}
-	
 		
 /* Function for sign up for new user */
 	function sign_up()

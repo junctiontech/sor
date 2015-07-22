@@ -1,8 +1,9 @@
+<?php $user_session_data =$this->session->userdata('user_data'); ?>
 <!--header starts added by palak on 16 jan of create sub item page -->
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-cog"></i> <?=(isset($id))?"Edit":"Manage"?> Subitem</h1>
+<h1><i class="fa fa-cog"></i> <?=(isset($id))?"Edit":"Manage"?> <?php if(isset($namehome)==1){ echo $namehome[30]->text;  }else{echo"Subitem";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -17,7 +18,7 @@
 <div class="row">
 	    <div class="col-md-2 col-md-offset-10">
 		
-			<a href="<?=base_url()?>index.php/home/manage_subitem"><button class="btn btn-primary pull-right"  ><i class="fa fa-plus"></i> SUBITEM</button></a>
+			<a href="<?=base_url()?>index.php/home/manage_subitem"><button class="btn btn-primary pull-right"  ><i class="fa fa-plus"></i> <?php if(isset($namehome)==1){ echo $namehome[84]->text;  }else{echo"SUBITEM";}?></button></a>
 		</div>
 	 </div>
 	 </br>
@@ -26,7 +27,7 @@
       <div class="box box-blue">
       <div class="box-title">
       	
-		<h3><i class="fa fa-cog"></i> <?=(isset($id))?"Edit":"Manage"?>  Subitems</h3>
+		<h3><i class="fa fa-cog"></i> <?=(isset($id))?"Edit":"Manage"?> <?php if(isset($namehome)==1){ echo $namehome[30]->text;  }else{echo"Subitem";}?></h3>
        </div>
       <div class="box-content">
      <form action="<?=base_url()?>home/add_subitem" method="post" class="form-horizontal form-row-separated" >

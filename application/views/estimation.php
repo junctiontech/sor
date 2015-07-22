@@ -1,7 +1,7 @@
 <div id="main-content" >
   	<div class="page-title">
   		<div>
-  			<h1><i class="fa fa-keyboard-o"></i>Estimation Values</h1>
+  			<h1><i class="fa fa-keyboard-o"></i> <?php if(isset($namehome)==1){echo $namehome[103]->text;}else{echo "Estimation Values";}?></h1>
   		</div>
   	</div>
 <div id="breadcrumbs">
@@ -14,16 +14,18 @@
   <div class="col-md-12">
      <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i>Estimations</h3>
+      
+      
+      	<h3><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[95]->text;}else{echo "Estimations";}?></h3>
        </div>
        
       <div class="box-content">
 		 <div class="row">
 						<div class="col-md-4 col-md-offset-8">
 
-							<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/estimation_controller/add_estsubitem/<?=$select?>/<?=$est_id?>"><i class="fa fa-plus"></i> Add Subitems</a>
+							<a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/estimation_controller/add_estsubitem/<?=$select?>/<?=$est_id?>"><i class="fa fa-plus"></i> <?php if(isset($namehome)==1){echo $namehome[104]->text;}else{echo "Add Subitems";}?></a>
 
-							<a class="btn btn-primary btn-sm" onClick="document.getElementById('form-del').submit();" ><i class="fa fa-trash-o"></i> Delete Subitems</a>
+							<a class="btn btn-primary btn-sm" onClick="document.getElementById('form-del').submit();" ><i class="fa fa-trash-o"></i><?php if(isset($namehome)==1){echo $namehome[105]->text;}else{echo "Delete Subitems";}?></a>
 						</div> 
 					 </div>  
 					 </br> 
@@ -81,7 +83,7 @@
 
 			<div class="col-md-12">
 					<div class="form-group"  style="padding-bottom: 30px;">
-						  <label class="col-sm-3 col-lg-2 control-label">Estimate Description</label>
+						  <label class="col-sm-3 col-lg-2 control-label"><?php if(isset($namehome)==1){echo $namehome[114]->text;}else{echo "Estimate Description";}?></label>
 						  <div class="col-sm-9 col-lg-10 controls">
 						<input type="text" required name="est_description" class="form-control"
 			<?php if(!empty($est_id)==1){
@@ -98,14 +100,14 @@
 
 						
 							<th >#</th>
-							<th>Subitem Code</th>
-							<th>Description.</th>
-							<th>Class.</th>
-							<th>Rate.</th>
-							<th>Unit</th>
-							<th>Qty</th>
-							<th>Amount</th>
-							<th>Action</th>
+							<th><?php if(isset($namehome)==1){echo $namehome[33]->text;}else{echo "Subitem Code";}?></th>
+							<th><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?>.</th>
+							<th><?php if(isset($namehome)==1){echo $namehome[25]->text;}else{echo "Class";}?>.</th>
+							<th><?php if(isset($namehome)==1){echo $namehome[35]->text;}else{echo "Rate";}?>.</th>
+							<th><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?></th>
+							<th><?php if(isset($namehome)==1){echo $namehome[82]->text;}else{echo "Quantity";}?></th>
+							<th><?php if(isset($namehome)==1){echo $namehome[58]->text;}else{echo "Amount";}?></th>
+							<th><?php if(isset($namehome)==1){echo $namehome[36]->text;}else{echo "Action";}?></th>
 							
 							
 							
@@ -177,7 +179,7 @@
 									
 					<td>
 
-							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/estimation_controller/estimation_val/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> Enter value</a>
+							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/estimation_controller/estimation_val/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> <?php if(isset($namehome)==1){echo $namehome[106]->text;}else{echo "Enter value";}?></a>
 
 													
 							</td>
@@ -199,7 +201,7 @@
 				</div>
 				
 
-				<input type="submit" name="save" formaction="index.php/estimation_controller/add_est_submit/<?=$select?>" class="btn btn-primary pull-right"  value="Save Changes">
+				<input type="submit" name="save" formaction="index.php/estimation_controller/add_est_submit/<?=$select?>" class="btn btn-primary pull-right"  value="<?php if(isset($namehome)==1){ echo $namehome[14]->text;  }else{echo"Save Changes";}?>">
 
   		
 	</div>

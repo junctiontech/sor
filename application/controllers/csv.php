@@ -12,7 +12,13 @@ class Csv extends CI_Controller {
 		$this->data['base_url']=base_url();
         $this->load->model('csv_model');
         $this->load->library('csvimport');
+        $this->load->model('login_model');
+        
         $this->load->library('authority');
+        $user_session_data = $this->session->userdata('user_data');
+        $name=$user_session_data['language_id'];
+        $namehome = $this->data['namehome']= $this->login_model->lang($name,'ssr_t_text');
+        
         //$debug_mode=n;
     }
   function is_logged_in()

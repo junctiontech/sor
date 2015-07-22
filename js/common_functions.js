@@ -63,6 +63,49 @@ function check_email(obj,id){
 			return false;		
 		}
 }
+function show_language(language_id){
+	$.ajax({
+		type: "POST",
+		url : base_url+'index.php/common_functions/show_language',
+		data: {language_id: language_id },
+	})	
+		.done(function(msg){
+			
+			$('#show_language').html(msg);					
+			return false;	
+		});
+
+return false;
+	
+	
+}
+function check_language(obj,id){
+	var edit_mode='';
+	if(id){
+		edit_mode=id;
+		}else{
+			edit_mode=0;
+			}
+	
+		var language_id = obj.value; 
+		var language_id = language_id; 
+		if(language_id!=''){
+			$.ajax({
+					type:"POST",
+					url: base_url+"index.php/common_functions/check_language/"+edit_mode,
+					data: {language_id: language_id},
+					})
+					.done(function( msg ) {
+					
+						if(msg!=1) {
+							$('#show-language').html(msg);
+							//$(".msg_box_"+obj.id).html("email id already registered with us.<a href='javascript:;' onclick='forgot()'>Forget Password</a>");
+							return false;
+							}
+					});
+			return false;		
+		}
+}
 
 function check_forget_email(id){
 	var edit_mode='';
@@ -81,11 +124,10 @@ function check_forget_email(id){
 					data: {email: email},
 					})
 					.done(function( msg ) {
-						
+					
 						if(msg!=1) {
 							$('#forget-email').val('');
 							$(".msg_box_forget-email").html("password send in your mail id");
-							
 							return false;
 							}
 							else
@@ -97,6 +139,28 @@ function check_forget_email(id){
 					});
 			return false;		
 		}
+}
+function hello(value){
+	alert(value);
+}
+function code(name)
+{
+	//alert(name);
+	//die;
+$.ajax({
+		type:"POST",
+		url: base_url+'index.php/login/select_language',
+		data:{name:name},
+})
+	.done(function(msg){
+		//alert(msg);
+		$("#lang").html(msg);
+		
+		return false;
+						});
+return false;
+	
+	
 }
 function append_menus(){
 	
@@ -143,6 +207,7 @@ function append_menus(){
 	
 	$(".menus").append(tr);
 }
+
 function search_code_ajax(value,row)
 {
 			var get_data = row.split('_');		
@@ -277,7 +342,23 @@ function check(currentcount,tableID){
 		var id_type =  get_data[0];
 		var row_id = get_data[1];//Counter for current row 
 }
-
+/* function _language(language_id,current_value)
+{
+	$.ajax({
+				type: "POST",
+				url : base_url+'index.php/common_functions/show_language',
+				data: {language_id: language_id , current_value: current_value },
+			})	
+				.done(function(msg){
+					
+					$('#show_language').html(msg);					
+					
+					return false;	
+				});
+		
+		return false;
+}
+*/
 function show_chapter(dep_id,current_value)
 {
 	$.ajax({

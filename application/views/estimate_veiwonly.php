@@ -1,7 +1,7 @@
 <div id="main-content" >
   	<div class="page-title">
   		<div>
-  			<h1><i class="fa fa-keyboard-o"></i>Estimation Values</h1>
+  			<h1><i class="fa fa-keyboard-o"></i><?php if(isset($namehome)==1){echo $namehome[103]->text;}else{echo "Estimation Values";}?></h1>
   		</div>
   	</div>
 
@@ -16,7 +16,7 @@
   <div class="col-md-12">
      <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i>Estimations</h3>
+      	<h3><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[95]->text;}else{echo "Estimations";}?></h3>
        </div>
        
       <div class="box-content">
@@ -37,7 +37,7 @@
 			<div class="col-md-12">
 			
 			<div class="form-group" style="padding-bottom: 30px;">
-				  <label class="col-sm-3 col-lg-2 control-label">Estimate Description</label>
+				  <label class="col-sm-3 col-lg-2 control-label"><?php if(isset($namehome)==1){echo $namehome[114]->text;}else{echo "Estimate Description";}?></label>
 						  <div class="col-sm-9 col-lg-10 controls">
 						 <input readonly type="text" required name="est_description" class="form-control"
 									<?php  if(!empty($est_id)==1){ $filter = array('est_id'=>$est_id);
@@ -58,14 +58,14 @@
 
 						
 							<th style="width:2%" >#</th>
-							<th style="width:4%">Subitem Code</th>
-							<th style="width:30%"> Description.</th>
-							<th style="width:4%">Class.</th>
-							<th style="width:10%">Rate.</th>
-							<th style="width:10%">Unit</th>
-							<th style="width:10%">Qty</th>
-							<th style="width:15%">Amount</th>
-							<th style="width:15%">Action</th>
+							<th style="width:4%"><?php if(isset($namehome)==1){echo $namehome[33]->text;}else{echo "Subitem Code";}?></th>
+							<th style="width:30%"><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?>.</th>
+							<th style="width:4%"><?php if(isset($namehome)==1){echo $namehome[26]->text;}else{echo "Class";}?>.</th>
+							<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[35]->text;}else{echo "Rate";}?>.</th>
+							<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?></th>
+							<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[82]->text;}else{echo "Quantity";}?></th>
+							<th style="width:15%"><?php if(isset($namehome)==1){echo $namehome[58]->text;}else{echo "Amount";}?></th>
+							<th style="width:15%"><?php if(isset($namehome)==1){echo $namehome[36]->text;}else{echo "Action";}?></th>
 				
 					</thead>
 
@@ -134,7 +134,7 @@
 									
 					<td>
 
-							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/estimation_controller/estimation_val_view/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> View value</a>
+							  <a class="btn btn-primary btn-small" href="<?=base_url()?>index.php/estimation_controller/estimation_val_view/<?=$subil->subitem_id?>/<?=$subil->subitem_class_id?>/<?=$select?>/<?=$est_id?>"><i class="icon-edit"></i> <?php if(isset($namehome)==1){echo $namehome[113]->text;}else{echo "View value";}?></a>
 
 													
 							</td>
@@ -154,7 +154,7 @@
 
 				</table>
 			</div>
-					<button type="button" onClick="window.history.back();" class="btn btn-primary pull-right"><i class="fa fa-times"></i> Cancel</button>
+					<button type="button" onClick="window.history.back();" class="btn btn-primary pull-right"><i class="fa fa-times"></i> <?php if(isset($namehome)==1){echo $namehome[13]->text;}else{echo "Cancel";}?></button>
   	
 	</div>
 		</form>

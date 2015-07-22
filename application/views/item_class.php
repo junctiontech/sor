@@ -3,7 +3,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> Class</h1>
+<h1><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[25]->text;}else{echo "Class";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -32,13 +32,13 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i>Class</h3>
+      	<h3><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[25]->text;}else{echo "Class";}?></h3>
        </div>
       
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_item_class"><i class="fa fa-plus"></i> Class</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_item_class"><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[25]->text;}else{echo "Class";}?> </a>
 				</div> 
 			 </div>  
 			 </br>      
@@ -48,10 +48,10 @@
 						<thead>
 						<tr>
 						<th>#</th>
-						<th>Class</th>
-						<th>Description</th>
-						<th>Heading</th>
-						<th>Notes</th>
+						<th><?php if(isset($namehome)==1){echo $namehome[25]->text;}else{echo "Class";}?></th>
+						<th><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?></th>
+						<th><?php if(isset($namehome)==1){echo $namehome[11]->text;}else{echo "Heading";}?></th>
+						<th><?php if(isset($namehome)==1){echo $namehome[12]->text;}else{echo "Notes";}?></th>
 						
 						<th></th>
 						</tr>
@@ -66,7 +66,7 @@
 						  <td><?=$cl->class_heading?></td>
 						  <td><?=$cl->class_notes?></td>
 						
-						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_item_class/<?=$cl->id?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Class? This will delete all the related records on this Class as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/0/<?=$cl->id?>"><i class="fa fa-edit"></i> DELETE</a>
+						  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_item_class/<?=$cl->id?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[55]->text;}else{echo "Edit";}?> </a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Class? This will delete all the related records on this Class as well.')" href="<?=base_url()?>index.php/masters/delete_material/0/0/0/0/0/0/<?=$cl->id?>"><i class="fa fa-edit"></i><?php if(isset($namehome)==1){echo $namehome[56]->text;}else{echo "DELETE";}?> </a>
 						  </td>
 					 </tr>
 

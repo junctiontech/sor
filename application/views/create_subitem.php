@@ -1,4 +1,5 @@
 <!--header starts added by palak on 13 jan of create sub item page -->
+<?php $user_session_data =$this->session->userdata('user_data'); ?>
 
 <div id="main-content">
 
@@ -6,7 +7,7 @@
 
 		<div>
 
-		<h1><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> Subitem</h1>
+		<h1><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> <?php if(isset($namehome)==1){ echo $namehome[84]->text;  }else{echo"Subitems";}?> </h1>
 
 		</div>
 
@@ -36,7 +37,7 @@
 
       	
 
-		<h3><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> Subtems</h3>
+		<h3><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> <?php if(isset($namehome)==1){ echo $namehome[84]->text;  }else{echo"Subitems";}?></h3>
 
        </div>
 
@@ -158,27 +159,27 @@
 
 			<tr>
 
-			<th style="width:10%">Code</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){ echo $namehome[33]->text;  }else{echo"Subitem Code";}?></th>
 
 
 
-			<th style="width:10%">Description</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){ echo $namehome[10]->text;  }else{echo"Description";}?></th>
 
 
 
-			<th style="width:10%">Unit</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){ echo $namehome[34]->text;  }else{echo"Unit";}?></th>
 
 
 
-			<th style="width:10%">Class</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){ echo $namehome[25]->text;  }else{echo"Class";}?></th>
 
 
 
-			<th style="width:10%">Rate</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){ echo $namehome[35]->text;  }else{echo"Rate";}?></th>
 
-			<th style="width:10%">Heading</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){ echo $namehome[11]->text;  }else{echo"Heading";}?></th>
 
-			<th style="width:10%">Notes</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){ echo $namehome[12]->text;  }else{echo"Notes";}?></th>
 
 
 
@@ -400,13 +401,13 @@
 
       <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
 
-	     <button type="button" class="btn" onClick="window.history.back();">Cancel</button>
+	     <button type="button" class="btn" onClick="window.history.back();"> <?php if(isset($namehome)==1){ echo $namehome[13]->text;  }else{echo"Cancel";}?></button>
 
        
 
 
 
-        <input  type="submit" name="submit" value="Save changes" class="btn btn-primary"/>
+        <input  type="submit" name="submit" value="<?php if(isset($namehome)==1){ echo $namehome[14]->text;  }else{echo"Save changes";}?>" class="btn btn-primary"/>
 
       </div>
 

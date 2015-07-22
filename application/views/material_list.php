@@ -3,7 +3,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> Material</h1>
+<h1><i class="fa fa-plus"></i> <?php if(isset($namehome)==1){echo $namehome[53]->text;}else{echo "Material";}?></h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -37,13 +37,13 @@
   <div class="col-md-12">
       <div class="box box-blue">
       <div class="box-title">
-      	<h3><i class="fa fa-plus"></i>Material</h3>
+      	<h3><i class="fa fa-plus"></i><?php if(isset($namehome)==1){echo $namehome[53]->text;}else{echo "Material";}?></h3>
        </div>
        
       <div class="box-content">
 			  <div class="row">
 				<div class="col-md-2 col-md-offset-10">
-					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_material"><i class="fa fa-plus"></i> MATERIAL</a>
+					<a class="btn btn-primary btn-sm pull-right" href="<?=base_url()?>index.php/masters/manage_material"><i class="fa fa-plus"></i> <?php if(isset($namehome)==1){echo $namehome[54]->text;}else{echo "MATERIAL";}?> </a>
 				</div> 
 			 </div>  
 			 </br>      
@@ -53,11 +53,11 @@
 									<thead>
 									<tr>
 									<th>#</th>
-									<th style="width:10%">Material Code</th>
-									<th style="width:30%">Description</th>
-									<th style="width:20%">Unit </th>
-									<th style="width:10%">Class </th>
-									<th style="width:10%">Rate</th>
+									<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[57]->text;}else{echo "Material Code";}?></th>
+									<th style="width:30%"><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?></th>
+									<th style="width:20%"><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?> </th>
+									<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[53]->text;}else{echo "Class";}?> </th>
+									<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[53]->text;}else{echo "Rate";}?></th>
 									<th style="width:30%"></th>
 									</tr>
 									</thead>
@@ -80,7 +80,7 @@
 			  <td><?=($class_name)?$class_name[0]->class_name:''?></td>
 			  <td><?=$li->rate?></td>
 
-			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_material/<?=$li->mat_name?>"><i class="fa fa-edit"></i> Edit</a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Material? This will delete all the related records on this Material as well.')" href="<?=base_url()?>index.php/masters/delete_material/<?=$li->mat_name?>"><i class="fa fa-edit"></i> DELETE</a></td>
+			  <td><a class="btn btn-primary btn-sm" href="<?=base_url()?>index.php/masters/manage_material/<?=$li->mat_name?>"><i class="fa fa-edit"></i> <?php if(isset($namehome)==1){echo $namehome[55]->text;}else{echo "Edit";}?></a> <a class="btn btn-primary btn-sm" onClick="return confirm('Are you sure to delete this Material? This will delete all the related records on this Material as well.')" href="<?=base_url()?>index.php/masters/delete_material/<?=$li->mat_name?>"><i class="fa fa-edit"></i> <?php if(isset($namehome)==1){echo $namehome[56]->text;}else{echo "DELETE";}?></a></td>
 
 		</tr>
 
@@ -97,4 +97,4 @@
       </div>
   </div>
 </div>
-<!--Content ends added by palak on 13 jan -->
+

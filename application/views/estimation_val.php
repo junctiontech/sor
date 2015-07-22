@@ -1,7 +1,7 @@
   <div id="main-content" >
   	<div class="page-title">
   		<div>
-  			<h1><i class="fa fa-keyboard-o"></i>Estimation Values</h1>
+  			<h1><i class="fa fa-keyboard-o"></i><?php if(isset($namehome)==1){echo $namehome[103]->text;}else{echo "Estimation Values";}?></h1>
   		</div>
   	</div>
 
@@ -17,7 +17,7 @@
   		<div class="span12">
   			<div class="box">
   				<div class="box-title">
-  					<h3><i class="icon-reorder"></i> Estimation Values</h3>
+  					<h3><i class="icon-reorder"></i><?php if(isset($namehome)==1){echo $namehome[103]->text;}else{echo "Estimation Values";}?></h3>
   				</div>
   				<div class="box-content">
 				 <?php  $row_table=0;
@@ -57,11 +57,11 @@
   							<thead>
   								<tr>
   									<th >#</th>
-  									<th>No.</th>
-  									<th>Length(m)</th>
-  									<th>Width(m)</th>
-  									<th>Depth(m)</th>
-  									<th>Quantity</th>
+  									<th><?php if(isset($namehome)==1){echo $namehome[96]->text;}else{echo "No.";}?></th>
+  									<th><?php if(isset($namehome)==1){echo $namehome[110]->text;}else{echo "Length(m)";}?></th>
+  									<th><?php if(isset($namehome)==1){echo $namehome[111]->text;}else{echo "Width(m)";}?></th>
+  									<th><?php if(isset($namehome)==1){echo $namehome[112]->text;}else{echo "Depth(m)";}?></th>
+  									<th><?php if(isset($namehome)==1){echo $namehome[82]->text;}else{echo "Quantity";}?></th>
   									
   									
   								</tr>
@@ -139,7 +139,7 @@
   							</table>
   					</div>					
   					<input type="hidden" readonly name="final_total" id="final_total" value="" />
-  					<input type="submit" name="save" class="btn btn-primary pull-right"  value="Save Changes">
+  					<input type="submit" name="save" class="btn btn-primary pull-right"  value="<?php if(isset($namehome)==1){ echo $namehome[14]->text;  }else{echo"Save Changes";}?>">
   				</form>
   				
   				
@@ -573,3 +573,4 @@ return( true );
 }
 
 </script>
+  

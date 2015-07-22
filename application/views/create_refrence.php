@@ -2,7 +2,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> Refrence</h1>
+<h1><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> <?php if(isset($namehome)==1){echo $namehome[75]->text;}else{echo "Refrence";}?> </h1>
 </div>
 </div>
 <div id="breadcrumbs">
@@ -18,7 +18,7 @@
       <div class="box box-blue">
       <div class="box-title">
       	
-		<h3><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> Refrence</h3>
+		<h3><i class="fa fa-plus"></i> <?=(isset($id))?"Edit":"Add"?> <?php if(isset($namehome)==1){echo $namehome[75]->text;}else{echo "Refrence";}?> </h3>
        </div>
       <div class="box-content">
      <form action="<?=base_url()?>index.php/masters/add_refrence" method="post" class="form-horizontal form-row-separated" novalidate="novalidate" id="validation-form">
@@ -42,17 +42,17 @@
 			<table class="table table-striped table-hover fill-head">
 			<thead>
 			<tr>
-			<th style="width:10%">Refrence Code</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[76]->text;}else{echo "Refrence Code";}?></th>
 
-			<th style="width:10%">Description</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[10]->text;}else{echo "Description";}?></th>
 
-			<th style="width:10%">Unit</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[34]->text;}else{echo "Unit";}?></th>
 
-			<th style="width:10%">Class</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[25]->text;}else{echo "Class";}?></th>
 
-			<th style="width:10%">Rate</th>
-			<th style="width:10%">Heading</th>
-			<th style="width:10%">Notes</th>
+			<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[35]->text;}else{echo "Rate";}?></th>
+			<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[11]->text;}else{echo "Heading";}?></th>
+			<th style="width:10%"><?php if(isset($namehome)==1){echo $namehome[12]->text;}else{echo "Notes";}?></th>
 
 			
 			</tr>
@@ -186,10 +186,10 @@
       
       <div class="form-group last">
       <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
-	     <button type="button" class="btn" onClick="window.history.back();">Cancel</button>
+	     <button type="button" class="btn" onClick="window.history.back();"><?php if(isset($namehome)==1){echo $namehome[13]->text;}else{echo "Cancel";}?></button>
          <input type="hidden" name="id" id="id" value="<?=(!empty($id))?$id:''?>"/>
 
-        <input  type="submit" name="submit" value="Save changes" class="btn btn-primary"/>
+        <input  type="submit" name="submit" value="<?php if(isset($namehome)==1){ echo $namehome[14]->text;  }else{echo"Save Changes";}?>" class="btn btn-primary"/>
       </div>
       </div>
        </form>
