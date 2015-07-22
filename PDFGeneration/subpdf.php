@@ -109,12 +109,12 @@ $st = $conn->prepare('SELECT * FROM ssr_t_chapter WHERE chap_id="'.$chap_id.'" '
 $st->execute();
 $chapter = $st->fetchAll();
 //end testing
-$st = $conn->prepare('SELECT * FROM ssr_t_item  WHERE dep_id="'.$dep_id.'" AND chap_id="'.$chap_id.'" ORDER BY item_name, item_class_id');
+$st = $conn->prepare('SELECT * FROM ssr_t_item  WHERE dep_id="'.$dep_id.'" AND chap_id="'.$chap_id.'" ');
 $st->execute();
 $item = $st->fetchAll();
 
 
-$st = $conn->prepare('SELECT * FROM ssr_t_subitem  WHERE dep_id="'.$dep_id.'" AND chap_id="'.$chap_id.'" ORDER BY item_id, subitem_name, subitem_class_id');
+$st = $conn->prepare('SELECT * FROM ssr_t_subitem  WHERE dep_id="'.$dep_id.'" AND chap_id="'.$chap_id.'" ');
 $st->execute();
 $subitem = $st->fetchAll();
 

@@ -2,7 +2,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-dashboard"></i><?php if(isset($namehome)==1){ echo $namehome[15]->text;  }else{echo"Dashboard";}?> </h1>
+<h1><i class="fa fa-dashboard"></i><?php if(isset($namehome)==1){ echo $namehome[78]->text;  }else{echo"Items";}?> </h1>
 
 </div>
 </div>
@@ -53,9 +53,11 @@
 				
 
 <?php 	foreach($item_list as $key=>$il){ ?>
-	<div class="box ">
-	<div class="box-title item_box">
-	<h3><i class="fa fa-th-list"></i><a href="javascript:;" class="text-white"> <?=$il->item_name?></a></h3>
+	<div class="box  ">
+	<div class="box-title item_box row">
+	<div class="col-md-1"><h3><i class="fa fa-th-list"></i><a href="javascript:;" class="text-white"> <?=$il->item_name?></a></h3></div>
+	<div class="col-md-8" > <h3 style=" width: 82%; overflow: hidden;" ><?=$il->item_desc?></h3></div>
+	<div class="col-md-3" > 
 	<div class="box-tool">
 		<a href="<?=base_url()?>index.php/home/create_item/<?=$il->dep_id?>/<?=$il->chap_id?>/<?=$il->item_id?>" ><button class="btn btn-default btn-sm "style="margin-top: -5px;
 "><i class="fa fa-edit"></i><?php if(isset($namehome)==1){ echo $namehome[22]->text;  }else{echo"EDIT ITEM";}?> </button></a>
@@ -68,7 +70,7 @@
 	
 	</div>
 	</div>
-
+	</div>
 	<div class="box-content" style="display:none">
 	<div class="row">
 	<div class="col-md-12">

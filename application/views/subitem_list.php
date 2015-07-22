@@ -1,7 +1,7 @@
 <div id="main-content">
 <div class="page-title">
 <div>
-<h1><i class="fa fa-dashboard"></i> <?php if(isset($namehome)==1){echo $namehome[15]->text;}else{echo "Dashboard";}?></h1>
+<h1><i class="fa fa-dashboard"></i> <?php if(isset($namehome)==1){echo $namehome[30]->text;}else{echo "Subitems";}?></h1>
 
 </div>
 </div>

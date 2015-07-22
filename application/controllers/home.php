@@ -65,9 +65,8 @@ class Home extends CI_Controller {
    		);
    		$this->session->set_userdata('user_data',$user_data);
    		$user_session_data = $this->session->userdata('user_data');
-   		redirect('home');
-   
-   	}
+   		header('Location: ' . $_SERVER['HTTP_REFERER']);
+   		}
    
    	else
    	{

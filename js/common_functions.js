@@ -140,20 +140,16 @@ function check_forget_email(id){
 			return false;		
 		}
 }
-function hello(value){
-	alert(value);
-}
+
 function code(name)
 {
-	//alert(name);
-	//die;
+	
 $.ajax({
 		type:"POST",
 		url: base_url+'index.php/login/select_language',
 		data:{name:name},
 })
 	.done(function(msg){
-		//alert(msg);
 		$("#lang").html(msg);
 		
 		return false;
