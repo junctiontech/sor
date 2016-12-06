@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'bitnami';
+$db['default']['password'] = 'initial1$';
 $db['default']['database'] = 'sor';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
