@@ -14,7 +14,17 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '/sor/';
+if($_SERVER['HTTP_HOST']=="localhost"){
+	$port=$_SERVER['SERVER_PORT'];
+$config['base_url']	= "http://localhost/sor/";
+}elseif($_SERVER['HTTP_HOST']=="www.sor.junctiontech.in"){
+$config['base_url']	= 'http://sor.junctiontech.in/';	
+}elseif($_SERVER['HTTP_HOST']=="sor.junctiontech.in"){
+	
+$config['base_url']	= 'http://sor.junctiontech.in/';	
+}elseif($_SERVER['HTTP_HOST']=="192.168.1.151"){
+	$config['base_url']	= 'http://192.168.1.151/sor/';
+}
 
 /*
 |--------------------------------------------------------------------------
