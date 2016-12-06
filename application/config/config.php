@@ -13,7 +13,7 @@
 | If this is not set then CodeIgniter will guess the protocol, domain and
 | path to your installation.
 |
-*/
+*/print_r($_SERVER['HTTP_HOST']);echo"<br>";echo"rohit";
 if($_SERVER['HTTP_HOST']=="localhost"){
 	$port=$_SERVER['SERVER_PORT'];
 $config['base_url']	= "http://localhost/sor/";
@@ -23,9 +23,10 @@ $config['base_url']	= 'http://sor.junctiontech.in/';
 	
 $config['base_url']	= 'http://sor.junctiontech.in/';	
 }elseif($_SERVER['HTTP_HOST']=="192.168.1.151"){
+	print_r($_SERVER['HTTP_HOST']);
 	$config['base_url']	= 'http://192.168.1.151/sor/';
 }
-
+die;
 /*
 |--------------------------------------------------------------------------
 | Index File
