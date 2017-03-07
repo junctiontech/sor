@@ -20,7 +20,7 @@ $user_session_data = $this->session->userdata('user_data');
 <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css">
 
 <link rel="shortcut icon" href="<?php echo base_url(); ?>img/icon/favicon.ico">
-<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="<?=base_url()?>/js/jquery-1.8.2.min.js"></script>
 <base href="<?php echo base_url(); ?>"/>
  <script type="text/javascript" src="<?php echo base_url(); ?>js/common_functions.js"></script>
