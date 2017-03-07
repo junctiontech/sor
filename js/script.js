@@ -1,4 +1,4 @@
-var base_url="http://"+window.location.hostname+':'+location.port+"/sor/";
+var base_url="https://"+window.location.hostname;
 //alert(base_url);
 
 function showRoseIndia(paraId)

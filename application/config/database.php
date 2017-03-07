@@ -58,8 +58,8 @@ if($_SERVER['HTTP_HOST']=="www.sor.junctiontech.in"){
 	$username="";
 }
 if($_SERVER['HTTP_HOST']=="192.168.1.151"){
-	$password="";
-	$username="";
+	$password="initial1$";
+	$username="root";
 }
 $active_group = 'default';
 $active_record = TRUE;
